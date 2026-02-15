@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>QuanTech | Master Repair Lab</title>
+    
+    <!-- Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DESIGN TOKENS --- */
+        :root {
+            --surface-color: #FFFFFF;
+            --text-main: #0a0a0a;
+            --text-secondary: #555555;
+            --accent: #0071E3; /* Apple Blue */
+            --whatsapp: #25D366; /* WhatsApp Green */
+            --whatsapp-hover: #1da851;
+            
+            /* Glass System V3 */
+            --glass-bg: rgba(255, 255, 255, 0.85); 
+            --glass-bg-hover: rgba(255, 255, 255, 0.95);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.65);
+            --glass-blur: blur(25px) saturate(180%);
+            
+            --section-gap: 60px;
+            --max-width: 1280px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius-lg: 32px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        
+        html {
+            width: 100%; height: 100%;
+            background-color: #050505;
+            overscroll-behavior: none; scroll-behavior: smooth;
+        }
+
+        body { 
+            color: #0a0a0a; font-family: 'Inter Tight', sans-serif; 
+            width: 100%; min-height: 100%; position: relative;
+            background-color: transparent; overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- BACKGROUND --- */
+        .global-bg {
+            position: fixed; inset: 0; z-index: -2; 
+            /* Sfondo Laboratorio Scuro */
+            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; background-position: center;
+            filter: brightness(0.60); 
+            transform: translateZ(0);
+        }
+        
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998; 
+            opacity: 0.05; mix-blend-mode: overlay; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        .hero-vignette { 
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+            z-index: -1; pointer-events: none; mix-blend-mode: multiply;
+        }
+
+        .main-wrapper { position: relative; z-index: 2; width: 100%; overflow-x: hidden; display: flex; flex-direction: column; }
+        h1, h2, h3 { letter-spacing: -0.03em; }
+
+        /* --- NAV --- */
+        .smart-nav-container { position: fixed; top: 20px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; padding: 0 20px; transform: translateZ(0); }
+        .smart-nav { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.8); border-radius: 32px; width: 100%; max-width: 900px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; flex-direction: column; overflow: hidden; }
+        .nav-main-row { padding: 12px 16px 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-announcement-row { width: 100%; height: 28px; background: rgba(0, 0, 0, 0.04); border-top: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; overflow: hidden; }
+        .marquee-inner { display: flex; gap: 60px; white-space: nowrap; animation: marquee-top 45s linear infinite; padding-left: 100%; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #111; align-items: center; }
+        .dot { color: var(--accent); font-size: 1.2em; margin: 0 4px; position: relative; top: -1px; }
+        @keyframes marquee-top { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #111; text-decoration: none; letter-spacing: -0.5px; flex-shrink: 0; }
+        .nav-logo img { height: 32px; width: auto; border-radius: 6px; }
+        .nav-links { display: flex; gap: 4px; margin-left: auto; margin-right: 12px; }
+        .nav-link { padding: 10px 18px; border-radius: 100px; color: #111; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; cursor: pointer; }
+        .nav-link.active { background: #111; color: #fff; }
+        .cta-button { background: var(--whatsapp); color: white; padding: 10px 20px; border-radius: 100px; font-size: 13px; font-weight: 700; text-decoration: none; transition: transform 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .menu-trigger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); border-radius: 50%; border: none; cursor: pointer; margin-left: 10px;}
+        .menu-trigger span { display: block; width: 18px; height: 2px; background: #111; position: relative; }
+        .menu-trigger span::before, .menu-trigger span::after { content: ''; position: absolute; width: 100%; height: 100%; background: #111; transition: 0.3s; top: -6px; }
+        .menu-trigger span::after { top: auto; bottom: -6px; }
+
+        /* --- HERO --- */
+        .hero { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 157px 20px 40px; position: relative; }
+        .hero-badge { background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); backdrop-filter: blur(16px); padding: 8px 18px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin-bottom: 24px; animation: fadeInDown 1s ease-out; }
+        
+        .hero h1 { 
+            font-size: 90px; line-height: 0.92; font-weight: 800; letter-spacing: -3px; margin-bottom: 24px; max-width: 1000px; 
+            background: linear-gradient(110deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 50%, #ffffff 60%);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 8s linear infinite, fadeUp 1s 0.2s forwards;
+            opacity: 0;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .hero p { font-size: 22px; line-height: 1.5; color: rgba(255,255,255,0.95); max-width: 650px; margin-bottom: 30px; text-shadow: 0 4px 10px rgba(0,0,0,0.4); font-weight: 500; opacity: 0; animation: fadeUp 1s 0.4s forwards; }
+        .hero-actions { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 1s 0.5s forwards; margin-bottom: 40px; }
+        .hero-btn { height: 56px; padding: 0 32px; min-width: 220px; border-radius: 100px; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; backdrop-filter: blur(12px); transition: 0.3s; cursor: pointer; }
+        .hero-btn.btn-wa { background: var(--whatsapp); color: #fff; gap: 10px; }
+        .hero-btn.btn-outline { background: rgba(255,255,255,0.6); color: #000; border: 1px solid rgba(255,255,255,0.8); }
+        .hero-google-card { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); padding: 16px 32px; border-radius: 100px; display: inline-flex; align-items: center; gap: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); transition: transform 0.3s; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 0.6s forwards; cursor: pointer; text-decoration: none; transform: scale(1.02); }
+        .g-icon { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .g-text { text-align: left; } .g-stars svg { width: 18px; height: 18px; fill: #FBBC05; }
+        .g-info { font-size: 13px; font-weight: 700; color: #4285F4; text-transform: uppercase; margin-top: 2px; }
+        .g-score { font-size: 15px; font-weight: 800; color: #111; margin-left: 6px; }
+
+        .glass-dashboard { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); border-radius: var(--radius-lg); padding: 40px 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; max-width: 1000px; width: 100%; opacity: 0; animation: fadeUp 1s 0.7s forwards; }
+        .stat-val { font-size: 52px; font-weight: 800; color: #111; font-family: 'Space Grotesk', sans-serif; display: block; line-height: 1; margin-bottom: 8px; letter-spacing: -2px; }
+        .stat-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- MARQUEE --- */
+        .marquee-section { padding: 24px 0; width: 105%; margin-left: -2.5%; overflow: hidden; white-space: nowrap; position: relative; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .marquee-content { display: inline-flex; gap: 100px; animation: scroll 40s linear infinite; align-items: center; }
+        .brand-item { font-size: 20px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .marquee-section.light-top { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-2deg); margin-top: 10px; margin-bottom: 30px; }
+        .marquee-section.dark-mid { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); transform: rotate(2deg); margin-top: 20px; margin-bottom: 30px; }
+        .marquee-section.light-bot { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-2deg); margin-top: 20px; margin-bottom: 30px; }
+        .marquee-section.light-top .brand-item, .marquee-section.light-bot .brand-item { color: #111; opacity: 0.8; }
+        .marquee-section.dark-mid .brand-item { color: #fff; opacity: 0.9; }
+        .marquee-section.dark-mid .brand-item.accent { color: var(--accent); } 
+
+        /* --- CONTENT --- */
+        .content-layer { position: relative; z-index: 10; width: 100%; }
+        .section-padding { padding-top: var(--section-gap); padding-bottom: var(--section-gap); max-width: var(--max-width); margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+        .center-header { text-align: center; width: 100%; margin-bottom: 30px; }
+        .section-glass-header { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); padding: 18px 40px; border-radius: 100px; display: inline-block; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 30px rgba(0,0,0,0.05); text-align: center; }
+        .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; display: block; margin-bottom: 4px; }
+        .section-title { font-size: 36px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
+        
+        .tilt-card { transition: transform 0.1s; will-change: transform; transform-style: preserve-3d; }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .feature-card { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); padding: 40px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; transition: all 0.4s ease; }
+        .feature-card:hover { box-shadow: var(--glass-shadow-hover); background: var(--glass-bg-hover); }
+        .feature-icon-circle { width: 60px; height: 60px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--accent); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .feature-card h3 { font-size: 20px; font-weight: 700; color: #111; }
+        .feature-card p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); font-weight: 500; }
+
+        .process-glass-box { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); border-radius: 40px; padding: 50px 80px; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; } 
+        .steps-wrapper { display: flex; justify-content: space-between; position: relative; gap: 20px; }
+        .steps-connector { position: absolute; top: 30px; left: 60px; right: 60px; height: 2px; background: rgba(0,0,0,0.06); z-index: 0; }
+        .step-single { position: relative; z-index: 1; text-align: center; flex: 1; opacity: 0.5; transform: translateY(10px); transition: all 0.6s ease; }
+        .step-single.step-active { opacity: 1; transform: translateY(0); }
+        .step-circle { width: 60px; height: 60px; background: #fff; border: 4px solid #F5F5F7; color: #111; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .step-single.step-active .step-circle { border-color: var(--accent); background: #fff; color: var(--accent); transform: scale(1.15); box-shadow: 0 0 30px rgba(0, 113, 227, 0.3); }
+        .step-single:hover .step-circle { border-color: var(--accent); color: var(--accent); transform: scale(1.1); }
+        .step-single h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #111; }
+        .step-single p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; padding: 0 15px; }
+
+        .reviews-scroller { display: flex; gap: 24px; overflow-x: auto; padding: 10px 10px 30px; scroll-snap-type: x mandatory; cursor: grab; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .reviews-scroller::-webkit-scrollbar { display: none; }
+        .review-glass-card { min-width: 380px; background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); padding: 36px; border-radius: 28px; scroll-snap-align: center; display: flex; flex-direction: column; gap: 16px; box-shadow: var(--glass-shadow); transition: all 0.4s ease; }
+        .review-glass-card:hover { background: #fff; box-shadow: var(--glass-shadow-hover); }
+        .r-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .r-user { display: flex; align-items: center; gap: 12px; }
+        .r-avatar { width: 44px; height: 44px; background: #f2f2f7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #111; }
+        .r-name { font-size: 16px; font-weight: 700; color: #111; }
+        .r-meta { font-size: 12px; color: #888; display: block; }
+        .r-verified { font-size: 11px; font-weight: 600; color: #0071E3; background: rgba(0, 113, 227, 0.1); padding: 4px 8px; border-radius: 12px; display: flex; align-items: center; gap: 4px; }
+        .r-stars { color: #FBBC05; font-size: 14px; display: flex; gap: 2px; }
+        .r-text { font-size: 16px; line-height: 1.6; color: #333; font-style: italic; }
+
+        .faq-grid { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .faq-item { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); border-radius: 24px; overflow: hidden; transition: 0.3s; cursor: pointer; box-shadow: var(--glass-shadow); }
+        .faq-question { padding: 28px; font-weight: 700; font-size: 18px; display: flex; justify-content: space-between; align-items: center; color: #111; }
+        .faq-answer { height: 0; padding: 0 28px; overflow: hidden; transition: all 0.4s ease; color: var(--text-secondary); line-height: 1.7; font-size: 15px; }
+        .faq-item.active { background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-color: rgba(255,255,255,1); transform: scale(1.01); }
+        .faq-item.active .faq-answer { height: auto; padding-bottom: 28px; }
+        .faq-icon { transition: 0.3s; font-size: 24px; color: var(--accent); }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        .cta-section { background: #111; color: #fff; border-radius: 48px; padding: 100px 40px; text-align: center; margin: 0 20px var(--section-gap); position: relative; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+        .cta-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(37, 211, 102, 0.25) 0%, transparent 70%); opacity: 0.8; pointer-events: none; }
+        .cta-content { position: relative; z-index: 2; }
+        .cta-title { font-size: 56px; font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
+
+        /* --- GLASS FOOTER BLOCK (STILE HEADER, NO FLOATING) --- */
+        footer {
+            padding: 0 20px 40px; /* Spazio sotto */
+            margin-top: var(--section-gap);
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass-footer-box {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.8); /* Bordo come Header */
+            border-radius: 40px; /* Arrotondamento forte */
+            padding: 60px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+        .footer-brand h4 { font-size: 22px; color: #111; margin-bottom: 12px; font-weight: 800; }
+        .footer-col h5 { color: #111; margin-bottom: 20px; font-weight: 700; font-size: 16px; }
+        .footer-col ul li { margin-bottom: 12px; list-style: none; }
+        .footer-col a { color: var(--text-secondary); transition: 0.2s; text-decoration: none; }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 12px; opacity: 0.7; }
+
+        .fs-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(255,255,255,0.95); backdrop-filter: blur(40px); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
+        .fs-menu.active { opacity: 1; pointer-events: all; }
+        .fs-link { font-size: 36px; font-weight: 700; color: #111; margin: 10px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.4s; }
+        .fs-menu.active .fs-link { opacity: 1; transform: translateY(0); }
+
+        .whatsapp-fab { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 10000; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: none; }
+        .whatsapp-fab svg { width: 32px; height: 32px; fill: white; }
+        .whatsapp-fab:active { transform: scale(0.9); }
+
+        /* DOTS INDICATORS */
+        .scroll-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+        .dot-indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: all 0.3s ease; cursor: pointer; }
+        .dot-indicator.active { width: 24px; background: var(--accent); border-radius: 10px; }
+        #featuresDots { display: none; }
+
+        /* --- SQUARE 4:4 COMPARISON SLIDER (IPHONE FRAME) --- */
+        .comparison-container { 
+            max-width: 500px; /* Controlla larghezza su desktop */
+            margin: 0 auto; 
+            text-align: center; 
+            position: relative;
+        }
+
+        .comparison-glass-frame { 
+            position: relative; 
+            width: 100%; 
+            /* ASPECT RATIO 1:1 (4:4) FORCE SQUARE */
+            aspect-ratio: 1 / 1; 
+            border-radius: 40px; /* Angoli iPhone */
+            /* THE FRAME - BLACK BEZEL + GLOSS */
+            border: 12px solid #1a1a1a; 
+            box-shadow: 
+                0 0 0 2px #333, /* Outer thin outline */
+                0 30px 80px rgba(0,0,0,0.4); /* Deep drop shadow */
+            overflow: hidden; 
+            background: #000; 
+        }
+
+        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; }
+        .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        
+        .img-comp-img img { 
+            display: block; vertical-align: middle; 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+        }
+
+        .label-badge { 
+            position: absolute; top: 40px; 
+            padding: 6px 14px; border-radius: 20px; 
+            font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
+            z-index: 10; backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .label-badge.after { right: 20px; background: rgba(255, 255, 255, 0.9); color: #000; }
+        .label-badge.before { left: 20px; background: rgba(20, 20, 20, 0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* SLIDER HANDLE - LASER STYLE */
+        .comp-slider { 
+            position: absolute; z-index: 9; cursor: ew-resize; 
+            top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 44px; height: 44px; 
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.2); 
+            display: flex; align-items: center; justify-content: center; 
+        }
+        
+        .comp-slider::before { 
+            content: ''; position: absolute; 
+            top: -1000px; bottom: -1000px; width: 2px; 
+            background: linear-gradient(to bottom, transparent, #fff, transparent); 
+            z-index: -1; 
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        .comp-slider svg { width: 20px; height: 20px; fill: #fff; }
+        .comp-caption { margin-top: 25px; color: #fff; font-size: 14px; font-weight: 500; opacity: 0.8; letter-spacing: 0.5px; }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(30px); } }
+        @keyframes fadeInDown { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(-20px); } }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0) rotate(-45deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) { 
+            :root { --section-gap: 40px; }
+            .nav-main-row { padding: 8px 15px; } 
+            .nav-links, .cta-button.desktop-only { display: none; } 
+            .smart-nav { width: 92%; }
+            .menu-trigger { display: flex; }
+            .hero h1 { font-size: 52px; }
+            
+            .features-grid, .reviews-scroller {
+                display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 10px; padding-right: 20px; -ms-overflow-style: none; scrollbar-width: none;
+                mask-image: linear-gradient(to right, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+            }
+            .features-grid::-webkit-scrollbar, .reviews-scroller::-webkit-scrollbar { display: none; }
+
+            .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 15px; padding: 25px; margin-top: 20px; }
+            .stat-item:last-child { grid-column: span 2; }
+            .stat-val { font-size: 42px; }
+
+            .feature-card { min-width: 85vw; scroll-snap-align: center; padding: 30px; }
+            .review-glass-card { min-width: 85vw; scroll-snap-align: center; }
+
+            #featuresDots { display: flex; }
+
+            .process-glass-box { padding: 40px 30px; }
+            .steps-wrapper { flex-direction: column; gap: 0; position: relative; padding-left: 20px; }
+            .steps-wrapper::before { content: ''; position: absolute; top: 20px; bottom: 40px; left: 49px; width: 2px; background: rgba(0,0,0,0.1); z-index: 0; }
+            .steps-connector { display: none; }
+            .step-single { display: flex; align-items: flex-start; text-align: left; margin-bottom: 40px; position: relative; z-index: 1; }
+            .step-circle { margin: 0 20px 0 0; min-width: 60px; background: rgba(255,255,255,0.9); }
+            .step-single h4 { margin-top: 8px; font-size: 20px; }
+            .step-single p { padding: 0; font-size: 15px; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .glass-footer-box { padding: 40px; } /* Meno padding interno su mobile */
+            
+            .cta-title { font-size: 36px; }
+            .cta-section { padding: 80px 30px; }
+            .hero-actions { gap: 15px; }
+            .hero-btn { min-width: 100%; }
+            .noise-overlay { opacity: 0.03; }
+            .marquee-section { padding: 18px 0; }
+            .whatsapp-fab { display: flex; animation: popIn 0.5s 2s backwards; }
+            
+            /* COMP SQUARE ON MOBILE TOO */
+            .comparison-glass-frame { width: 100%; max-width: 350px; margin: 0 auto; } 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="global-bg"></div>
+    <div class="hero-vignette"></div>
+
+    <a href="https://wa.me/393510000000" class="whatsapp-fab" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <div class="smart-nav-container">
+        <nav class="smart-nav">
+            <div class="nav-main-row">
+                <a href="#hero" class="nav-logo" onclick="smoothScroll(event, '#hero')">
+                    <img src="https://raw.githubusercontent.com/Supermanbatman2726/Dhdbd/refs/heads/main/IMG_0031.png" alt="Logo">
+                    QuanTech
+                </a>
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link active" onclick="smoothScroll(event, '#hero')">Home</a>
+                    <a href="#features" class="nav-link" onclick="smoothScroll(event, '#features')">Servizi</a>
+                    <a href="#process" class="nav-link" onclick="smoothScroll(event, '#process')">Processo</a>
+                    <a href="#reviews" class="nav-link" onclick="smoothScroll(event, '#reviews')">Clienti</a>
+                    <a href="#faq" class="nav-link" onclick="smoothScroll(event, '#faq')">FAQ</a>
+                </div>
+                <div style="display:flex; align-items:center;">
+                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" class="cta-button desktop-only" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Prenota su WhatsApp
+                    </a>
+                    <button class="menu-trigger" onclick="toggleMenu()">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-announcement-row">
+                <div class="marquee-inner">
+                    <span>Sconto 20% sul primo ordine</span> <span class="dot">•</span>
+                    <span>Assistenza Express Apple</span> <span class="dot">•</span>
+                    <span>Tecnologia QuanTech</span> <span class="dot">•</span>
+                    <span>Prenota Online in 2 Minuti</span> <span class="dot">•</span>
+                    <span>Sconto 20% sul primo ordine</span> <span class="dot">•</span>
+                    <span>Assistenza Express Apple</span> <span class="dot">•</span>
+                    <span>Tecnologia QuanTech</span> <span class="dot">•</span>
+                    <span>Prenota Online in 2 Minuti</span> <span class="dot">•</span>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="fs-menu" id="fsMenu">
+            <a href="#hero" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#hero');">Home</a>
+            <a href="#features" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#features');">Servizi</a>
+            <a href="#process" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#process');">Come Funziona</a>
+            <a href="#reviews" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#reviews');">Recensioni</a>
+            <a href="#faq" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#faq');">FAQ</a>
+            <a href="https://wa.me/393510000000?text=Ciao%20QuanTech" class="fs-link" onclick="toggleMenu()" target="_blank" style="color: var(--whatsapp); transition-delay: 0.5s">Scrivici su WhatsApp</a>
+            <div style="margin-top: 40px; cursor: pointer; font-weight: 600;" onclick="toggleMenu()">✕ Chiudi</div>
+        </div>
+
+        <section class="hero" id="hero">
+            <div class="hero-badge">Nuova Apertura</div>
+            <h1>Il futuro della<br>riparazione tech.</h1>
+            <p>Design minimale. Componenti originali. Velocità sorprendente.<br>Restituiamo vita ai tuoi dispositivi in meno di 60 minuti.</p>
+            
+            <div class="hero-actions">
+                <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20informazioni" class="hero-btn btn-wa" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    Prenota su WhatsApp
+                </a>
+                <a href="#features" class="hero-btn btn-outline" onclick="smoothScroll(event, '#features')">Scopri i Servizi</a>
+            </div>
+
+            <a href="https://www.google.com/maps" target="_blank" style="text-decoration:none;">
+                <div class="hero-google-card">
+                    <div class="g-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    </div>
+                    <div class="g-text">
+                        <div class="g-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <div class="g-info">Excellent <span class="g-score">5.0 / 5.0</span></div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="glass-dashboard">
+                <div class="stat-item">
+                    <span class="stat-val" data-target="20">0</span>
+                    <span class="stat-label">Minuti Attesa Media</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val" data-target="184">0</span>
+                    <span class="stat-label">Recensioni 5 Stelle</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">12</span>
+                    <span class="stat-label">Mesi Garanzia</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-layer">
+            
+            <div class="marquee-section light-top reveal">
+                <div class="marquee-content">
+                    <span class="brand-item">Apple</span>
+                    <span class="brand-item">Samsung</span>
+                    <span class="brand-item">Xiaomi</span>
+                    <span class="brand-item">Huawei</span>
+                    <span class="brand-item">Oppo</span>
+                    <span class="brand-item">Google</span>
+                    <span class="brand-item">Sony</span>
+                    <span class="brand-item">Apple</span>
+                    <span class="brand-item">Samsung</span>
+                    <span class="brand-item">Xiaomi</span>
+                    <span class="brand-item">Huawei</span>
+                    <span class="brand-item">Oppo</span>
+                    <span class="brand-item">Google</span>
+                    <span class="brand-item">Sony</span>
+                </div>
+            </div>
+            
+            <section class="section-padding" id="features">
+                <div class="center-header reveal">
+                    <div class="section-glass-header">
+                        <span class="section-tag">Perché Sceglierci</span>
+                        <h2 class="section-title">Eccellenza tecnica.</h2>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card tilt-card reveal">
+                        <div class="feature-icon-circle">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>
+                        </div>
+                        <h3>Diagnostica Laser</h3>
+                        <p>Strumenti di precisione per identificare micro-danni invisibili a occhio nudo. La cura è nei dettagli.</p>
+                    </div>
+                    <div class="feature-card tilt-card reveal" style="transition-delay: 0.1s">
+                        <div class="feature-icon-circle">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        </div>
+                        <h3>Componenti OEM</h3>
+                        <p>Solo parti originali o certificate. Il tuo schermo avrà gli stessi colori vividi, la tua batteria la stessa durata.</p>
+                    </div>
+                    <div class="feature-card tilt-card reveal" style="transition-delay: 0.2s">
+                        <div class="feature-icon-circle">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <h3>Riparazione Express</h3>
+                        <p>Il 90% delle riparazioni avviene in meno di un'ora. Goditi un caffè nella nostra area relax mentre aspetti.</p>
+                    </div>
+                </div>
+                <div class="scroll-dots" id="featuresDots"></div>
+            </section>
+
+            <div class="marquee-section dark-mid reveal">
+                <div class="marquee-content">
+                    <span class="brand-item accent">Garanzia 12 Mesi</span>
+                    <span class="brand-item">Ricambi Originali</span>
+                    <span class="brand-item accent">Tecnici Certificati</span>
+                    <span class="brand-item">Velocità</span>
+                    <span class="brand-item accent">Garanzia 12 Mesi</span>
+                    <span class="brand-item">Ricambi Originali</span>
+                    <span class="brand-item accent">Tecnici Certificati</span>
+                    <span class="brand-item">Velocità</span>
+                    <span class="brand-item accent">Garanzia 12 Mesi</span>
+                    <span class="brand-item">Ricambi Originali</span>
+                    <span class="brand-item accent">Tecnici Certificati</span>
+                    <span class="brand-item">Velocità</span>
+                </div>
+            </div>
+
+            <section class="section-padding" id="process">
+                <div class="process-glass-box reveal">
+                    <div class="center-header" style="margin-bottom: 40px;">
+                        <span class="section-tag">Il Processo</span>
+                        <h2 class="section-title">Semplice, in 3 step.</h2>
+                    </div>
+                    
+                    <div class="steps-wrapper">
+                        <div class="steps-connector"></div>
+                        <div class="step-single">
+                            <div class="step-circle">1</div>
+                            <div>
+                                <h4>Prenota o Passa</h4>
+                                <p>Prenota online per priorità o passa in negozio per una diagnosi.</p>
+                            </div>
+                        </div>
+                        <div class="step-single">
+                            <div class="step-circle">2</div>
+                            <div>
+                                <h4>Riparazione Live</h4>
+                                <p>I nostri tecnici operano davanti ai tuoi occhi con cura maniacale.</p>
+                            </div>
+                        </div>
+                        <div class="step-single">
+                            <div class="step-circle">3</div>
+                            <div>
+                                <h4>Garanzia e Via</h4>
+                                <p>Ritira il dispositivo perfetto, coperto da 12 mesi di garanzia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BEFORE / AFTER SECTION - PREMIUM SQUARE 4:4 (iPhone Style) -->
+            <section class="section-padding" id="showcase">
+                <div class="center-header reveal">
+                    <div class="section-glass-header">
+                        <span class="section-tag">Risultati Reali</span>
+                        <h2 class="section-title">Magia in azione.</h2>
+                    </div>
+                </div>
+
+                <div class="comparison-container reveal">
+                    <div class="comparison-glass-frame">
+                        <div class="img-comp-container">
+                            <!-- AFTER: VIBRANT FLUID WALLPAPER (CLEAN SCREEN) -->
+                            <div class="img-comp-img">
+                                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop" alt="Dopo - Schermo Perfetto">
+                                <span class="label-badge after">Dopo</span>
+                            </div>
+                            <!-- BEFORE: CRACKED SCREEN TEXTURE -->
+                            <div class="img-comp-img img-comp-overlay">
+                                <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
+                                <span class="label-badge before">Prima</span>
+                            </div>
+                        </div>
+                        <div class="comp-slider">
+                            <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#fff"/><path d="M16 12L10 18V6L16 12Z" fill="#fff"/></svg>
+                        </div>
+                    </div>
+                    <p class="comp-caption">Trascina per vedere la riparazione</p>
+                </div>
+            </section>
+
+            <section class="section-padding" id="reviews">
+                <div class="center-header reveal">
+                    <div class="section-glass-header">
+                        <span class="section-tag">Social Proof</span>
+                        <h2 class="section-title">Clienti Soddisfatti.</h2>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20ho%20letto%20le%20recensioni" class="cta-button" target="_blank" style="padding: 12px 28px; background: #fff; color: var(--whatsapp); border: 1px solid var(--whatsapp);">
+                        <svg viewBox="0 0 24 24" style="fill: var(--whatsapp);"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+                </div>
+
+                <div class="reviews-scroller reveal" id="reviewsScroll">
+                    <div class="review-glass-card tilt-card">
+                        <div class="r-header">
+                            <div class="r-user">
+                                <div class="r-avatar">S</div>
+                                <div>
+                                    <div class="r-name">Sante Alberga</div>
+                                    <span class="r-meta">2 settimane fa</span>
+                                </div>
+                            </div>
+                            <div class="r-verified">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified
+                            </div>
+                        </div>
+                        <div class="r-stars">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <p class="r-text">"Ero veramente in difficoltà con schermo e cristalli rotti su iPhone 15 Pro Max. Proprietario disponibile, gentile e veloce, in mezz’ora mi ha cambiato schermo."</p>
+                    </div>
+                    <div class="review-glass-card tilt-card">
+                        <div class="r-header">
+                            <div class="r-user">
+                                <div class="r-avatar">P</div>
+                                <div>
+                                    <div class="r-name">Pietro Perta</div>
+                                    <span class="r-meta">1 mese fa</span>
+                                </div>
+                            </div>
+                            <div class="r-verified">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified
+                            </div>
+                        </div>
+                        <div class="r-stars">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <p class="r-text">"Mi sono rivolto a questo negozio per sostituire batteria iPhone 12 Pro e display Apple Watch. Servizio impeccabile, proprietario gentilissimo."</p>
+                    </div>
+                    <div class="review-glass-card tilt-card">
+                        <div class="r-header">
+                            <div class="r-user">
+                                <div class="r-avatar">M</div>
+                                <div>
+                                    <div class="r-name">Marco Verga</div>
+                                    <span class="r-meta">3 settimane fa</span>
+                                </div>
+                            </div>
+                            <div class="r-verified">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified
+                            </div>
+                        </div>
+                        <div class="r-stars">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <p class="r-text">"Onestà rara. Risolto problema al connettore in 20 minuti senza sostituire pezzi inutili. Competenza e trasparenza al top."</p>
+                    </div>
+                </div>
+                <div class="scroll-dots" id="reviewsDots"></div>
+            </section>
+
+            <div class="marquee-section light-bot reveal">
+                <div class="marquee-content">
+                    <span class="brand-item">Privacy Totale</span>
+                    <span class="brand-item">Nessuna Perdita Dati</span>
+                    <span class="brand-item">Check-up Gratuito</span>
+                    <span class="brand-item">Qualità Premium</span>
+                    <span class="brand-item">Privacy Totale</span>
+                    <span class="brand-item">Nessuna Perdita Dati</span>
+                    <span class="brand-item">Check-up Gratuito</span>
+                    <span class="brand-item">Qualità Premium</span>
+                </div>
+            </div>
+
+            <section class="section-padding" id="faq">
+                <div class="center-header reveal">
+                    <div class="section-glass-header">
+                        <span class="section-tag">FAQ</span>
+                        <h2 class="section-title">Domande Frequenti.</h2>
+                    </div>
+                </div>
+                
+                <div class="faq-grid reveal">
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Quanto tempo richiede la riparazione?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Il 90% delle nostre riparazioni (cambio schermo, batteria) viene completato in meno di 60 minuti. Per interventi su scheda madre potrebbero volerci 24-48 ore.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            I dati vengono persi?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Assolutamente no. Non cancelliamo mai i tuoi dati durante le riparazioni hardware. Consigliamo comunque sempre un backup per sicurezza.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Che garanzia offrite?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Offriamo una garanzia completa di 12 mesi su tutti i ricambi sostituiti e sulla manodopera.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA SECTION RESTORED (BIG & BOLD) -->
+            <section class="cta-section" id="contact">
+                <div class="cta-glow"></div>
+                <div class="cta-content">
+                    <h2 class="cta-title">Il tuo dispositivo merita il meglio.</h2>
+                    <p style="font-size: 17px; opacity: 0.8; max-width: 600px; margin: 10px auto 0;">Non aspettare che il danno peggiori. Prenota oggi con un click.</p>
+                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20ho%20bisogno%20di%20assistenza" class="cta-button" target="_blank" style="margin-top: 25px; padding: 16px 40px; font-size: 16px;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+                </div>
+            </section>
+
+            <!-- FOOTER - GLASS BLOCK STYLE -->
+            <footer>
+                <div class="glass-footer-box">
+                    <div class="footer-grid">
+                        <div class="footer-col footer-brand">
+                            <h4>QuanTech</h4>
+                            <p>White Glass Engine.<br>Tecnologia e Design al servizio della riparazione.</p>
+                        </div>
+                        <div class="footer-col">
+                            <h5>Servizi</h5>
+                            <ul>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione iPhone</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione Mac</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Recupero Dati</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h5>Azienda</h5>
+                            <ul>
+                                <li><a href="#hero" onclick="smoothScroll(event, '#hero')">Chi Siamo</a></li>
+                                <li><a href="https://wa.me/393510000000" target="_blank">Contatti</a></li>
+                                <li><a href="#">Privacy</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h5>Social</h5>
+                            <ul>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="https://www.google.com/maps" target="_blank">Maps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        &copy; 2024 QuanTech. Tutti i diritti riservati.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function smoothScroll(e, targetId) {
+            e.preventDefault();
+            const target = document.querySelector(targetId);
+            if (!target) return;
+            const headerOffset = 100;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const startPosition = window.pageYOffset;
+            const distance = offsetPosition - startPosition;
+            const duration = 500; // Fast Scroll
+            let start = null;
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const run = ease(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+            function ease(t, b, c, d) {
+                t /= d / 2; if (t < 1) return c / 2 * t * t * t + b; t -= 2; return c / 2 * (t * t * t + 2) + b;
+            }
+            requestAnimationFrame(animation);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('fsMenu');
+            menu.classList.toggle('active');
+        }
+        
+        function toggleFaq(el) {
+            el.classList.toggle('active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const stepsContainer = document.querySelector('.steps-wrapper');
+        const steps = document.querySelectorAll('.step-single');
+
+        const processObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    steps.forEach((step, index) => {
+                        setTimeout(() => {
+                            step.classList.add('step-active');
+                        }, index * 400); 
+                    });
+                    processObserver.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.4 });
+
+        if(stepsContainer) processObserver.observe(stepsContainer);
+
+        const animateCounters = () => {
+            document.querySelectorAll('.stat-val').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                if(!target) return;
+                const duration = 2000; 
+                const increment = target / (duration / 16); 
+                let current = 0;
+                const update = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(update);
+                    } else {
+                        counter.innerText = target + (target > 100 ? "+" : "");
+                    }
+                };
+                update();
+            });
+        };
+
+        let counterTriggered = false;
+        const statsSection = document.querySelector('.glass-dashboard');
+        const statsObserver = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting && !counterTriggered) {
+                animateCounters();
+                counterTriggered = true;
+            }
+        });
+        if(statsSection) statsObserver.observe(statsSection);
+
+        // --- DOTS LOGIC ---
+        function createDots(containerId, dotsId, itemSelector) {
+            const container = document.querySelector(containerId);
+            const dotsContainer = document.getElementById(dotsId);
+            if (!container || !dotsContainer) return;
+
+            const items = container.querySelectorAll(itemSelector);
+            const dotsCount = items.length;
+
+            // Clear existing
+            dotsContainer.innerHTML = '';
+
+            // Generate dots
+            for (let i = 0; i < dotsCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot-indicator');
+                if (i === 0) dot.classList.add('active');
+                
+                dot.addEventListener('click', () => {
+                    items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                });
+                dotsContainer.appendChild(dot);
+            }
+
+            // Sync dots on scroll
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const itemWidth = items[0].clientWidth; // Approximation
+                const activeIndex = Math.round(scrollLeft / itemWidth);
+                
+                const dots = dotsContainer.querySelectorAll('.dot-indicator');
+                dots.forEach((d, idx) => {
+                    if (idx === activeIndex) d.classList.add('active');
+                    else d.classList.remove('active');
+                });
+            });
+        }
+
+        // Initialize dots
+        createDots('.reviews-scroller', 'reviewsDots', '.review-glass-card');
+        
+        // Features dots logic (Mobile only check inside)
+        if (window.innerWidth <= 1024) {
+            createDots('.features-grid', 'featuresDots', '.feature-card');
+        }
+        
+        // Re-init on resize to be safe
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 1024) {
+                createDots('.features-grid', 'featuresDots', '.feature-card');
+            }
+        });
+
+
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)'; });
+        });
+
+        /* --- COMPARISON SLIDER LOGIC --- */
+        function initComparisons() {
+            const overlay = document.querySelector(".img-comp-overlay");
+            const slider = document.querySelector(".comp-slider");
+            const container = document.querySelector(".comparison-glass-frame");
+            let clicked = 0;
+            
+            if(!overlay || !slider || !container) return;
+
+            // Set initial width to 50%
+            const w = container.offsetWidth;
+            overlay.style.width = (w / 2) + "px";
+
+            slider.addEventListener("mousedown", slideReady);
+            window.addEventListener("mouseup", slideFinish);
+            slider.addEventListener("touchstart", slideReady);
+            window.addEventListener("touchend", slideFinish);
+
+            function slideReady(e) {
+                e.preventDefault();
+                clicked = 1;
+                window.addEventListener("mousemove", slideMove);
+                window.addEventListener("touchmove", slideMove);
+            }
+
+            function slideFinish() {
+                clicked = 0;
+            }
+
+            function slideMove(e) {
+                if (clicked == 0) return false;
+                let pos = getCursorPos(e);
+                if (pos < 0) pos = 0;
+                if (pos > w) pos = w;
+                slide(pos);
+            }
+
+            function getCursorPos(e) {
+                let a = container.getBoundingClientRect();
+                let x = 0;
+                e = e.changedTouches ? e.changedTouches[0] : e;
+                x = e.pageX - a.left;
+                x = x - window.pageXOffset;
+                return x;
+            }
+
+            function slide(x) {
+                overlay.style.width = x + "px";
+                slider.style.left = x + "px"; // Muove il bottone con la linea
+            }
+        }
+
+        // Inizializza quando la pagina è pronta o ridimensionata
+        window.addEventListener('load', initComparisons);
+        window.addEventListener('resize', initComparisons);
+    </script>
+</body>
+</html>
+
