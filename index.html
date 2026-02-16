@@ -139,7 +139,7 @@
         .brand-item { font-size: 18px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 10px; margin-bottom: 40px; }
         .marquee-section.dark-mid { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); transform: rotate(1.5deg) scale(1.05); margin-top: 30px; margin-bottom: 30px; }
-        .marquee-section.light-bot { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 30px; margin-bottom: 30px; }
+        .marquee-section.light-bot { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 60px; margin-bottom: 60px; }
         .marquee-section.light-top .brand-item, .marquee-section.light-bot .brand-item { color: #111; opacity: 0.8; }
         .marquee-section.dark-mid .brand-item { color: #fff; opacity: 0.9; }
         .marquee-section.dark-mid .brand-item.accent { color: var(--accent); } 
@@ -229,6 +229,44 @@
         .cta-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(37, 211, 102, 0.25) 0%, transparent 70%); opacity: 0.8; pointer-events: none; }
         .cta-content { position: relative; z-index: 2; }
         .cta-title { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -2px; }
+
+        /* --- NEW SERVICE BOXES --- */
+        .service-box-glass {
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 30px;
+            border-radius: 24px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .service-bullets-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .check-icon {
+            color: var(--whatsapp);
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+        }
 
         /* --- FOOTER ATTACHED SIDES + CURVED TOP --- */
         footer {
@@ -389,6 +427,8 @@
             .step-circle { margin: 0 20px 0 0; min-width: 50px; background: rgba(255,255,255,0.9); }
             .step-single h4 { margin-top: 8px; font-size: 18px; }
             .step-single p { padding: 0; font-size: 14px; margin: 0; max-width: 100%; }
+            
+            .service-bullets-grid { grid-template-columns: 1fr; }
 
             /* Footer Mobile - Revert to curved top style for consistency */
             footer { padding: 0; }
@@ -621,13 +661,44 @@
                 </div>
             </section>
 
-            <!-- BEFORE / AFTER SECTION -->
+            <!-- BEFORE / AFTER SECTION WITH SERVICE LISTS -->
             <section class="section-padding" id="showcase">
                 <div class="center-header reveal">
                     <div class="section-glass-header">
                         <span class="section-tag">Risultati Reali</span>
                         <h2 class="section-title">Magia in azione.</h2>
                     </div>
+                </div>
+
+                <!-- BLOCK 1: SERVICES LIST BEFORE SLIDER -->
+                <div class="service-box-glass reveal">
+                    <h3 style="margin-bottom: 20px; font-size: 20px; text-align: center;">Cosa Ripariamo</h3>
+                    <ul class="service-bullets-grid">
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Sostituzione Display OLED
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Cambio Batteria Originale
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Riparazione Fotocamere
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Connettori di Ricarica
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Ripristino Audio / Face ID
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Scocca Posteriore Laser
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="comparison-container reveal">
@@ -648,7 +719,56 @@
                     </div>
                     <p class="comp-caption">Trascina per vedere la riparazione</p>
                 </div>
+
+                <!-- BLOCK 2: SERVICES LIST AFTER SLIDER -->
+                <div class="service-box-glass reveal">
+                    <h3 style="margin-bottom: 20px; font-size: 20px; text-align: center;">Servizi Avanzati</h3>
+                    <ul class="service-bullets-grid">
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Recupero Dati Persi
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Microsaldature Scheda Madre
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Trattamento Danni da Liquidi
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Pulizia Interna Profonda
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Assistenza Software & Backup
+                        </li>
+                        <li class="service-bullet-item">
+                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Applicazione Pellicole Pro
+                        </li>
+                    </ul>
+                </div>
             </section>
+
+            <!-- 3/4 PAGE MARQUEE -->
+            <div class="marquee-section light-bot reveal">
+                <div class="marquee-content">
+                    <span class="brand-item">Prenotazione Immediata</span>
+                    <span class="brand-item">Diagnosi Gratuita</span>
+                    <span class="brand-item">Pagamenti Sicuri</span>
+                    <span class="brand-item">Ambiente Climatizzato</span>
+                    <span class="brand-item">Prenotazione Immediata</span>
+                    <span class="brand-item">Diagnosi Gratuita</span>
+                    <span class="brand-item">Pagamenti Sicuri</span>
+                    <span class="brand-item">Ambiente Climatizzato</span>
+                    <span class="brand-item">Prenotazione Immediata</span>
+                    <span class="brand-item">Diagnosi Gratuita</span>
+                    <span class="brand-item">Pagamenti Sicuri</span>
+                    <span class="brand-item">Ambiente Climatizzato</span>
+                </div>
+            </div>
 
             <section class="section-padding" id="reviews">
                 <div class="center-header reveal">
