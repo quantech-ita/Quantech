@@ -26,8 +26,8 @@
             --glass-shadow: 0 20px 40px rgba(0,0,0,0.05);
             --glass-shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
             
-            /* COMPACT DESKTOP GAP */
-            --section-gap: 60px; 
+            /* STANDARDIZED GAP */
+            --section-gap: 80px; 
             --max-width: 1100px;
             --radius-lg: 32px;
         }
@@ -132,34 +132,36 @@
         .g-info { font-size: 12px; font-weight: 700; color: #4285F4; text-transform: uppercase; margin-top: 2px; }
         .g-score { font-size: 14px; font-weight: 800; color: #111; margin-left: 6px; }
 
-        .glass-dashboard { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: var(--radius-lg); padding: 30px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 800px; width: 100%; opacity: 0; animation: fadeUp 1s 0.7s forwards; }
+        .glass-dashboard { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: var(--radius-lg); padding: 30px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 800px; width: 100%; margin-bottom: var(--section-gap); opacity: 0; animation: fadeUp 1s 0.7s forwards; }
         .stat-item { display: flex; flex-direction: column; align-items: center; }
         .stat-val { font-size: 42px; font-weight: 800; color: #111; font-family: 'Space Grotesk', sans-serif; display: block; line-height: 1; margin-bottom: 8px; letter-spacing: -2px; }
         .stat-label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- MARQUEE --- */
-        .marquee-section { padding: 24px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        .marquee-content { display: inline-flex; gap: 80px; animation: scroll 30s linear infinite; align-items: center; padding-left: 80px; }
-        .brand-item { font-size: 18px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-        .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 10px; margin-bottom: 40px; }
-        .marquee-section.dark-mid { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); transform: rotate(1.5deg) scale(1.05); margin-top: 30px; margin-bottom: 30px; }
-        .marquee-section.light-bot { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 60px; margin-bottom: 60px; }
-        .marquee-section.light-top .brand-item, .marquee-section.light-bot .brand-item { color: #111; opacity: 0.8; }
-        .marquee-section.dark-mid .brand-item { color: #fff; opacity: 0.9; }
-        .marquee-section.dark-mid .brand-item.accent { color: var(--accent); } 
-
-        /* --- CONTENT --- */
+        /* --- CONTENT LAYER & PADDING --- */
         .content-layer { position: relative; z-index: 10; width: 100%; }
-        .section-padding { padding-top: var(--section-gap); padding-bottom: var(--section-gap); max-width: var(--max-width); margin: 0 auto; padding-left: 20px; padding-right: 20px; }
-        .center-header { text-align: center; width: 100%; margin-bottom: 30px; }
+        /* Margin Top regolarizzato per tutto */
+        .section-padding { margin-top: var(--section-gap); margin-bottom: var(--section-gap); max-width: var(--max-width); margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+        .center-header { text-align: center; width: 100%; margin-bottom: 40px; }
         .section-glass-header { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); padding: 14px 32px; border-radius: 100px; display: inline-block; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 30px rgba(0,0,0,0.05); text-align: center; }
         .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; display: block; margin-bottom: 4px; }
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
+
+        /* --- MARQUEE --- */
+        .marquee-section { padding: 24px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-top: var(--section-gap); margin-bottom: var(--section-gap); }
+        .marquee-content { display: inline-flex; gap: 80px; animation: scroll 30s linear infinite; align-items: center; padding-left: 80px; }
+        .brand-item { font-size: 18px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); }
+        .marquee-section.dark-mid { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); transform: rotate(1.5deg) scale(1.05); }
+        .marquee-section.light-bot { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); }
+        .marquee-section.light-top .brand-item, .marquee-section.light-bot .brand-item { color: #111; opacity: 0.8; }
+        .marquee-section.dark-mid .brand-item { color: #fff; opacity: 0.9; }
+        .marquee-section.dark-mid .brand-item.accent { color: var(--accent); } 
         
-        /* DESKTOP GRID & FEATURE CARDS (PIÙ PICCOLE) */
+        .tilt-card { transition: transform 0.1s; will-change: transform; transform-style: preserve-3d; }
+        
+        /* DESKTOP GRID & FEATURE CARDS */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 28px; padding-bottom: 60px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 250px; position: relative; cursor: pointer; transition: background 0.3s ease; }
-        /* Rimosso l'effetto hover 3D e l'ombra rialzata */
+        .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 28px; padding-bottom: 60px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 250px; position: relative; cursor: pointer; transition: background 0.3s ease; box-shadow: var(--glass-shadow); }
         .feature-card:hover { background: var(--glass-bg-hover); }
         .feature-icon-circle { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .feature-card h3 { font-size: 17px; font-weight: 700; color: #111; padding-right: 30px; margin: 0; }
@@ -218,13 +220,13 @@
         .faq-item.active .faq-icon { transform: rotate(45deg); }
 
         /* --- CTA BLOCK --- */
-        .cta-section { background: #111; color: #fff; border-radius: 40px; padding: 80px 40px; text-align: center; margin: 0 auto var(--section-gap); max-width: var(--max-width); position: relative; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+        .cta-section { background: #111; color: #fff; border-radius: 40px; padding: 80px 40px; text-align: center; margin-top: var(--section-gap); margin-bottom: var(--section-gap); margin-left: auto; margin-right: auto; max-width: var(--max-width); position: relative; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
         .cta-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(37, 211, 102, 0.25) 0%, transparent 70%); opacity: 0.8; pointer-events: none; }
         .cta-content { position: relative; z-index: 2; }
         .cta-title { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -2px; }
 
         /* --- SERVICE BOXES --- */
-        .service-box-glass { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 30px; border-radius: 24px; margin: 20px auto; max-width: 600px; box-shadow: var(--glass-shadow); }
+        .service-box-glass { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 30px; border-radius: 24px; margin: 30px auto; max-width: 600px; box-shadow: var(--glass-shadow); }
         .service-bullets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; list-style: none; padding: 0; margin: 0; }
         .service-bullet-item { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #111; }
         .check-icon { color: var(--whatsapp); flex-shrink: 0; width: 18px; height: 18px; }
@@ -232,14 +234,19 @@
         /* --- FOOTER --- */
         footer { padding: 0; margin-top: var(--section-gap); width: 100%; position: relative; z-index: 10; }
         .glass-footer-box { width: 100%; max-width: 100%; margin: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); border-top: 1px solid rgba(255, 255, 255, 0.8); border-radius: 60px 60px 0 0; padding: 80px 40px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; max-width: var(--max-width); margin-left: auto; margin-right: auto; }
+        
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
         .footer-brand h4 { font-size: 24px; color: #111; margin-bottom: 12px; font-weight: 800; }
         .footer-col h5 { color: #111; margin-bottom: 20px; font-weight: 700; font-size: 15px; }
         .footer-col ul { padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 10px; list-style: none; }
         .footer-col a { color: var(--text-secondary); transition: 0.2s; text-decoration: none; font-size: 14px; font-weight: 500; }
         .footer-col a:hover { color: var(--accent); }
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 12px; opacity: 0.7; max-width: var(--max-width); margin: 0 auto; }
+        
+        .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .footer-map iframe { width: 100%; height: 160px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.1); }
+
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 12px; opacity: 0.7; max-width: 1200px; margin: 0 auto; }
 
         /* FULLSCREEN MENU */
         .fs-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(255,255,255,0.95); backdrop-filter: blur(40px); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
@@ -269,7 +276,7 @@
         .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 50%; box-shadow: 0 0 20px rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; }
         .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 2px; background: linear-gradient(to bottom, transparent, #fff, transparent); z-index: -1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .comp-slider svg { width: 20px; height: 20px; fill: #fff; }
-        .comp-caption { margin-top: 25px; color: #fff; font-size: 14px; font-weight: 500; opacity: 0.8; letter-spacing: 0.5px; }
+        .comp-caption { margin-top: 30px; color: #fff; font-size: 18px; font-weight: 600; opacity: 0.9; letter-spacing: 0.5px; }
 
         /* --- FEATURE INFO MODAL --- */
         .f-modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: 0.4s ease; }
@@ -294,7 +301,7 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 1024px) { 
-            :root { --section-gap: 30px; }
+            :root { --section-gap: 60px; }
             .nav-main-row { padding: 8px 15px; } 
             .nav-links, .cta-button.desktop-only { display: none; } 
             .smart-nav { width: 92%; }
@@ -310,19 +317,18 @@
                 display: flex; 
                 overflow-x: auto; 
                 scroll-snap-type: x mandatory; 
-                gap: 15px; /* Spazio netto tra le card */
+                gap: 15px; 
                 padding-bottom: 10px; 
-                padding-right: 0; /* Rimosso per centrare esattamente 100% width */
+                padding-right: 0; 
                 -ms-overflow-style: none; 
                 scrollbar-width: none;
-                /* Rimossa la sfumatura laterale per uno scorrimento a singola card più pulito */
                 mask-image: none; 
                 -webkit-mask-image: none;
             }
             .features-grid::-webkit-scrollbar { display: none; }
             
             .feature-card { 
-                min-width: 100%; /* Occupa tutto lo spazio visibile */
+                min-width: 100%; 
                 scroll-snap-align: start; 
                 padding: 20px; 
                 padding-bottom: 55px; 
@@ -330,7 +336,7 @@
             }
             .feature-expand-indicator { top: 20px; right: 20px; }
 
-            .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px; margin-top: 10px; }
+            .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px; margin-top: 10px; margin-bottom: var(--section-gap); }
             .stat-item:last-child { grid-column: span 2; }
             .stat-val { font-size: 38px; }
             
@@ -350,7 +356,7 @@
             
             .service-bullets-grid { grid-template-columns: 1fr; }
 
-            footer { padding: 0; }
+            footer { padding: 0; margin-top: var(--section-gap); }
             .glass-footer-box { padding: 50px 30px 30px; border-radius: 40px 40px 0 0; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             
@@ -359,7 +365,6 @@
             .hero-actions { gap: 12px; }
             .hero-btn { min-width: 100%; }
             .noise-overlay { opacity: 0.03; }
-            .marquee-section { padding: 18px 0; }
             .whatsapp-fab { display: flex; animation: popIn 0.5s 2s backwards; }
             
             .comparison-glass-frame { width: 100%; max-width: 350px; } 
@@ -388,7 +393,7 @@
                 <div class="nav-links">
                     <a href="#hero" class="nav-link active" onclick="smoothScroll(event, '#hero')">Home</a>
                     <a href="#features" class="nav-link" onclick="smoothScroll(event, '#features')">Servizi</a>
-                    <a href="#process" class="nav-link" onclick="smoothScroll(event, '#process')">Processo</a>
+                    <a href="#process" class="nav-link" onclick="smoothScroll(event, '#process')">Come Funziona</a>
                     <a href="#reviews" class="nav-link" onclick="smoothScroll(event, '#reviews')">Clienti</a>
                     <a href="#faq" class="nav-link" onclick="smoothScroll(event, '#faq')">FAQ</a>
                 </div>
@@ -564,7 +569,7 @@
             <section class="section-padding" id="process">
                 <div class="process-glass-box reveal">
                     <div class="center-header" style="margin-bottom: 40px;">
-                        <span class="section-tag">Il Processo</span>
+                        <span class="section-tag">Come Funziona</span>
                         <h2 class="section-title">Semplice, in 3 step.</h2>
                     </div>
                     
@@ -591,6 +596,13 @@
                                 <p>Ritira il dispositivo perfetto, coperto da 12 mesi di garanzia.</p>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 50px;">
+                        <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" class="cta-button" target="_blank" style="padding: 14px 32px; font-size: 15px;">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Prenota Subito
+                        </a>
                     </div>
                 </div>
             </section>
@@ -943,28 +955,27 @@
                             <p>White Glass Engine.<br>Tecnologia e Design al servizio della riparazione.</p>
                         </div>
                         <div class="footer-col">
-                            <h5>Servizi</h5>
-                            <ul>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione iPhone</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione Mac</a></li>
+                            <h5>I Nostri Servizi</h5>
+                            <ul class="footer-services-grid">
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Sostituzione Display</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Cambio Batteria</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione Fotocamere</a></li>
                                 <li><a href="#features" onclick="smoothScroll(event, '#features')">Recupero Dati</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Microsaldature</a></li>
+                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Pulizia e Audio</a></li>
                             </ul>
                         </div>
                         <div class="footer-col">
                             <h5>Azienda</h5>
                             <ul>
-                                <li><a href="#hero" onclick="smoothScroll(event, '#hero')">Chi Siamo</a></li>
-                                <li><a href="https://wa.me/393510000000" target="_blank">Contatti</a></li>
-                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#process" onclick="smoothScroll(event, '#process')">Come Funziona</a></li>
+                                <li><a href="https://wa.me/393510000000" target="_blank">Contattaci</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
                             </ul>
                         </div>
-                        <div class="footer-col">
-                            <h5>Social</h5>
-                            <ul>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="https://www.google.com/maps" target="_blank">Maps</a></li>
-                            </ul>
+                        <div class="footer-col footer-map">
+                            <h5>Dove Siamo</h5>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.8872583857324!2d9.1868352!3d45.4648777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6af701831cf%3A0xc392fc5bb40026db!2sDuomo%20di%20Milano!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                     <div class="footer-bottom">
@@ -1077,7 +1088,6 @@
         }
 
         function closeFeatureModal(event) {
-            // Se event è undefined (chiamato dal pulsante X) o se il click è sull'overlay esterno
             if (!event || event.target.id === 'featureModal') {
                 document.getElementById('featureModal').classList.remove('active');
                 document.body.style.overflow = ''; // Restore scrolling
