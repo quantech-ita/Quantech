@@ -76,10 +76,15 @@
         .smart-nav-container { position: fixed; top: 20px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; padding: 0 20px; transform: translateZ(0); }
         .smart-nav { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.6); border-radius: 32px; width: 100%; max-width: 800px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease; }
         .nav-main-row { padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .nav-announcement-row { width: 100%; height: 28px; background: rgba(0, 0, 0, 0.04); border-top: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; overflow: hidden; }
-        .marquee-inner { display: flex; gap: 60px; white-space: nowrap; animation: marquee-top 45s linear infinite; padding-left: 100%; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #111; align-items: center; }
-        .dot { color: var(--accent); font-size: 1.2em; margin: 0 4px; position: relative; top: -1px; }
-        @keyframes marquee-top { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        
+        .nav-announcement-row { width: 100%; height: 32px; background: rgba(0, 0, 0, 0.04); border-top: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; overflow: hidden; }
+        .nav-address { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #333; text-decoration: none; transition: color 0.2s; }
+        .nav-address:hover { color: var(--accent); }
+        .nav-address svg { width: 14px; height: 14px; }
+        .nav-socials { display: flex; gap: 8px; align-items: center; }
+        .nav-social-icon { width: 22px; height: 22px; background: rgba(0,0,0,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #111; transition: all 0.2s; text-decoration: none; }
+        .nav-social-icon:hover { background: var(--accent); color: #fff; transform: scale(1.1); box-shadow: 0 4px 10px rgba(0, 113, 227, 0.3); }
+        .nav-social-icon svg { width: 12px; height: 12px; stroke-width: 2px; }
         
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #111; text-decoration: none; letter-spacing: -0.5px; flex-shrink: 0; }
         .nav-logo img { height: 32px; width: auto; border-radius: 6px; }
@@ -151,19 +156,19 @@
         .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; display: block; margin-bottom: 4px; }
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
         
-        .tilt-card { transition: transform 0.1s; will-change: transform; transform-style: preserve-3d; }
-        
-        /* DESKTOP GRID & FEATURE CARDS */
+        /* DESKTOP GRID & FEATURE CARDS (PIÙ PICCOLE) */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .feature-card { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 32px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 16px; transition: all 0.4s ease; min-height: 290px; position: relative; cursor: pointer; }
-        .feature-icon-circle { width: 50px; height: 50px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .feature-card h3 { font-size: 18px; font-weight: 700; color: #111; padding-right: 30px; }
-        .feature-card p { font-size: 15px; line-height: 1.6; color: var(--text-secondary); font-weight: 500; }
+        .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 28px; padding-bottom: 60px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 250px; position: relative; cursor: pointer; transition: background 0.3s ease; }
+        /* Rimosso l'effetto hover 3D e l'ombra rialzata */
+        .feature-card:hover { background: var(--glass-bg-hover); }
+        .feature-icon-circle { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .feature-card h3 { font-size: 17px; font-weight: 700; color: #111; padding-right: 30px; margin: 0; }
+        .feature-card p { font-size: 14px; line-height: 1.5; color: var(--text-secondary); font-weight: 500; margin: 0; }
         
         /* FEATURE EXPAND INDICATOR */
-        .feature-expand-indicator { position: absolute; top: 32px; right: 32px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0, 113, 227, 0.08); color: var(--accent); display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 10; }
-        .feature-expand-indicator svg { width: 18px; height: 18px; stroke-width: 2.5px; transition: transform 0.4s ease; }
-        .feature-card:hover .feature-expand-indicator { background: var(--accent); color: #fff; transform: scale(1.1) rotate(90deg); box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3); }
+        .feature-expand-indicator { position: absolute; top: 28px; right: 28px; width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 113, 227, 0.08); color: var(--accent); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; }
+        .feature-expand-indicator svg { width: 16px; height: 16px; stroke-width: 2.5px; transition: transform 0.3s ease; }
+        .feature-card:hover .feature-expand-indicator { background: var(--accent); color: #fff; transform: scale(1.1) rotate(90deg); }
 
         .process-glass-box { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 40px; padding: 60px 50px; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; width: 100%; max-width: 900px; margin: 0 auto; } 
         .steps-wrapper { display: flex; justify-content: space-between; position: relative; gap: 20px; }
@@ -297,19 +302,37 @@
             .hero h1 { font-size: 52px; margin-bottom: 20px; }
             .hero p { font-size: 18px; }
             
+            .nav-announcement-row { padding: 0 15px; }
+            .nav-address { font-size: 10px; }
+
+            /* --- FEATURES GRID (MOBILE: 1 CARD PER SLIDE) --- */
             .features-grid {
-                display: flex; overflow-x: auto; scroll-snap-type: x mandatory; 
-                gap: 5px; padding-bottom: 10px; padding-right: 20px; -ms-overflow-style: none; scrollbar-width: none;
-                mask-image: linear-gradient(to right, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+                display: flex; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                gap: 15px; /* Spazio netto tra le card */
+                padding-bottom: 10px; 
+                padding-right: 0; /* Rimosso per centrare esattamente 100% width */
+                -ms-overflow-style: none; 
+                scrollbar-width: none;
+                /* Rimossa la sfumatura laterale per uno scorrimento a singola card più pulito */
+                mask-image: none; 
+                -webkit-mask-image: none;
             }
             .features-grid::-webkit-scrollbar { display: none; }
+            
+            .feature-card { 
+                min-width: 100%; /* Occupa tutto lo spazio visibile */
+                scroll-snap-align: start; 
+                padding: 20px; 
+                padding-bottom: 55px; 
+                border-radius: 24px; 
+            }
+            .feature-expand-indicator { top: 20px; right: 20px; }
 
             .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px; margin-top: 10px; }
             .stat-item:last-child { grid-column: span 2; }
             .stat-val { font-size: 38px; }
-
-            .feature-card { min-width: 85vw; scroll-snap-align: center; padding: 24px; border-radius: 24px; }
-            .feature-expand-indicator { top: 24px; right: 24px; }
             
             #featuresDots { display: flex; }
 
@@ -379,16 +402,19 @@
                     </button>
                 </div>
             </div>
+            
             <div class="nav-announcement-row">
-                <div class="marquee-inner">
-                    <span>Sconto 20% sul primo ordine</span> <span class="dot">•</span>
-                    <span>Assistenza Express Apple</span> <span class="dot">•</span>
-                    <span>Tecnologia QuanTech</span> <span class="dot">•</span>
-                    <span>Prenota Online in 2 Minuti</span> <span class="dot">•</span>
-                    <span>Sconto 20% sul primo ordine</span> <span class="dot">•</span>
-                    <span>Assistenza Express Apple</span> <span class="dot">•</span>
-                    <span>Tecnologia QuanTech</span> <span class="dot">•</span>
-                    <span>Prenota Online in 2 Minuti</span> <span class="dot">•</span>
+                <a href="https://maps.google.com/?q=Tuo+Indirizzo+Qui" target="_blank" class="nav-address">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Vieni a trovarci in Sede
+                </a>
+                <div class="nav-socials">
+                    <a href="https://facebook.com" class="nav-social-icon" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://instagram.com" class="nav-social-icon" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -493,17 +519,6 @@
                         <p>Strumenti di precisione per identificare micro-danni invisibili a occhio nudo. La cura è nei dettagli.</p>
                     </div>
                     
-                    <div class="feature-card tilt-card reveal" onclick="openFeatureModal('oem')" style="transition-delay: 0.1s">
-                        <div class="feature-expand-indicator">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
-                        </div>
-                        <div class="feature-icon-circle">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>
-                        </div>
-                        <h3>Diagnostica Laser</h3>
-                        <p>Strumenti di precisione per identificare micro-danni invisibili a occhio nudo. La cura è nei dettagli.</p>
-                    </div>
-                    
                     <div class="feature-card reveal" onclick="openFeatureModal('oem')" style="transition-delay: 0.1s">
                         <div class="feature-expand-indicator">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
@@ -518,6 +533,9 @@
                     <div class="feature-card reveal" onclick="openFeatureModal('express')" style="transition-delay: 0.2s">
                         <div class="feature-expand-indicator">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        </div>
+                        <div class="feature-icon-circle">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
                         <h3>Riparazione Express</h3>
                         <p>Il 90% delle riparazioni avviene in meno di un'ora. Goditi un caffè nella nostra area relax mentre aspetti.</p>
