@@ -232,21 +232,69 @@
         .check-icon { color: var(--whatsapp); flex-shrink: 0; width: 18px; height: 18px; }
 
         /* --- FOOTER --- */
-        footer { padding: 0; margin-top: var(--section-gap); width: 100%; position: relative; z-index: 10; }
-        .glass-footer-box { width: 100%; max-width: 100%; margin: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); border-top: 1px solid rgba(255, 255, 255, 0.8); border-radius: 60px 60px 0 0; padding: 80px 40px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); }
+        footer { 
+            padding: 0; 
+            margin-top: var(--section-gap); 
+            width: 100%; 
+            position: relative; 
+            z-index: 10; 
+        }
         
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
-        .footer-brand h4 { font-size: 24px; color: #111; margin-bottom: 12px; font-weight: 800; }
-        .footer-col h5 { color: #111; margin-bottom: 20px; font-weight: 700; font-size: 15px; }
-        .footer-col ul { padding: 0; margin: 0; }
-        .footer-col ul li { margin-bottom: 10px; list-style: none; }
-        .footer-col a { color: var(--text-secondary); transition: 0.2s; text-decoration: none; font-size: 14px; font-weight: 500; }
-        .footer-col a:hover { color: var(--accent); }
+        .glass-footer-box { 
+            width: 100%; max-width: 100%; margin: 0; 
+            background: var(--glass-bg); 
+            -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); 
+            border-top: 1px solid rgba(255, 255, 255, 0.8); 
+            border-radius: 60px 60px 0 0; 
+            padding: 80px 40px 40px; 
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); 
+        }
         
-        .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .footer-map iframe { width: 100%; height: 160px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.1); }
+        .footer-grid { 
+            display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 50px; 
+            margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; 
+        }
 
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 12px; opacity: 0.7; max-width: 1200px; margin: 0 auto; }
+        .footer-brand-logo { 
+            display: flex; align-items: center; gap: 12px; 
+            font-size: 22px; font-weight: 800; color: #111; letter-spacing: -0.5px; margin-bottom: 16px; 
+        }
+        .footer-brand-logo img { height: 36px; width: auto; border-radius: 8px; }
+        .footer-brand p { font-size: 15px; line-height: 1.6; color: #555; font-weight: 500; }
+        
+        .footer-col h5 { 
+            color: var(--accent); margin-bottom: 24px; font-weight: 800; font-size: 13px; 
+            text-transform: uppercase; letter-spacing: 1.5px; 
+        }
+        .footer-col ul { padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 14px; list-style: none; }
+        
+        .footer-col a { 
+            color: #444; transition: all 0.3s ease; text-decoration: none; 
+            font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; 
+        }
+        .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
+        .footer-col a svg { width: 16px; height: 16px; flex-shrink: 0; }
+        
+        .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: x; column-gap: 20px;}
+
+        /* Map styling enhanced */
+        .footer-map-container { 
+            background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); 
+            padding: 8px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
+        }
+        .footer-map-container iframe { 
+            width: 100%; height: 160px; border-radius: 16px; display: block; border: none; 
+        }
+
+        .footer-bottom { 
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); 
+            font-size: 13px; font-weight: 500; color: #777; max-width: 1200px; margin: 0 auto; 
+        }
+        .footer-bottom-links { display: flex; gap: 20px; }
+        .footer-bottom-links a { color: #777; text-decoration: none; transition: 0.2s; }
+        .footer-bottom-links a:hover { color: var(--accent); }
 
         /* FULLSCREEN MENU */
         .fs-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(255,255,255,0.95); backdrop-filter: blur(40px); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
@@ -359,6 +407,7 @@
             footer { padding: 0; margin-top: var(--section-gap); }
             .glass-footer-box { padding: 50px 30px 30px; border-radius: 40px 40px 0 0; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
             
             .cta-title { font-size: 32px; }
             .cta-section { padding: 60px 24px; max-width: 90%; }
@@ -942,44 +991,113 @@
                     <p style="font-size: 18px; opacity: 0.9; max-width: 500px; margin: 10px auto 0;">Non aspettare che il danno peggiori. Prenota oggi con un click.</p>
                     <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20ho%20bisogno%20di%20assistenza" class="cta-button" target="_blank" style="margin-top: 25px; padding: 16px 40px; font-size: 16px;">
                         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Prenota Subito
                     </a>
                 </div>
             </section>
 
-            <!-- FOOTER -->
+            <!-- FOOTER POTENZIATO -->
             <footer>
                 <div class="glass-footer-box">
                     <div class="footer-grid">
+                        
+                        <!-- Colonna 1: Brand e Info -->
                         <div class="footer-col footer-brand">
-                            <h4>QuanTech</h4>
-                            <p>White Glass Engine.<br>Tecnologia e Design al servizio della riparazione.</p>
+                            <div class="footer-brand-logo">
+                                <img src="https://raw.githubusercontent.com/quantech-ita/Quantech/main/logo%20icona%20nero%20(convert.io).png" alt="QuanTech Logo">
+                                QuanTech
+                            </div>
+                            <p>White Glass Engine.<br>Tecnologia e Design al servizio della tua riparazione. Restituiamo vita ai tuoi device con componenti premium.</p>
                         </div>
+                        
+                        <!-- Colonna 2: Servizi (a 2 colonne) -->
                         <div class="footer-col">
                             <h5>I Nostri Servizi</h5>
                             <ul class="footer-services-grid">
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Sostituzione Display</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Cambio Batteria</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Riparazione Fotocamere</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Recupero Dati</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Microsaldature</a></li>
-                                <li><a href="#features" onclick="smoothScroll(event, '#features')">Pulizia e Audio</a></li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Sostituzione Display
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Cambio Batteria
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Rip. Fotocamere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Recupero Dati
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Microsaldature
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#features" onclick="smoothScroll(event, '#features')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        Pulizia e Audio
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+                        
+                        <!-- Colonna 3: Contatti -->
                         <div class="footer-col">
-                            <h5>Azienda</h5>
+                            <h5>Contatti</h5>
                             <ul>
-                                <li><a href="#process" onclick="smoothScroll(event, '#process')">Come Funziona</a></li>
-                                <li><a href="https://wa.me/393510000000" target="_blank">Contattaci</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li>
+                                    <a href="https://wa.me/393510000000" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                        +39 351 000 0000
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:info@quantech.it">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                        info@quantech.it
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://maps.google.com/?q=Tuo+Indirizzo+Qui" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                        Via Roma 1, Milano
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+                        
+                        <!-- Colonna 4: Mappa -->
                         <div class="footer-col footer-map">
                             <h5>Dove Siamo</h5>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.8872583857324!2d9.1868352!3d45.4648777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6af701831cf%3A0xc392fc5bb40026db!2sDuomo%20di%20Milano!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="footer-map-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.8872583857324!2d9.1868352!3d45.4648777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6af701831cf%3A0xc392fc5bb40026db!2sDuomo%20di%20Milano!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
+
                     </div>
+                    
+                    <!-- Footer Bottom -->
                     <div class="footer-bottom">
-                        &copy; 2024 QuanTech. Tutti i diritti riservati.
+                        <div class="footer-bottom-copy">
+                            &copy; 2024 QuanTech. Tutti i diritti riservati.
+                        </div>
+                        <div class="footer-bottom-links">
+                            <a href="#process" onclick="smoothScroll(event, '#process')">Come Funziona</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Termini e Condizioni</a>
+                        </div>
                     </div>
                 </div>
             </footer>
@@ -1242,4 +1360,5 @@
         window.addEventListener('resize', initComparisons);
     </script>
 </body>
+</html>
 </html>
