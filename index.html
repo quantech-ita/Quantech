@@ -1002,7 +1002,7 @@
             e.preventDefault();
             const target = document.querySelector(targetId);
             if (!target) return;
-            const headerOffset = 100;
+            const headerOffset = 96; // Offset modificato per fermarsi 4px più in basso
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             const startPosition = window.pageYOffset;
