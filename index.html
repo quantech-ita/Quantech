@@ -92,7 +92,10 @@
         .nav-social-icon svg { width: 12px; height: 12px; stroke-width: 2px; }
         
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #111; text-decoration: none; letter-spacing: -0.5px; flex-shrink: 0; }
-        .nav-logo img { height: 32px; width: auto; border-radius: 6px; }
+        /* Logo sopra ingrandito */
+        .nav-logo img { height: 48px; width: auto; border-radius: 8px; transition: transform 0.3s ease; }
+        .nav-logo:hover img { transform: scale(1.05); }
+
         .nav-links { display: flex; gap: 4px; margin-left: auto; margin-right: 12px; }
         .nav-link { padding: 8px 16px; border-radius: 100px; color: #111; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; cursor: pointer; }
         .nav-link:hover { background: rgba(0,0,0,0.05); }
@@ -325,7 +328,9 @@
             display: flex; align-items: center; gap: 16px; 
             font-size: 32px; font-weight: 800; color: #111; letter-spacing: -1px; margin-bottom: 0; 
         }
-        .footer-brand-logo img { height: 90px; width: auto; border-radius: 12px; }
+        /* Logo sotto ingrandito */
+        .footer-brand-logo img { height: 130px; width: auto; border-radius: 16px; transition: transform 0.3s ease; }
+        .footer-brand-logo:hover img { transform: scale(1.03); }
         .brand-name-text { display: block; }
         
         .footer-col h5 { 
@@ -502,9 +507,9 @@
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
             
-            /* Logo footer su mobile */
+            /* Logo footer su mobile ingrandito */
             .footer-brand { justify-content: center; align-items: center; text-align: center; }
-            .footer-brand-logo img { height: auto; width: 140px; margin-bottom: 10px; }
+            .footer-brand-logo img { height: auto; width: 220px; margin-bottom: 15px; }
             .brand-name-text { display: none; }
             
             .cta-title { font-size: 32px; }
