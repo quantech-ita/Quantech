@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- DESIGN TOKENS --- */
+        /* --- DESIGN TOKENS (ORIGINALI) --- */
         :root {
             --accent: #0071E3; /* Apple Blue */
             --whatsapp: #25D366;
@@ -92,7 +92,6 @@
         .nav-social-icon svg { width: 12px; height: 12px; stroke-width: 2px; }
         
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: #111; text-decoration: none; letter-spacing: -0.5px; flex-shrink: 0; }
-        /* Logo sopra ingrandito */
         .nav-logo img { height: 48px; width: auto; border-radius: 8px; transition: transform 0.3s ease; }
         .nav-logo:hover img { transform: scale(1.05); }
 
@@ -128,69 +127,30 @@
         .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: center; opacity: 0; animation: fadeUp 1s 0.5s forwards; margin-bottom: 40px; }
         .hero-btn { height: 52px; padding: 0 32px; min-width: 180px; border-radius: 100px; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; backdrop-filter: blur(12px); transition: 0.3s; cursor: pointer; }
         .hero-btn.btn-outline { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+        .hero-btn.btn-outline:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-        /* NUOVI PULSANTI ANIMATI HERO */
         .contact-btn-group { display: flex; gap: 16px; }
         .btn-animated { 
-            position: relative; 
-            overflow: hidden; 
-            min-width: 140px; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            gap: 8px;
+            position: relative; overflow: hidden; min-width: 140px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); gap: 8px;
         }
-        
         .btn-animated::after { 
-            content: ''; 
-            position: absolute; 
-            top: -50%; 
-            left: -60%; 
-            width: 20%; 
-            height: 200%; 
-            background: rgba(255,255,255,0.3); 
-            transform: rotate(45deg); 
-            transition: all 0.6s ease; 
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%; background: rgba(255,255,255,0.3); transform: rotate(45deg); transition: all 0.6s ease; 
         }
         .btn-animated:hover::after { left: 120%; }
         
-        .btn-call { 
-            background: var(--whatsapp); 
-            color: #fff; 
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); 
-            border: 1px solid transparent;
-        }
-        .btn-call:hover { 
-            transform: translateY(-4px) scale(1.03); 
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); 
-            background: #20b958; 
-        }
+        .btn-call { background: var(--whatsapp); color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); border: 1px solid transparent; }
+        .btn-call:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); background: #20b958; }
         .btn-call svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .btn-call:hover svg { animation: ring 0.4s ease infinite alternate; }
         
-        .btn-chat { 
-            background: #fff; 
-            color: #111; 
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1); 
-            border: 1px solid transparent;
-        }
+        .btn-chat { background: #fff; color: #111; box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1); border: 1px solid transparent; }
         .btn-chat::after { background: rgba(0,0,0,0.06); }
-        .btn-chat:hover { 
-            transform: translateY(-4px) scale(1.03); 
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3); 
-        }
+        .btn-chat:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3); }
         .btn-chat svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .btn-chat:hover svg { animation: floatMsg 0.8s ease-in-out infinite alternate; }
 
-        @keyframes ring {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(15deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-15deg); }
-            100% { transform: rotate(0deg); }
-        }
-        @keyframes floatMsg {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-4px); }
-        }
+        @keyframes ring { 0% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
+        @keyframes floatMsg { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
 
         .hero-google-card { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); padding: 12px 28px; border-radius: 100px; display: inline-flex; align-items: center; gap: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); transition: transform 0.3s; margin-bottom: 30px; opacity: 0; animation: fadeUp 1s 0.6s forwards; cursor: pointer; text-decoration: none; transform: scale(1.02); }
         .g-icon { width: 36px; height: 36px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -227,16 +187,16 @@
         /* DESKTOP GRID & FEATURE CARDS */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 28px; padding-bottom: 60px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 250px; position: relative; cursor: pointer; transition: background 0.3s ease; box-shadow: var(--glass-shadow); }
-        .feature-card:hover { background: var(--glass-bg-hover); }
+        .feature-card:hover { background: var(--glass-bg-hover); box-shadow: var(--glass-shadow-hover); transform: translateY(-3px); }
         .feature-icon-circle { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .feature-card h3 { font-size: 17px; font-weight: 700; color: #111; padding-right: 30px; margin: 0; }
         .feature-card p { font-size: 14px; line-height: 1.5; color: var(--text-secondary); font-weight: 500; margin: 0; }
         
-        /* FEATURE EXPAND INDICATOR */
         .feature-expand-indicator { position: absolute; top: 28px; right: 28px; width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 113, 227, 0.08); color: var(--accent); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; }
         .feature-expand-indicator svg { width: 16px; height: 16px; stroke-width: 2.5px; transition: transform 0.3s ease; }
         .feature-card:hover .feature-expand-indicator { background: var(--accent); color: #fff; transform: scale(1.1) rotate(90deg); }
 
+        /* --- PROCESS BOX --- */
         .process-glass-box { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 40px; padding: 60px 50px; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; width: 100%; max-width: 900px; margin: 0 auto; } 
         .steps-wrapper { display: flex; justify-content: space-between; position: relative; gap: 20px; }
         .steps-connector { position: absolute; top: 25px; left: 50px; right: 50px; height: 2px; background: rgba(0,0,0,0.08); z-index: 0; }
@@ -248,7 +208,159 @@
         .step-single h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #111; }
         .step-single p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding: 0 10px; max-width: 250px; margin: 0 auto; }
 
-        /* INFINITE SCROLL LOOP (PC ONLY) */
+
+        /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
+        .showcase-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 1. Slider Prima/Dopo Centrato */
+        .comparison-showcase-container {
+            width: 100%;
+            max-width: 380px; 
+            margin: 0 auto;
+        }
+
+        .comparison-glass-frame { 
+            position: relative; width: 100%; aspect-ratio: 1 / 1; 
+            border-radius: 28px; border: 8px solid #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+            overflow: hidden; background: #000; 
+            margin-bottom: 12px;
+        }
+        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; }
+        .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        .img-comp-img img { display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; }
+        .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .label-badge.after { right: 16px; background: rgba(255, 255, 255, 0.9); color: #000; }
+        .label-badge.before { left: 16px; background: rgba(20, 20, 20, 0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        
+        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .comp-slider:hover { background: rgba(255, 255, 255, 0.6); }
+        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent); z-index: -1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .comp-slider svg { width: 18px; height: 18px; fill: #111; }
+        .comp-caption { color: #555; font-size: 13px; font-weight: 600; text-align: center; }
+
+        /* 2. Tabs Navigazione (Capsule) */
+        .stage-tabs-nav {
+            display: flex;
+            gap: 12px; /* Leggermente incrementato per distribuire le capsule */
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 8px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .stage-tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 16px; /* Capsule rese leggermente più piccole */
+            border-radius: 100px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .stage-tab-btn svg { width: 16px; height: 16px; stroke-width: 2px; }
+        
+        .stage-tab-btn:hover { color: #111; background: rgba(255,255,255,0.5); }
+        .stage-tab-btn.active { background: #fff; color: #111; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transform: scale(1.02); }
+        
+        .stage-tab-btn.active[data-target="s-display"] svg { color: #0071E3; }
+        .stage-tab-btn.active[data-target="s-battery"] svg { color: #34C759; }
+        .stage-tab-btn.active[data-target="s-data"] svg { color: #111; }
+        .stage-tab-btn.active[data-target="s-solder"] svg { color: #5856D6; }
+        .stage-tab-btn.active[data-target="s-water"] svg { color: #32ADE6; }
+        .stage-tab-btn.active[data-target="s-modules"] svg { color: #FF2D55; }
+
+        /* 3. Pannello Dettaglio Compatto */
+        .stage-content-box {
+            position: relative;
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .stage-bg-halo {
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 80% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 60%);
+            z-index: 0;
+            transition: background 0.8s ease;
+            pointer-events: none;
+        }
+
+        .stage-panel {
+            position: absolute;
+            inset: 0;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(15px);
+            z-index: 1;
+        }
+        .stage-panel.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+            position: relative; 
+        }
+
+        .stage-text { flex: 1; text-align: left; }
+        .stage-text h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; color: #111; }
+        .stage-text p { font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 20px; max-width: 450px; }
+        
+        .stage-cta {
+            background: #111; color: #fff;
+            padding: 12px 24px; border-radius: 100px;
+            font-size: 14px; font-weight: 700; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stage-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+        .stage-cta svg { width: 16px; height: 16px; fill: white; }
+
+        .stage-visual { 
+            width: 100px; height: 100px; 
+            background: #fff; border-radius: 24px; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
+            flex-shrink: 0;
+        }
+        .stage-visual svg { width: 48px; height: 48px; stroke-width: 1.5px; }
+
+
+        /* PC INFINITE SCROLL */
         @media (min-width: 1025px) {
             .reviews-scroller {
                 display: flex; gap: 30px; scroll-snap-type: none; overflow: hidden; 
@@ -290,79 +402,25 @@
         .cta-content { position: relative; z-index: 2; }
         .cta-title { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -2px; }
 
-        /* --- SERVICE BOXES --- */
-        .service-box-glass { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 30px; border-radius: 24px; margin: 30px auto; max-width: 600px; box-shadow: var(--glass-shadow); }
-        .service-bullets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; list-style: none; padding: 0; margin: 0; }
-        .service-bullet-item { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #111; }
-        .check-icon { color: var(--whatsapp); flex-shrink: 0; width: 18px; height: 18px; }
-
         /* --- FOOTER POTENZIATO --- */
-        footer { 
-            padding: 0; 
-            margin-top: var(--section-gap); 
-            width: 100%; 
-            position: relative; 
-            z-index: 10; 
-        }
-        
-        .glass-footer-box { 
-            width: 100%; max-width: 100%; margin: 0; 
-            background: var(--glass-bg); 
-            -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); 
-            border-top: 1px solid rgba(255, 255, 255, 0.8); 
-            border-radius: 60px 60px 0 0; 
-            padding: 80px 40px 40px; 
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.05); 
-        }
-        
-        .footer-grid { 
-            display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 50px; 
-            margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; 
-        }
-
-        .footer-brand {
-            display: flex; align-items: flex-start; justify-content: flex-start;
-        }
-        
-        .footer-brand-logo { 
-            display: flex; align-items: center; gap: 16px; 
-            font-size: 32px; font-weight: 800; color: #111; letter-spacing: -1px; margin-bottom: 0; 
-        }
-        /* Logo sotto ingrandito */
+        footer { padding: 0; margin-top: var(--section-gap); width: 100%; position: relative; z-index: 10; }
+        .glass-footer-box { width: 100%; max-width: 100%; margin: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); border-top: 1px solid rgba(255, 255, 255, 0.8); border-radius: 60px 60px 0 0; padding: 80px 40px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.05); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 50px; margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        .footer-brand { display: flex; align-items: flex-start; justify-content: flex-start; }
+        .footer-brand-logo { display: flex; align-items: center; gap: 16px; font-size: 32px; font-weight: 800; color: #111; letter-spacing: -1px; margin-bottom: 0; }
         .footer-brand-logo img { height: 130px; width: auto; border-radius: 16px; transition: transform 0.3s ease; }
         .footer-brand-logo:hover img { transform: scale(1.03); }
         .brand-name-text { display: block; }
-        
-        .footer-col h5 { 
-            color: var(--accent); margin-bottom: 24px; font-weight: 800; font-size: 13px; 
-            text-transform: uppercase; letter-spacing: 1.5px; 
-        }
+        .footer-col h5 { color: var(--accent); margin-bottom: 24px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; }
         .footer-col ul { padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 14px; list-style: none; }
-        
-        .footer-col a { 
-            color: #444; transition: all 0.3s ease; text-decoration: none; 
-            font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; 
-        }
+        .footer-col a { color: #444; transition: all 0.3s ease; text-decoration: none; font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .footer-col a svg { width: 16px; height: 16px; flex-shrink: 0; }
-        
         .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; column-gap: 20px;}
-
-        /* Map styling enhanced */
-        .footer-map-container { 
-            background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); 
-            padding: 8px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
-        }
-        .footer-map-container iframe { 
-            width: 100%; height: 160px; border-radius: 16px; display: block; border: none; 
-        }
-
-        .footer-bottom { 
-            display: flex; justify-content: space-between; align-items: center;
-            padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); 
-            font-size: 13px; font-weight: 500; color: #777; max-width: 1200px; margin: 0 auto; 
-        }
+        .footer-map-container { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); padding: 8px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
+        .footer-map-container iframe { width: 100%; height: 160px; border-radius: 16px; display: block; border: none; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 13px; font-weight: 500; color: #777; max-width: 1200px; margin: 0 auto; }
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: #777; text-decoration: none; transition: 0.2s; }
         .footer-bottom-links a:hover { color: var(--accent); }
@@ -372,51 +430,26 @@
         .fs-menu.active { opacity: 1; pointer-events: all; }
         .fs-link { font-size: 32px; font-weight: 700; color: #111; margin: 10px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.4s; }
         .fs-menu.active .fs-link { opacity: 1; transform: translateY(0); }
-        
-        /* ICONE AZIONE MENU MOBILE */
         .fs-social-actions { display: flex; gap: 24px; margin-top: 30px; }
-        .fs-icon-btn { 
-            width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; 
-            opacity: 0; transform: translateY(20px);
-        }
+        .fs-icon-btn { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; opacity: 0; transform: translateY(20px); }
         .fs-icon-btn:active { transform: scale(0.9); }
         .fs-menu.active .fs-icon-btn { opacity: 1; transform: translateY(0); }
         .fs-menu.active .fs-icon-btn.call-bg { transition-delay: 0.4s; }
         .fs-menu.active .fs-icon-btn.wa-bg { transition-delay: 0.5s; }
-        
         .fs-icon-btn.call-bg { background: #111; }
         .fs-icon-btn.call-bg svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .fs-icon-btn.wa-bg { background: var(--whatsapp); }
         .fs-icon-btn.wa-bg svg { width: 34px; height: 34px; fill: currentColor; }
 
-        /* FLOATING WHATSAPP BUTTON */
         .whatsapp-fab { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 9998; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: none; }
         .whatsapp-fab svg { width: 32px; height: 32px; fill: white; }
         .whatsapp-fab:active { transform: scale(0.9); }
-        
-        /* Calsse per nascondere il floating button al menu aperto */
         .fab-hidden { opacity: 0 !important; transform: scale(0.5) translateY(30px) !important; pointer-events: none !important; visibility: hidden; }
 
-        /* DOTS INDICATORS */
         .scroll-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
         .dot-indicator { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: all 0.3s ease; cursor: pointer; }
         .dot-indicator.active { width: 18px; background: var(--accent); border-radius: 10px; }
         #featuresDots { display: none; }
-
-        /* --- SQUARE 4:4 COMPARISON SLIDER --- */
-        .comparison-container { max-width: 500px; margin: 0 auto; text-align: center; position: relative; }
-        .comparison-glass-frame { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 40px; border: 10px solid #1a1a1a; box-shadow: 0 0 0 2px #333, 0 30px 80px rgba(0,0,0,0.4); overflow: hidden; background: #000; }
-        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; }
-        .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
-        .img-comp-img img { display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; }
-        .label-badge { position: absolute; top: 30px; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .label-badge.after { right: 20px; background: rgba(255, 255, 255, 0.9); color: #000; }
-        .label-badge.before { left: 20px; background: rgba(20, 20, 20, 0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 50%; box-shadow: 0 0 20px rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; }
-        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 2px; background: linear-gradient(to bottom, transparent, #fff, transparent); z-index: -1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .comp-slider svg { width: 20px; height: 20px; fill: #fff; }
-        .comp-caption { margin-top: 30px; color: #fff; font-size: 18px; font-weight: 600; opacity: 0.9; letter-spacing: 0.5px; }
 
         /* --- FEATURE INFO MODAL --- */
         .f-modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: 0.4s ease; }
@@ -448,45 +481,45 @@
             .menu-trigger { display: flex; }
             .hero h1 { font-size: 52px; margin-bottom: 20px; }
             .hero p { font-size: 18px; }
-            
             .nav-announcement-row { padding: 0 15px; }
             .nav-address { font-size: 10px; }
-            
-            /* Aggiornamento Bottoni Hero per Mobile */
             .hero-actions { flex-direction: column; width: 100%; gap: 12px; }
             .contact-btn-group { width: 100%; display: flex; gap: 12px; }
             .contact-btn-group .hero-btn { min-width: 0; flex: 1; padding: 0 10px; font-size: 14px; }
             .hero-actions .btn-outline { width: 100%; }
 
-            /* --- FEATURES GRID (MOBILE: 1 CARD PER SLIDE) --- */
-            .features-grid {
-                display: flex; 
-                overflow-x: auto; 
-                scroll-snap-type: x mandatory; 
-                gap: 15px; 
-                padding-bottom: 10px; 
-                padding-right: 0; 
-                -ms-overflow-style: none; 
-                scrollbar-width: none;
-                mask-image: none; 
-                -webkit-mask-image: none;
-            }
+            .features-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 10px; padding-right: 0; -ms-overflow-style: none; scrollbar-width: none; }
             .features-grid::-webkit-scrollbar { display: none; }
-            
-            .feature-card { 
-                min-width: 100%; 
-                scroll-snap-align: start; 
-                padding: 20px; 
-                padding-bottom: 55px; 
-                border-radius: 24px; 
-            }
+            .feature-card { min-width: 100%; scroll-snap-align: start; padding: 20px; padding-bottom: 55px; border-radius: 24px; }
             .feature-expand-indicator { top: 20px; right: 20px; }
 
             .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px; margin-top: 10px; margin-bottom: 10px; }
             .stat-item:last-child { grid-column: span 2; }
             .stat-val { font-size: 38px; }
-            
             #featuresDots { display: flex; }
+
+            /* MEDIA QUERIES TABS/STAGE COMPATTI (MANTENENDO STILE ORIGINALE PER GLI ALTRI) */
+            .stage-tabs-nav {
+                justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto;
+                scroll-snap-type: x mandatory; padding-bottom: 12px; border-radius: 20px;
+                -ms-overflow-style: none; scrollbar-width: none;
+            }
+            .stage-tabs-nav::-webkit-scrollbar { display: none; }
+            .stage-tab-btn { flex: 0 0 auto; scroll-snap-align: start; }
+
+            .stage-panel {
+                flex-direction: column-reverse;
+                padding: 24px 20px;
+                text-align: center;
+                gap: 24px;
+            }
+            .stage-text { align-items: center; text-align: center; } 
+            .stage-text h3 { font-size: 20px; margin: 0 auto 12px auto; }
+            .stage-text p { font-size: 14px; margin: 0 auto 16px auto; }
+            .stage-visual { width: 70px; height: 70px; border-radius: 16px; margin: 0 auto; }
+            .stage-visual svg { width: 34px; height: 34px; }
+
+            .comparison-glass-frame { width: 100%; max-width: 350px; border-width: 6px; } 
 
             .reviews-scroller { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; animation: none; padding-left: 10px; width: 100%; justify-content: flex-start; }
             .reviews-wrapper { width: 100%; margin: 0; padding: 0; mask-image: linear-gradient(to right, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); }
@@ -500,14 +533,10 @@
             .step-single h4 { margin-top: 8px; font-size: 18px; }
             .step-single p { padding: 0; font-size: 14px; margin: 0; max-width: 100%; }
             
-            .service-bullets-grid { grid-template-columns: 1fr; }
-
             footer { padding: 0; margin-top: var(--section-gap); }
             .glass-footer-box { padding: 50px 30px 30px; border-radius: 40px 40px 0 0; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
-            
-            /* Logo footer su mobile ingrandito */
             .footer-brand { justify-content: center; align-items: center; text-align: center; }
             .footer-brand-logo img { height: auto; width: 220px; margin-bottom: 15px; }
             .brand-name-text { display: none; }
@@ -515,13 +544,8 @@
             .cta-title { font-size: 32px; }
             .cta-section { padding: 60px 24px; max-width: 90%; }
             .noise-overlay { opacity: 0.03; }
-            
-            /* Aggiornamento floating button */
             .whatsapp-fab { display: flex; animation: popIn 0.5s 2s backwards; }
-            
-            .comparison-glass-frame { width: 100%; max-width: 350px; } 
             .review-glass-card { min-width: 85vw; }
-
             .f-modal-box { padding: 30px 24px; }
         }
     </style>
@@ -545,10 +569,10 @@
                 </a>
                 <div class="nav-links">
                     <a href="#hero" class="nav-link active" onclick="smoothScroll(event, '#hero')">Home</a>
-                    <a href="#features" class="nav-link" onclick="smoothScroll(event, '#features')">Servizi</a>
+                    <a href="#features" class="nav-link" onclick="smoothScroll(event, '#features')">Perché Noi</a>
+                    <a href="#showcase" class="nav-link" onclick="smoothScroll(event, '#showcase')">Servizi</a>
                     <a href="#process" class="nav-link" onclick="smoothScroll(event, '#process')">Come Funziona</a>
                     <a href="#reviews" class="nav-link" onclick="smoothScroll(event, '#reviews')">Clienti</a>
-                    <a href="#faq" class="nav-link" onclick="smoothScroll(event, '#faq')">FAQ</a>
                 </div>
                 <div style="display:flex; align-items:center;">
                     <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" class="cta-button desktop-only" target="_blank">
@@ -581,10 +605,10 @@
     <div class="main-wrapper">
         <div class="fs-menu" id="fsMenu">
             <a href="#hero" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#hero');">Home</a>
-            <a href="#features" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#features');">Servizi</a>
+            <a href="#features" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#features');">Perché Noi</a>
+            <a href="#showcase" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#showcase');">Servizi</a>
             <a href="#process" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#process');">Come Funziona</a>
             <a href="#reviews" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#reviews');">Recensioni</a>
-            <a href="#faq" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#faq');">FAQ</a>
             
             <div class="fs-social-actions">
                 <a href="tel:+393510000000" class="fs-icon-btn call-bg" onclick="toggleMenu()" aria-label="Chiama">
@@ -614,7 +638,7 @@
                         Scrivici
                     </a>
                 </div>
-                <a href="#features" class="hero-btn btn-outline" onclick="smoothScroll(event, '#features')">Scopri i Servizi</a>
+                <a href="#showcase" class="hero-btn btn-outline" onclick="smoothScroll(event, '#showcase')">Scopri i Servizi</a>
             </div>
 
             <a href="https://www.google.com/maps" target="_blank" style="text-decoration:none;">
@@ -697,6 +721,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </div>
                         <div class="feature-icon-circle">
+                            <!-- ICONA BATTERIA ORIGINALE USATA IN FEATURES (INVARIATA MA ALLINEATA) -->
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         </div>
                         <h3>Componenti OEM</h3>
@@ -734,135 +759,166 @@
                 </div>
             </div>
 
-            <section class="section-padding" id="process">
-                <div class="process-glass-box reveal">
-                    <div class="center-header" style="margin-bottom: 40px;">
-                        <span class="section-tag">Come Funziona</span>
-                        <h2 class="section-title">Semplice, in 3 step.</h2>
-                    </div>
-                    
-                    <div class="steps-wrapper">
-                        <div class="steps-connector"></div>
-                        <div class="step-single">
-                            <div class="step-circle">1</div>
-                            <div>
-                                <h4>Prenota o Passa</h4>
-                                <p>Prenota online per priorità o passa in negozio per una diagnosi.</p>
-                            </div>
-                        </div>
-                        <div class="step-single">
-                            <div class="step-circle">2</div>
-                            <div>
-                                <h4>Riparazione Live</h4>
-                                <p>I nostri tecnici operano davanti ai tuoi occhi con cura maniacale.</p>
-                            </div>
-                        </div>
-                        <div class="step-single">
-                            <div class="step-circle">3</div>
-                            <div>
-                                <h4>Garanzia e Via</h4>
-                                <p>Ritira il dispositivo perfetto, coperto da 12 mesi di garanzia.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 50px;">
-                        <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" class="cta-button" target="_blank" style="padding: 14px 32px; font-size: 15px;">
-                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                            Prenota Subito
-                        </a>
-                    </div>
-                </div>
-            </section>
-
+            <!-- SEZIONE SERVIZI PREMIUM COMPACT STAGE (3 RIGHE) -->
             <section class="section-padding" id="showcase">
-                <div class="center-header reveal">
+                <div class="center-header reveal" style="margin-bottom: 40px;">
                     <div class="section-glass-header">
-                        <span class="section-tag">Risultati Reali</span>
+                        <span class="section-tag">I Nostri Servizi</span>
                         <h2 class="section-title">Magia in azione.</h2>
                     </div>
                 </div>
 
-                <div class="service-box-glass reveal">
-                    <h3 style="margin-bottom: 20px; font-size: 20px; text-align: center;">Cosa Ripariamo</h3>
-                    <ul class="service-bullets-grid">
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Sostituzione Display OLED
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Cambio Batteria Originale
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Riparazione Fotocamere
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Connettori di Ricarica
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Ripristino Audio / Face ID
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Scocca Posteriore Laser
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="comparison-container reveal">
-                    <div class="comparison-glass-frame">
-                        <div class="img-comp-container">
-                            <div class="img-comp-img">
-                                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop" alt="Dopo - Schermo Perfetto">
-                                <span class="label-badge after">Dopo</span>
+                <div class="showcase-wrapper reveal">
+                    
+                    <!-- RIGA 1: Slider Prima/Dopo (Dimensioni Normali) -->
+                    <div class="comparison-showcase-container">
+                        <div class="comparison-glass-frame">
+                            <div class="img-comp-container">
+                                <div class="img-comp-img">
+                                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop" alt="Dopo - Schermo Perfetto">
+                                    <span class="label-badge after">Dopo</span>
+                                </div>
+                                <div class="img-comp-img img-comp-overlay">
+                                    <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
+                                    <span class="label-badge before">Prima</span>
+                                </div>
                             </div>
-                            <div class="img-comp-img img-comp-overlay">
-                                <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
-                                <span class="label-badge before">Prima</span>
+                            <div class="comp-slider">
+                                <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#111"/><path d="M16 12L10 18V6L16 12Z" fill="#111"/></svg>
                             </div>
                         </div>
-                        <div class="comp-slider">
-                            <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#fff"/><path d="M16 12L10 18V6L16 12Z" fill="#fff"/></svg>
-                        </div>
+                        <p class="comp-caption" style="margin-top: 12px;">Trascina per visualizzare il restauro</p>
                     </div>
-                    <p class="comp-caption">Trascina per vedere la riparazione</p>
-                </div>
 
-                <div class="service-box-glass reveal">
-                    <h3 style="margin-bottom: 20px; font-size: 20px; text-align: center;">Servizi Avanzati</h3>
-                    <ul class="service-bullets-grid">
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Recupero Dati Persi
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Microsaldature Scheda Madre
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Trattamento Danni da Liquidi
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Pulizia Interna Profonda
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Assistenza Software & Backup
-                        </li>
-                        <li class="service-bullet-item">
-                            <svg class="check-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Applicazione Pellicole Pro
-                        </li>
-                    </ul>
+                    <!-- RIGA 2: Tabs Navigazione Servizi (Capsule ridotte e Batteria spostata leggermente) -->
+                    <div class="stage-tabs-nav">
+                        <button class="stage-tab-btn active" data-target="s-display" data-color="rgba(0, 113, 227, 0.15)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
+                            Display
+                        </button>
+                        <!-- Aggiunto margine per spostarla a destra come richiesto -->
+                        <button class="stage-tab-btn" data-target="s-battery" data-color="rgba(52, 199, 89, 0.15)" style="margin-left: 4px;">
+                            <!-- NUOVA ICONA BATTERIA: Ingrandita e centrata nel viewBox -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
+                            Batteria
+                        </button>
+                        <button class="stage-tab-btn" data-target="s-data" data-color="rgba(0, 0, 0, 0.1)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                            Dati Persi
+                        </button>
+                        <button class="stage-tab-btn" data-target="s-solder" data-color="rgba(88, 86, 214, 0.15)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                            Saldature
+                        </button>
+                        <button class="stage-tab-btn" data-target="s-water" data-color="rgba(50, 173, 230, 0.15)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                            Lavaggio
+                        </button>
+                        <button class="stage-tab-btn" data-target="s-modules" data-color="rgba(255, 45, 85, 0.15)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            Moduli
+                        </button>
+                    </div>
+
+                    <!-- RIGA 3: Pannello Info Compatto -->
+                    <div class="stage-content-box">
+                        <div class="stage-bg-halo" id="stageHalo"></div>
+                        
+                        <!-- PANE: DISPLAY -->
+                        <div class="stage-panel active" id="s-display">
+                            <div class="stage-text">
+                                <h3>Display & OLED</h3>
+                                <p>Sostituzione rapida con riprogrammazione TrueTone e ripristino dell'isolamento originale. Il tuo schermo tornerà ad avere i colori vividi e la reattività del primo giorno.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Display" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #0071E3;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- PANE: BATTERIA -->
+                        <div class="stage-panel" id="s-battery">
+                            <div class="stage-text">
+                                <h3>Sostituzione Batteria</h3>
+                                <p>Installazione di batterie ad alta capacità. Leggiamo e trasferiamo il chip originale per mantenere il 100% di salute visibile nelle impostazioni. Addio ricariche continue.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Batteria" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #34C759;">
+                                <!-- NUOVA ICONA BATTERIA: Ingrandita e centrata nel viewBox -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
+                            </div>
+                        </div>
+
+                        <!-- PANE: DATI PERSI -->
+                        <div class="stage-panel" id="s-data">
+                            <div class="stage-text">
+                                <h3>Recupero Dati Persi</h3>
+                                <p>Servizio hardware e software avanzato per telefoni morti o gravemente danneggiati. Non diamo i tuoi ricordi o i tuoi file di lavoro per persi.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Recupero%20Dati" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #111;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- PANE: SALDATURE -->
+                        <div class="stage-panel" id="s-solder">
+                            <div class="stage-text">
+                                <h3>Microsaldature</h3>
+                                <p>Interventi a livello di componente microscopico su schede madri. Ripariamo chip IC difettosi, touch disease e cortocircuiti interni complessi.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Saldature" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #5856D6;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                            </div>
+                        </div>
+
+                        <!-- PANE: LAVAGGIO -->
+                        <div class="stage-panel" id="s-water">
+                            <div class="stage-text">
+                                <h3>Lavaggio Ultrasuoni</h3>
+                                <p>Smontaggio immediato e deossidazione in speciali vasche a ultrasuoni per salvare la scheda madre dalla corrosione da liquidi.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Lavaggio" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #32ADE6;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- PANE: MODULI E CONNETTORI -->
+                        <div class="stage-panel" id="s-modules">
+                            <div class="stage-text">
+                                <h3>Moduli & Connettori</h3>
+                                <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
+                                <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Richiedi Info
+                                </a>
+                            </div>
+                            <div class="stage-visual" style="color: #FF2D55;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
-
+            
             <div class="marquee-section light-bot reveal">
                 <div class="marquee-content">
                     <span class="brand-item">Prenotazione Immediata</span>
@@ -888,15 +944,8 @@
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20ho%20letto%20le%20recensioni" class="cta-button" target="_blank" style="padding: 12px 28px; background: #fff; color: var(--whatsapp); border: 1px solid var(--whatsapp);">
-                        <svg viewBox="0 0 24 24" style="fill: var(--whatsapp);"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                    </a>
-                </div>
-
                 <div class="reviews-wrapper">
                     <div class="reviews-scroller reveal" id="reviewsScroll">
-                        <!-- ORIGINAL ITEMS -->
                         <div class="review-glass-card tilt-card">
                             <div class="r-header">
                                 <div class="r-user">
@@ -1019,49 +1068,15 @@
                             </div>
                             <p class="r-text">"Mi sono rivolto a questo negozio per sostituire batteria iPhone 12 Pro e display Apple Watch. Servizio impeccabile."</p>
                         </div>
-                        <div class="review-glass-card tilt-card desktop-duplicate">
-                            <div class="r-header">
-                                <div class="r-user">
-                                    <div class="r-avatar">M</div>
-                                    <div>
-                                        <div class="r-name">Marco Verga</div>
-                                        <span class="r-meta">3 settimane fa</span>
-                                    </div>
-                                </div>
-                                <div class="r-verified">Verified</div>
-                            </div>
-                            <div class="r-stars">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            </div>
-                            <p class="r-text">"Onestà rara. Risolto problema al connettore in 20 minuti senza sostituire pezzi inutili. Competenza e trasparenza al top."</p>
-                        </div>
-                        <div class="review-glass-card tilt-card desktop-duplicate">
-                            <div class="r-header">
-                                <div class="r-user">
-                                    <div class="r-avatar">G</div>
-                                    <div>
-                                        <div class="r-name">Giulia R.</div>
-                                        <span class="r-meta">1 giorno fa</span>
-                                    </div>
-                                </div>
-                                <div class="r-verified">Verified</div>
-                            </div>
-                            <div class="r-stars">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            </div>
-                            <p class="r-text">"Riparazione fotocamera iPhone 14 perfetta. Pensavo di dover cambiare telefono, invece è tornato come nuovo. Super consigliato!"</p>
-                        </div>
                     </div>
                 </div>
                 <div class="scroll-dots" id="reviewsDots"></div>
+
+                <div style="text-align: center; margin-top: 40px;" class="reveal">
+                    <a href="https://www.google.com/maps" target="_blank" class="hero-btn btn-outline">
+                        Vedi tutte le recensioni
+                    </a>
+                </div>
             </section>
 
             <section class="section-padding" id="faq">
@@ -1120,7 +1135,6 @@
                 <div class="glass-footer-box">
                     <div class="footer-grid">
                         
-                        <!-- Colonna 1: Brand e Info -->
                         <div class="footer-col footer-brand">
                             <div class="footer-brand-logo">
                                 <img src="https://raw.githubusercontent.com/quantech-ita/Quantech/main/logo%20icona%20nero%20(convert.io).png" alt="QuanTech Logo">
@@ -1128,75 +1142,27 @@
                             </div>
                         </div>
                         
-                        <!-- Colonna 2: Servizi (a 2 colonne) -->
                         <div class="footer-col">
                             <h5>I Nostri Servizi</h5>
                             <ul class="footer-services-grid">
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Sostituzione Display
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Cambio Batteria
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Rip. Fotocamere
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Recupero Dati
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Microsaldature
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#features" onclick="smoothScroll(event, '#features')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        Pulizia e Audio
-                                    </a>
-                                </li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Sostituzione Display</a></li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Cambio Batteria</a></li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Rip. Fotocamere</a></li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Recupero Dati</a></li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Microsaldature</a></li>
+                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Pulizia e Audio</a></li>
                             </ul>
                         </div>
                         
-                        <!-- Colonna 3: Contatti -->
                         <div class="footer-col">
                             <h5>Contatti</h5>
                             <ul>
-                                <li>
-                                    <a href="https://wa.me/393510000000" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                        +39 351 000 0000
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:info@quantech.it">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                        info@quantech.it
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://maps.google.com/?q=Tuo+Indirizzo+Qui" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                        Via Roma 1, Milano
-                                    </a>
-                                </li>
+                                <li><a href="https://wa.me/393510000000" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+39 351 000 0000</a></li>
+                                <li><a href="mailto:info@quantech.it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>info@quantech.it</a></li>
+                                <li><a href="https://maps.google.com/?q=Tuo+Indirizzo+Qui" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Via Roma 1, Milano</a></li>
                             </ul>
                         </div>
                         
-                        <!-- Colonna 4: Mappa -->
                         <div class="footer-col footer-map">
                             <h5>Dove Siamo</h5>
                             <div class="footer-map-container">
@@ -1206,11 +1172,8 @@
 
                     </div>
                     
-                    <!-- Footer Bottom -->
                     <div class="footer-bottom">
-                        <div class="footer-bottom-copy">
-                            &copy; 2024 QuanTech. Tutti i diritti riservati.
-                        </div>
+                        <div class="footer-bottom-copy">&copy; 2024 QuanTech. Tutti i diritti riservati.</div>
                         <div class="footer-bottom-links">
                             <a href="#process" onclick="smoothScroll(event, '#process')">Come Funziona</a>
                             <a href="#">Privacy Policy</a>
@@ -1222,18 +1185,71 @@
         </div>
     </div>
 
-    <!-- FEATURE INFO MODAL HTML -->
-    <div class="f-modal-overlay" id="featureModal" onclick="closeFeatureModal(event)">
-        <div class="f-modal-box" onclick="event.stopPropagation()">
-            <button class="f-modal-close" onclick="closeFeatureModal()">×</button>
-            <div class="f-modal-icon-wrap" id="fModalIcon"></div>
-            <h3 class="f-modal-title" id="fModalTitle">Titolo</h3>
-            <p class="f-modal-desc" id="fModalDesc">Descrizione</p>
-            <ul class="f-modal-list" id="fModalList"></ul>
-        </div>
-    </div>
-
     <script>
+        // --- PREMIUM STAGE TABS LOGIC ---
+        const tabBtns = document.querySelectorAll('.stage-tab-btn');
+        const stagePanels = document.querySelectorAll('.stage-panel');
+        const stageHalo = document.getElementById('stageHalo');
+
+        // Set default halo color on load (Display)
+        if(stageHalo) stageHalo.style.background = `radial-gradient(circle at 80% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 60%)`;
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. Remove active state from all
+                tabBtns.forEach(b => b.classList.remove('active'));
+                stagePanels.forEach(p => p.classList.remove('active'));
+
+                // 2. Add active state to clicked
+                btn.classList.add('active');
+                const targetId = btn.getAttribute('data-target');
+                const targetPanel = document.getElementById(targetId);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+
+                // 3. Update Glow Color
+                const glowColor = btn.getAttribute('data-color');
+                if(stageHalo && glowColor) {
+                    stageHalo.style.background = `radial-gradient(circle at 80% 50%, ${glowColor} 0%, transparent 60%)`;
+                }
+            });
+        });
+
+        // --- COMPARISON SLIDER ---
+        function initComparisons() {
+            const overlay = document.querySelector(".img-comp-overlay");
+            const slider = document.querySelector(".comp-slider");
+            const container = document.querySelector(".comparison-glass-frame");
+            let clicked = 0; let w;
+            
+            if(!overlay || !slider || !container) return;
+
+            function slideReady(e) { e.preventDefault(); clicked = 1; w = container.offsetWidth; window.addEventListener("mousemove", slideMove); window.addEventListener("touchmove", slideMove, {passive: false}); }
+            function slideFinish() { clicked = 0; }
+            function slideMove(e) { if (clicked == 0) return false; let pos = getCursorPos(e); if (pos < 0) pos = 0; if (pos > w) pos = w; slide(pos); }
+            function getCursorPos(e) { let a = container.getBoundingClientRect(); let x = 0; e = e.changedTouches ? e.changedTouches[0] : e; x = e.pageX - a.left; x = x - window.pageXOffset; return x; }
+            function slide(x) { overlay.style.width = x + "px"; slider.style.left = x + "px"; }
+
+            // Initialize position correctly
+            setTimeout(() => {
+                w = container.offsetWidth;
+                if(w > 0) slide(w / 2);
+            }, 100); 
+            
+            slider.addEventListener("mousedown", slideReady);
+            window.addEventListener("mouseup", slideFinish);
+            slider.addEventListener("touchstart", slideReady, {passive: false});
+            window.addEventListener("touchend", slideFinish);
+        }
+
+        window.addEventListener('load', initComparisons);
+        window.addEventListener('resize', initComparisons);
+
+
+        // --- GENERAL SCRIPTS (Scroll, Menu, Reveal, Counters) ---
+        function toggleFaq(el) { el.classList.toggle('active'); }
+
         function smoothScroll(e, targetId) {
             e.preventDefault();
             const target = document.querySelector(targetId);
@@ -1252,96 +1268,21 @@
                 window.scrollTo(0, run);
                 if (timeElapsed < duration) requestAnimationFrame(animation);
             }
-            function ease(t, b, c, d) {
-                t /= d / 2; if (t < 1) return c / 2 * t * t * t + b; t -= 2; return c / 2 * (t * t * t + 2) + b;
-            }
+            function ease(t, b, c, d) { t /= d / 2; if (t < 1) return c / 2 * t * t * t + b; t -= 2; return c / 2 * (t * t * t + 2) + b; }
             requestAnimationFrame(animation);
         }
 
         function toggleMenu() {
             const menu = document.getElementById('fsMenu');
             const waFab = document.getElementById('waFab');
-            
+            if (!menu) return; 
             menu.classList.toggle('active');
-            
-            // Gestione Fade In/Out del FAB WhatsApp su mobile
             if(window.innerWidth <= 1024 && waFab) {
-                if(menu.classList.contains('active')) {
-                    waFab.classList.add('fab-hidden');
-                } else {
-                    waFab.classList.remove('fab-hidden');
-                }
+                if(menu.classList.contains('active')) waFab.classList.add('fab-hidden');
+                else waFab.classList.remove('fab-hidden');
             }
         }
         
-        function toggleFaq(el) {
-            el.classList.toggle('active');
-        }
-
-        // --- FEATURE MODAL LOGIC ---
-        const featureData = {
-            laser: {
-                icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>',
-                title: 'Diagnostica Laser Avanzata',
-                desc: 'Utilizziamo strumentazione all\'avanguardia per un\'analisi approfondita del tuo dispositivo, garantendo interventi mirati.',
-                bullets: [
-                    'Scansione termica per individuare micro-cortocircuiti sulla scheda madre.',
-                    'Test microscopico dei componenti interni e dei pin di connessione.',
-                    'Analisi avanzata dei log di sistema per risolvere battery drain anomali.'
-                ]
-            },
-            oem: {
-                icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>',
-                title: 'Componenti Originali (OEM)',
-                desc: 'Non scendiamo a compromessi sulla qualità. Installiamo solo ricambi originali o certificati di altissima gamma.',
-                bullets: [
-                    'Display OLED con riprogrammazione e calibrazione del TrueTone.',
-                    'Batterie ad alta capacità con microchip originale per la lettura dello stato di salute.',
-                    'Garanzia estesa su tutti i componenti installati.'
-                ]
-            },
-            express: {
-                icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
-                title: 'Servizio Express 60 Minuti',
-                desc: 'Il tuo tempo è prezioso. Abbiamo ottimizzato i nostri processi per restituirti il dispositivo riparato in tempi record.',
-                bullets: [
-                    'Riparazioni standard (schermo/batteria) completate in meno di un\'ora.',
-                    'Priorità assoluta sulle riparazioni prenotate online.',
-                    'Diagnosi immediata al banco in fase di accettazione.'
-                ]
-            }
-        };
-
-        const checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-
-        function openFeatureModal(featureId) {
-            const data = featureData[featureId];
-            if (!data) return;
-
-            document.getElementById('fModalIcon').innerHTML = data.icon;
-            document.getElementById('fModalTitle').innerText = data.title;
-            document.getElementById('fModalDesc').innerText = data.desc;
-            
-            const listEl = document.getElementById('fModalList');
-            listEl.innerHTML = '';
-            data.bullets.forEach(bullet => {
-                const li = document.createElement('li');
-                li.innerHTML = `${checkSvg} <span>${bullet}</span>`;
-                listEl.appendChild(li);
-            });
-
-            document.getElementById('featureModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-
-        function closeFeatureModal(event) {
-            if (!event || event.target.id === 'featureModal') {
-                document.getElementById('featureModal').classList.remove('active');
-                document.body.style.overflow = ''; // Restore scrolling
-            }
-        }
-
-        // --- OBSERVERS ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1350,12 +1291,10 @@
                 }
             });
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         const stepsContainer = document.querySelector('.steps-wrapper');
         const steps = document.querySelectorAll('.step-single');
-
         const processObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1366,7 +1305,6 @@
                 }
             });
         }, { threshold: 0.4 });
-
         if(stepsContainer) processObserver.observe(stepsContainer);
 
         const animateCounters = () => {
@@ -1388,7 +1326,6 @@
                 update();
             });
         };
-
         let counterTriggered = false;
         const statsSection = document.querySelector('.glass-dashboard');
         const statsObserver = new IntersectionObserver((entries) => {
@@ -1399,32 +1336,24 @@
         });
         if(statsSection) statsObserver.observe(statsSection);
 
-        // --- DOTS LOGIC ---
         function createDots(containerId, dotsId, itemSelector) {
             const container = document.querySelector(containerId);
             const dotsContainer = document.getElementById(dotsId);
             if (!container || !dotsContainer) return;
-
             const items = container.querySelectorAll(itemSelector);
             const dotsCount = items.length;
             dotsContainer.innerHTML = '';
-
             for (let i = 0; i < dotsCount; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot-indicator');
                 if (i === 0) dot.classList.add('active');
-                
-                dot.addEventListener('click', () => {
-                    items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                });
+                dot.addEventListener('click', () => { items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); });
                 dotsContainer.appendChild(dot);
             }
-
             container.addEventListener('scroll', () => {
                 const scrollLeft = container.scrollLeft;
                 const itemWidth = items[0].clientWidth + 20; 
                 const activeIndex = Math.min(items.length - 1, Math.round(scrollLeft / itemWidth));
-                
                 const dots = dotsContainer.querySelectorAll('.dot-indicator');
                 dots.forEach((d, idx) => {
                     if (idx === activeIndex) d.classList.add('active');
@@ -1437,7 +1366,6 @@
             createDots('.reviews-scroller', 'reviewsDots', '.review-glass-card');
             createDots('.features-grid', 'featuresDots', '.feature-card');
         }
-        
         window.addEventListener('resize', () => {
             if (window.innerWidth <= 1024) {
                 createDots('.reviews-scroller', 'reviewsDots', '.review-glass-card');
@@ -1445,7 +1373,6 @@
             }
         });
 
-        // TILT CARDS
         const tiltCards = document.querySelectorAll('.tilt-card');
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -1460,33 +1387,6 @@
             });
             card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)'; });
         });
-
-        // --- COMPARISON SLIDER ---
-        function initComparisons() {
-            const overlay = document.querySelector(".img-comp-overlay");
-            const slider = document.querySelector(".comp-slider");
-            const container = document.querySelector(".comparison-glass-frame");
-            let clicked = 0; let w;
-            
-            if(!overlay || !slider || !container) return;
-
-            function slideReady(e) { e.preventDefault(); clicked = 1; w = container.offsetWidth; window.addEventListener("mousemove", slideMove); window.addEventListener("touchmove", slideMove); }
-            function slideFinish() { clicked = 0; }
-            function slideMove(e) { if (clicked == 0) return false; let pos = getCursorPos(e); if (pos < 0) pos = 0; if (pos > w) pos = w; slide(pos); }
-            function getCursorPos(e) { let a = container.getBoundingClientRect(); let x = 0; e = e.changedTouches ? e.changedTouches[0] : e; x = e.pageX - a.left; x = x - window.pageXOffset; return x; }
-            function slide(x) { overlay.style.width = x + "px"; slider.style.left = x + "px"; }
-
-            w = container.offsetWidth;
-            slide(w / 2);
-
-            slider.addEventListener("mousedown", slideReady);
-            window.addEventListener("mouseup", slideFinish);
-            slider.addEventListener("touchstart", slideReady);
-            window.addEventListener("touchend", slideFinish);
-        }
-
-        window.addEventListener('load', initComparisons);
-        window.addEventListener('resize', initComparisons);
     </script>
 </body>
 </html>
