@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QuanTech | DiagnosiIntuitiva</title>
+    <title>QuanTech | Diagnosi IA Intuitiva</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -286,48 +286,48 @@
             "Fase completata."
         ];
 
-        // ===================================================================================
-        // QUI LA STRINGA VERRÀ SOSTITUITA AUTOMATICAMENTE DA GITHUB ACTIONS DURANTE IL DEPLOY
-        // ===================================================================================
+        // Questa verrà sostituita da GitHub Actions
         const apiKey = "__MIA_CHIAVE_SEGRETA__";
+
+        // POP-UP DI DIAGNOSTICA: Appare appena carichi la pagina
+        window.onload = function() {
+            if(apiKey === "__MIA_CHIAVE_SEGRETA__") {
+                alert("ERRORE GITHUB: La chiave NON è stata sostituita! C'è ancora scritto __MIA_CHIAVE_SEGRETA__");
+            } else if (apiKey.startsWith("AIza")) {
+                alert("SUCCESSO: La chiave di Google è stata inserita correttamente da GitHub! Puoi provare l'analisi.");
+            } else {
+                alert("ERRORE CHIAVE: È stata inserita una chiave strana: " + apiKey.substring(0, 10));
+            }
+        };
 
         async function fetchAIResponse(userText) {
             if (!apiKey || apiKey === "__MIA_CHIAVE_SEGRETA__") {
-                throw new Error("API Key mancante o non sostituita in fase di build");
+                throw new Error("API Key mancante");
             }
             
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             
-            const systemPrompt = `Sei l'Assistente Diagnostico del "QuanTech Master Repair Lab", un laboratorio di riparazioni per smartphone di altissimo livello.
-            Il tuo compito è leggere il problema descritto dall'utente e fornire 2 o 3 possibili cause (ordinate dalla più probabile alla meno probabile).
-            
-            REGOLA FONDAMENTALE: L'utente non è un tecnico. Usa un linguaggio SEMPLICE, CHIARO E COMPRENSIBILE. 
-            - Evita termini super complessi. Invece di "Cortocircuito VDD_MAIN", usa "Danno al circuito di alimentazione principale".
-            - Invece di "Rottura Layer OLED", usa "Danno al pannello luminoso interno".
-            - Spiega sempre brevemente *perché* succede quel problema basandoti sui sintomi scritti dall'utente.
-            
-            Sii rassicurante, professionale e mostra competenza spiegando le cose in modo semplice.`;
+            const systemPrompt = `Sei l'Assistente Diagnostico del "QuanTech Master Repair Lab", un laboratorio di riparazioni per smartphone di altissimo livello. Il tuo compito è leggere il problema descritto dall'utente e fornire 2 o 3 possibili cause (ordinate dalla più probabile alla meno probabile). Sii rassicurante, professionale e usa un linguaggio semplice.`;
 
             const schema = {
                 type: "OBJECT",
                 properties: {
-                    device: { type: "STRING", description: "Nome del telefono dedotto dal testo (es. 'iPhone 13 Pro'). Se non fornito, scrivi 'Dispositivo non specificato'" },
-                    severity_color: { type: "STRING", description: "Scegli un colore in base alla gravità del danno peggiore: 'var(--level-low)' (verde, problemi lievi/schermo), 'var(--level-med)' (arancione, problemi batteria/ricarica), 'var(--level-high)' (rosso, acqua o non si accende)" },
-                    urgency: { type: "STRING", description: "Messaggio da mostrare in alto a destra. Es. 'Riparazione Standard', 'Consigliato Controllo', 'Intervento Urgente'." },
+                    device: { type: "STRING" },
+                    severity_color: { type: "STRING" },
+                    urgency: { type: "STRING" },
                     causes: {
                         type: "ARRAY",
-                        description: "Le 2 o 3 possibili cause. La prima è quella che ritieni più probabile.",
                         items: {
                             type: "OBJECT",
                             properties: {
-                                name: { type: "STRING", description: "Nome del guasto, semplice e chiaro. (Es. 'Danno allo Schermo Interno', 'Batteria Esaurita')" },
-                                prob: { type: "STRING", description: "Probabilità (es. '80%')" },
-                                desc: { type: "STRING", description: "Spiegazione semplice per l'utente di cosa si è rotto e perché fa quel difetto." }
+                                name: { type: "STRING" },
+                                prob: { type: "STRING" },
+                                desc: { type: "STRING" }
                             },
                             required: ["name", "prob", "desc"]
                         }
                     },
-                    protocol: { type: "STRING", description: "Cosa faranno i tecnici in modo rassicurante. Es: 'In laboratorio testeremo il componente e lo sostituiremo mantenendo i tuoi dati al sicuro.'" }
+                    protocol: { type: "STRING" }
                 },
                 required: ["device", "severity_color", "urgency", "causes", "protocol"]
             };
@@ -338,51 +338,22 @@
                 generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.4 }
             };
 
-            let delay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                    if(!response.ok) throw new Error("API Error");
-                    const data = await response.json();
-                    if(data.candidates && data.candidates[0].content.parts[0].text) {
-                        return JSON.parse(data.candidates[0].content.parts[0].text);
-                    }
-                } catch (e) {
-                    if (i === 4) {
-                        throw e;
-                    }
-                    await new Promise(r => setTimeout(r, delay));
-                    delay *= 2;
-                }
+            const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            
+            if(!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error.message || "Errore sconosciuto da Google");
             }
-            throw new Error("API timeout");
+            
+            const data = await response.json();
+            return JSON.parse(data.candidates[0].content.parts[0].text);
         }
 
         function generateFallbackResponse(text) {
-            let textLower = text.toLowerCase();
-            let color = "var(--level-med)"; let urgency = "Analisi Consigliata";
-            let causes = [
-                { name: "Problema a un componente", prob: "60%", desc: "Il difetto che descrivi di solito è legato a un singolo pezzo difettoso (come il connettore o un sensore) che va semplicemente sostituito." },
-                { name: "Anomalia alla Scheda Madre", prob: "30%", desc: "A volte, un piccolo urto o sbalzo di corrente danneggia i circuiti principali del telefono, causando malfunzionamenti generali." }
-            ];
-
-            if(textLower.match(/acqu|mare|piscina|liquid/)) {
-                color = "var(--level-high)"; urgency = "Intervento Urgente";
-                causes = [
-                    { name: "Ossidazione dei Circuiti", prob: "85%", desc: "L'acqua (specialmente se salata) crea rapidamente ruggine e cortocircuiti all'interno. Anche se ora funziona, la corrosione peggiorerà." },
-                    { name: "Danno allo Schermo", prob: "15%", desc: "Il liquido potrebbe essere penetrato sotto il vetro, rovinando l'illuminazione del display." }
-                ];
-            } else if (textLower.match(/vetro|crep|schermo|cadut|righe/)) {
-                color = "var(--level-low)"; urgency = "Riparazione Standard";
-                causes = [
-                    { name: "Rottura del Display Interno", prob: "80%", desc: "L'urto ha rotto non solo il vetro esterno, ma anche il pannello luminoso sotto di esso (ecco perché vedi righe o macchie nere)." },
-                    { name: "Danno da Impatto Interno", prob: "20%", desc: "La botta è stata forte e potrebbe aver allentato alcuni collegamenti vitali all'interno del dispositivo." }
-                ];
-            }
-
             return {
-                device: "Dispositivo Mobile", severity_color: color, urgency: urgency, causes: causes,
-                protocol: "I nostri tecnici apriranno il dispositivo in sicurezza, verificheranno esattamente quale pezzo è stato compromesso e ti forniranno la soluzione migliore senza toccare i tuoi dati."
+                device: "Dispositivo Mobile", severity_color: "var(--level-med)", urgency: "Analisi Consigliata", 
+                causes: [{ name: "Problema Generico", prob: "50%", desc: "Non siamo riusciti a connetterci all'IA in questo momento, ma il tuo dispositivo necessita di un controllo in laboratorio." }],
+                protocol: "I nostri tecnici apriranno il dispositivo in sicurezza per verificare esattamente quale pezzo è stato compromesso."
             };
         }
 
@@ -408,15 +379,14 @@
                 clearInterval(interval);
                 showResults(aiResult, rawText);
             } catch(error) {
-                console.error("API error:", error);
                 clearInterval(interval);
-                loaderText.innerText = "Impossibile connettersi all'IA al momento.";
-                loaderText.classList.add("loader-error");
-                loaderSub.innerText = "Utilizzando il protocollo di diagnosi base.";
                 
-                setTimeout(() => {
-                    showResults(generateFallbackResponse(rawText), rawText);
-                }, 2000);
+                // QUESTO ALERT TI DIRÀ IL MOTIVO ESATTO PER CUI GOOGLE TI RIFIUTA
+                alert("ERRORE DURANTE L'ANALISI: " + error.message); 
+                
+                loaderText.innerText = "Impossibile connettersi all'IA.";
+                loaderText.classList.add("loader-error");
+                setTimeout(() => { showResults(generateFallbackResponse(rawText), rawText); }, 2000);
             }
         }
 
@@ -424,30 +394,12 @@
             document.getElementById('step2').style.display = 'none';
             document.getElementById('step3').style.display = 'block';
             
-            if(aiResult.causes && aiResult.causes.length > 0) {
-                aiResult.causes.sort((a,b) => parseInt(b.prob) - parseInt(a.prob));
-            }
-            
             const primaryCause = aiResult.causes[0];
-
             document.getElementById('resDevice').innerText = aiResult.device;
             const urgBadge = document.getElementById('resUrgency');
             urgBadge.innerText = aiResult.urgency;
             
-            if(aiResult.severity_color.includes("high") || aiResult.severity_color.includes("extreme")) {
-                urgBadge.style.backgroundColor = "rgba(255, 59, 48, 0.15)";
-                urgBadge.style.color = "var(--level-high)";
-                urgBadge.style.borderColor = "rgba(255, 59, 48, 0.3)";
-            } else if(aiResult.severity_color.includes("med")) {
-                urgBadge.style.backgroundColor = "rgba(255, 159, 10, 0.15)";
-                urgBadge.style.color = "var(--level-med)";
-                urgBadge.style.borderColor = "rgba(255, 159, 10, 0.3)";
-            } else {
-                urgBadge.style.backgroundColor = "rgba(52, 199, 89, 0.15)";
-                urgBadge.style.color = "var(--level-low)";
-                urgBadge.style.borderColor = "rgba(52, 199, 89, 0.3)";
-            }
-
+            urgBadge.style.color = aiResult.severity_color;
             document.getElementById('heroGlow').style.setProperty('--card-glow', aiResult.severity_color);
             document.getElementById('primaryTitle').innerText = primaryCause.name;
             document.getElementById('primaryDesc').innerText = primaryCause.desc;
@@ -465,23 +417,21 @@
                     secContainer.innerHTML += `
                         <div class="sec-cause-item">
                             <div class="sec-cause-header">
-                                <div class="sec-info">
-                                    <h5>${cause.name}</h5>
-                                </div>
+                                <div class="sec-info"><h5>${cause.name}</h5></div>
                                 <div class="sec-prob">${cause.prob}</div>
                             </div>
                             <p>${cause.desc}</p>
                         </div>
                     `;
                 }
-            } else {
-                secWrapper.style.display = 'none';
+            } else { 
+                secWrapper.style.display = 'none'; 
             }
             
             document.getElementById('resProtocol').innerText = aiResult.protocol;
-
+            
             let shortQuote = rawText.length > 60 ? rawText.substring(0, 60) + "..." : rawText;
-            const waNumber = "393510000000"; // RICORDATI DI INSERIRE QUI IL TUO NUMERO
+            const waNumber = "393510000000"; // INSERISCI QUI IL TUO NUMERO
             const message = `*TICKET DIAGNOSI SITO*%0A%0A📱 *Modello:* ${aiResult.device}%0A💬 *Problema:* "${shortQuote}"%0A🔍 *Diagnosi IA:* ${primaryCause.name} (${primaryCause.prob})%0A%0ACiao QuanTech! Ho fatto l'analisi sul sito e vorrei parlare con voi per risolvere.`;
             document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${message}`;
         }
@@ -489,16 +439,10 @@
         function resetForm() {
             document.getElementById('userIssue').value = "";
             document.getElementById('analyzeBtn').disabled = true;
-            
-            const step3 = document.getElementById('step3');
-            step3.style.display = 'none';
-            step3.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4');
-            
+            document.getElementById('step3').style.display = 'none';
             document.getElementById('step1').style.display = 'block';
-            
-            const loaderText = document.getElementById('loaderText');
-            loaderText.innerText = loaderMessages[0];
-            loaderText.classList.remove("loader-error");
+            document.getElementById('loaderText').innerText = loaderMessages[0];
+            document.getElementById('loaderText').classList.remove("loader-error");
             document.getElementById('loaderSubtext').innerText = subtextMessages[0];
         }
     </script>
