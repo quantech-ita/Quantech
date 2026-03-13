@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>QuanTech | Diagnosi IA Intuitiva</title>
 
-    <!-- Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --accent: #0071E3; /* Apple Blue */
+            --accent: #0071E3; 
             --accent-glow: rgba(0, 113, 227, 0.4);
             --whatsapp: #25D366;
             --glass-bg: rgba(28, 28, 30, 0.65);
@@ -23,7 +22,6 @@
             --level-med: #FF9F0A;
             --level-high: #FF3B30;
             
-            /* Siri Intelligence Colors */
             --siri-1: #4158D0;
             --siri-2: #C850C0;
             --siri-3: #FFCC70;
@@ -40,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* --- BACKGROUND --- */
         .global-bg {
             position: fixed; inset: 0; z-index: -2; 
             background-image: radial-gradient(circle at 50% -20%, #1c1c22 0%, #000 80%);
@@ -52,7 +49,6 @@
         }
 
         .ai-section-container { position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; }
-
         .center-header { text-align: center; margin-bottom: 24px; }
         .section-tag { 
             background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px;
@@ -62,20 +58,14 @@
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #fff; margin-bottom: 8px; }
         .section-subtitle { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 500;}
 
-        /* Main Container */
         .ai-glass-box { 
-            background: var(--glass-bg); 
-            border: var(--glass-border); 
-            backdrop-filter: var(--glass-blur); 
-            -webkit-backdrop-filter: var(--glass-blur); 
-            border-radius: 40px; 
-            padding: 32px; 
+            background: var(--glass-bg); border: var(--glass-border); 
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); 
+            border-radius: 40px; padding: 32px; 
             box-shadow: 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15); 
-            position: relative; 
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- STEP 1: INPUT --- */
         .input-wrapper { margin-bottom: 24px; text-align: left; }
         .ai-textarea {
             width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
@@ -90,38 +80,31 @@
         }
 
         .btn-analyze {
-            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
-            color: #111; width: 100%; padding: 18px; border-radius: 100px;
-            font-size: 16px; font-weight: 800; border: none; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; gap: 10px; 
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%); color: #111; 
+            width: 100%; padding: 18px; border-radius: 100px; font-size: 16px; font-weight: 800; 
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; 
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
         }
         .btn-analyze:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
         .btn-analyze svg { width: 22px; height: 22px; stroke-width: 2; }
         .btn-analyze:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* --- STEP 2: LOADER SIRI STYLE --- */
         .loader-container { display: none; padding: 60px 0; text-align: center; }
         .siri-orb {
             width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 30px;
             background: linear-gradient(45deg, var(--siri-1), var(--siri-2), var(--siri-3));
-            filter: blur(10px);
-            animation: orbSpin 3s linear infinite, orbBreathe 2s ease-in-out infinite alternate;
+            filter: blur(10px); animation: orbSpin 3s linear infinite, orbBreathe 2s ease-in-out infinite alternate;
         }
         .loader-text { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.5px; margin-bottom: 8px;}
         .loader-subtext { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); }
         .loader-error { color: var(--level-high) !important; }
 
-        /* --- STEP 3: RESULTS (iOS 26 WIDGET STYLE) --- */
         .result-container { display: none; text-align: left; }
-        
-        /* Staggered Animation Classes */
         .stagger-1 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
         .stagger-2 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; transform: translateY(20px); }
         .stagger-3 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; transform: translateY(20px); }
         .stagger-4 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; transform: translateY(20px); }
 
-        /* Top Badges */
         .result-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .device-pill { 
             background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 100px;
@@ -129,83 +112,42 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
         .device-pill svg { width: 14px; height: 14px; opacity: 0.7;}
-        
-        .urgency-badge {
-            padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 800; 
-            text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid transparent;
-        }
+        .urgency-badge { padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid transparent; }
 
-        /* --- HERO CAUSE (LA PIU' PLAUSIBILE) --- */
         .hero-cause-card {
-            position: relative;
-            background: rgba(0,0,0,0.3);
-            border-radius: 28px;
-            padding: 24px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.08);
-            overflow: hidden;
-            z-index: 1;
+            position: relative; background: rgba(0,0,0,0.3); border-radius: 28px; padding: 24px;
+            margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; z-index: 1;
         }
-        
         .hero-glow {
             position: absolute; width: 150%; height: 150%; top: -25%; left: -25%;
             background: radial-gradient(circle at 50% 50%, var(--card-glow, rgba(255,255,255,0.05)), transparent 70%);
             z-index: -1; opacity: 0.4; animation: breatheGlow 4s ease-in-out infinite alternate;
         }
-
         .hero-cause-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        
         .hero-cause-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: flex; align-items: center; gap: 6px;}
         .hero-cause-label svg { width: 14px; height: 14px; color: var(--card-glow); }
-        
         .hero-prob-pill {
             background: var(--card-glow); color: #fff; padding: 4px 10px; border-radius: 100px;
             font-size: 13px; font-weight: 800; font-family: 'JetBrains Mono', monospace;
         }
-
         .hero-cause-title { font-size: 22px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; color: #fff;}
         .hero-cause-desc { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.8); font-weight: 400;}
 
-        /* --- SECONDARY CAUSES (DIFFERENZIALE) --- */
         .differential-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); margin: 24px 0 12px 8px; text-transform: uppercase; letter-spacing: 0.5px;}
-        
-        .secondary-causes-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-        
-        .sec-cause-item {
-            padding: 16px 20px; display: flex; flex-direction: column; gap: 6px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .secondary-causes-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; overflow: hidden; margin-bottom: 24px; }
+        .sec-cause-item { padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .sec-cause-item:last-child { border-bottom: none; }
-        
         .sec-cause-header { display: flex; justify-content: space-between; align-items: center; }
         .sec-info h5 { font-size: 15px; font-weight: 700; color: #fff; }
-        .sec-prob { 
-            background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
-            padding: 4px 8px; border-radius: 8px; 
-            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; 
-        }
+        .sec-prob { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); padding: 4px 8px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; }
         .sec-cause-item p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.4; }
 
-        /* Protocol Box */
-        .protocol-box {
-            background: rgba(0, 113, 227, 0.1); border: 1px solid rgba(0, 113, 227, 0.2);
-            border-radius: 24px; padding: 20px; margin-bottom: 32px; display: flex; gap: 16px;
-        }
-        .protocol-icon {
-            width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
+        .protocol-box { background: rgba(0, 113, 227, 0.1); border: 1px solid rgba(0, 113, 227, 0.2); border-radius: 24px; padding: 20px; margin-bottom: 32px; display: flex; gap: 16px; }
+        .protocol-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .protocol-icon svg { width: 20px; height: 20px; }
         .protocol-content h5 { font-size: 13px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;}
         .protocol-text { font-size: 14.5px; font-weight: 500; color: #fff; line-height: 1.5; }
 
-        /* Buttons */
         .btn-whatsapp {
             background: var(--whatsapp); color: #fff; width: 100%; padding: 20px; border-radius: 100px;
             font-size: 16px; font-weight: 800; border: none; cursor: pointer; display: flex;
@@ -223,14 +165,10 @@
         .restart-btn:hover { color: #fff; }
         .restart-btn svg { width: 16px; height: 16px; }
 
-        /* Animations */
         @keyframes orbSpin { 100% { transform: rotate(360deg); } }
         @keyframes orbBreathe { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
         @keyframes blink { 0% { opacity: 0.5; } 100% { opacity: 1; } }
-        @keyframes springUp { 
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); } 
-            100% { opacity: 1; transform: translateY(0) scale(1); } 
-        }
+        @keyframes springUp { 0% { opacity: 0; transform: translateY(30px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes breatheGlow { 0% { opacity: 0.3; } 100% { opacity: 0.6; } }
 
         @media (max-width: 768px) {
@@ -256,7 +194,6 @@
 
         <div class="ai-glass-box" id="mainPanel">
             
-            <!-- STEP 1: INPUT -->
             <div id="step1">
                 <div class="input-wrapper">
                     <textarea id="userIssue" class="ai-textarea" rows="4" placeholder="Cosa è successo al tuo telefono? Scrivilo con parole tue... (es: È caduto dal tavolo e ora lo schermo fa delle righe strane)" oninput="checkInput()"></textarea>
@@ -268,17 +205,13 @@
                 </button>
             </div>
 
-            <!-- STEP 2: LOADER (SIRI STYLE) -->
             <div class="loader-container" id="step2">
                 <div class="siri-orb"></div>
                 <div class="loader-text" id="loaderText">L'IA sta elaborando...</div>
                 <div class="loader-subtext" id="loaderSubtext">Traduzione dei sintomi in corso</div>
             </div>
 
-            <!-- STEP 3: RESULTS (iOS 26 WIDGET STYLE) -->
             <div class="result-container" id="step3">
-                
-                <!-- ROW 1: Meta -->
                 <div class="result-meta-row stagger-1">
                     <div class="device-pill">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
@@ -287,7 +220,6 @@
                     <div class="urgency-badge" id="resUrgency">Valutazione Completata</div>
                 </div>
 
-                <!-- ROW 2: HERO CAUSE (LA PIU' PROBABILE) -->
                 <div class="hero-cause-card stagger-2">
                     <div class="hero-glow" id="heroGlow"></div>
                     
@@ -303,15 +235,11 @@
                     <p class="hero-cause-desc" id="primaryDesc">Descrizione semplice e comprensibile del danno primario.</p>
                 </div>
 
-                <!-- ROW 3: DIFFERENTIAL CAUSES -->
                 <div id="secondaryCausesWrapper" class="stagger-3">
                     <div class="differential-title">Altre possibili cause</div>
-                    <div class="secondary-causes-box" id="resCausesList">
-                        <!-- Le cause secondarie verranno inserite qui dal JS -->
-                    </div>
+                    <div class="secondary-causes-box" id="resCausesList"></div>
                 </div>
 
-                <!-- ROW 4: PROTOCOL & CTA -->
                 <div class="stagger-4">
                     <div class="protocol-box">
                         <div class="protocol-icon">
@@ -359,15 +287,13 @@
         ];
 
         // ===================================================================================
-        // CHIAVE API GEMINI INSERITA QUI SOTTO
-        // Importante: Ti consiglio di limitare l'uso di questa chiave al tuo dominio specifico 
-        // tramite le impostazioni di Google Cloud Console per evitare abusi da terzi.
+        // QUI LA STRINGA VERRÀ SOSTITUITA AUTOMATICAMENTE DA GITHUB ACTIONS DURANTE IL DEPLOY
         // ===================================================================================
-        const apiKey = process.env.apiKey;
+        const apiKey = "__MIA_CHIAVE_SEGRETA__";
 
         async function fetchAIResponse(userText) {
-            if (!apiKey) {
-                throw new Error("API Key mancante");
+            if (!apiKey || apiKey === "__MIA_CHIAVE_SEGRETA__") {
+                throw new Error("API Key mancante o non sostituita in fase di build");
             }
             
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -432,7 +358,6 @@
             throw new Error("API timeout");
         }
 
-        // Funzione di fallback locale in caso di assenza rete o api disabilitata
         function generateFallbackResponse(text) {
             let textLower = text.toLowerCase();
             let color = "var(--level-med)"; let urgency = "Analisi Consigliata";
@@ -463,7 +388,6 @@
 
         async function startDynamicAnalysis() {
             const rawText = document.getElementById('userIssue').value.trim();
-
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
 
@@ -480,15 +404,12 @@
             }, 1000);
 
             try {
-                // Tenta la connessione a Gemini API in tempo reale
                 let aiResult = await fetchAIResponse(rawText);
                 clearInterval(interval);
                 showResults(aiResult, rawText);
             } catch(error) {
                 console.error("API error:", error);
                 clearInterval(interval);
-                
-                // UX Feedback se API limit o no network
                 loaderText.innerText = "Impossibile connettersi all'IA al momento.";
                 loaderText.classList.add("loader-error");
                 loaderSub.innerText = "Utilizzando il protocollo di diagnosi base.";
@@ -509,12 +430,10 @@
             
             const primaryCause = aiResult.causes[0];
 
-            // Setup Meta
             document.getElementById('resDevice').innerText = aiResult.device;
             const urgBadge = document.getElementById('resUrgency');
             urgBadge.innerText = aiResult.urgency;
             
-            // Colore del badge di urgenza basato sulla gravità
             if(aiResult.severity_color.includes("high") || aiResult.severity_color.includes("extreme")) {
                 urgBadge.style.backgroundColor = "rgba(255, 59, 48, 0.15)";
                 urgBadge.style.color = "var(--level-high)";
@@ -529,14 +448,12 @@
                 urgBadge.style.borderColor = "rgba(52, 199, 89, 0.3)";
             }
 
-            // Setup HERO CAUSE (Causa Principale)
             document.getElementById('heroGlow').style.setProperty('--card-glow', aiResult.severity_color);
             document.getElementById('primaryTitle').innerText = primaryCause.name;
             document.getElementById('primaryDesc').innerText = primaryCause.desc;
             document.getElementById('primaryProb').innerText = primaryCause.prob;
             document.getElementById('primaryProb').style.backgroundColor = aiResult.severity_color;
 
-            // Setup SECONDARY CAUSES (Celle in stile Impostazioni iOS)
             const secContainer = document.getElementById('resCausesList');
             const secWrapper = document.getElementById('secondaryCausesWrapper');
             secContainer.innerHTML = '';
@@ -561,12 +478,10 @@
                 secWrapper.style.display = 'none';
             }
             
-            // Setup Protocollo
             document.getElementById('resProtocol').innerText = aiResult.protocol;
 
-            // Setup WhatsApp
             let shortQuote = rawText.length > 60 ? rawText.substring(0, 60) + "..." : rawText;
-            const waNumber = "393510000000"; // INSERISCI QUI IL TUO NUMERO DI TELEFONO
+            const waNumber = "393510000000"; // RICORDATI DI INSERIRE QUI IL TUO NUMERO
             const message = `*TICKET DIAGNOSI SITO*%0A%0A📱 *Modello:* ${aiResult.device}%0A💬 *Problema:* "${shortQuote}"%0A🔍 *Diagnosi IA:* ${primaryCause.name} (${primaryCause.prob})%0A%0ACiao QuanTech! Ho fatto l'analisi sul sito e vorrei parlare con voi per risolvere.`;
             document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${message}`;
         }
