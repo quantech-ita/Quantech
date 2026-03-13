@@ -507,9 +507,16 @@
             /* MEDIA QUERIES TABS/STAGE COMPATTI */
             .stage-tabs-nav {
                 justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto;
-                scroll-snap-type: x mandatory; padding: 10px 10px 10px 240px; border-radius: 24px;
+                scroll-snap-type: x mandatory; 
+                padding: 10px; /* Manteniamo il padding base per il vetro */
+                border-radius: 24px;
                 -ms-overflow-style: none; scrollbar-width: none;
             }
+
+            /* AGGIUNGI QUESTE DUE RIGHE: Creano uno spazio simmetrico e perfetto per il primo e l'ultimo bottone */
+            .stage-tab-btn:first-child { margin-left: 14px; }
+            .stage-tab-btn:last-child { margin-right: 14px; }
+            
             .stage-tabs-nav::-webkit-scrollbar { display: none; }
             .stage-tab-btn { flex: 0 0 auto; scroll-snap-align: start; }
 
