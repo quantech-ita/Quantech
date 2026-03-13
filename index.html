@@ -124,7 +124,7 @@
 
         .hero p { font-size: 20px; line-height: 1.6; color: rgba(255,255,255,0.9); max-width: 600px; margin-bottom: 30px; text-shadow: 0 4px 10px rgba(0,0,0,0.4); font-weight: 500; opacity: 0; animation: fadeUp 1s 0.4s forwards; }
         
-        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: center; opacity: 0; animation: fadeUp 1s 0.5s forwards; margin-bottom: 40px; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: center; opacity: 0; animation: fadeUp 1s 0.5s forwards; margin-bottom: 50px; }
         .hero-btn { height: 52px; padding: 0 32px; min-width: 180px; border-radius: 100px; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; backdrop-filter: blur(12px); transition: 0.3s; cursor: pointer; }
         .hero-btn.btn-outline { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.4); }
         .hero-btn.btn-outline:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
@@ -138,25 +138,21 @@
         }
         .btn-animated:hover::after { left: 120%; }
         
-        .btn-call { background: var(--whatsapp); color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); border: 1px solid transparent; }
-        .btn-call:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); background: #20b958; }
+        /* Updated Dark "Chiama" Button */
+        .btn-call { background: #111; color: #fff; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); border: 1px solid transparent; }
+        .btn-call:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); background: #222; }
         .btn-call svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .btn-call:hover svg { animation: ring 0.4s ease infinite alternate; }
         
-        .btn-chat { background: #fff; color: #111; box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1); border: 1px solid transparent; }
-        .btn-chat::after { background: rgba(0,0,0,0.06); }
-        .btn-chat:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3); }
-        .btn-chat svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-        .btn-chat:hover svg { animation: floatMsg 0.8s ease-in-out infinite alternate; }
+        /* Updated WhatsApp "Scrivici" Button */
+        .btn-whatsapp { background: var(--whatsapp); color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); border: 1px solid transparent; }
+        .btn-whatsapp::after { background: rgba(255,255,255,0.2); }
+        .btn-whatsapp:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); background: var(--whatsapp-hover); }
+        .btn-whatsapp svg { width: 18px; height: 18px; fill: currentColor; }
+        .btn-whatsapp:hover svg { animation: floatMsg 0.8s ease-in-out infinite alternate; }
 
         @keyframes ring { 0% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
         @keyframes floatMsg { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
-
-        .hero-google-card { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); padding: 12px 28px; border-radius: 100px; display: inline-flex; align-items: center; gap: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); transition: transform 0.3s; margin-bottom: 30px; opacity: 0; animation: fadeUp 1s 0.6s forwards; cursor: pointer; text-decoration: none; transform: scale(1.02); }
-        .g-icon { width: 36px; height: 36px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .g-text { text-align: left; } .g-stars svg { width: 16px; height: 16px; fill: #FBBC05; }
-        .g-info { font-size: 12px; font-weight: 700; color: #4285F4; text-transform: uppercase; margin-top: 2px; }
-        .g-score { font-size: 14px; font-weight: 800; color: #111; margin-left: 6px; }
 
         .glass-dashboard { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: var(--radius-lg); padding: 30px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 800px; width: 100%; margin-bottom: 10px; opacity: 0; animation: fadeUp 1s 0.7s forwards; }
         .stat-item { display: flex; flex-direction: column; align-items: center; }
@@ -211,29 +207,11 @@
         .step-single p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding: 0 10px; max-width: 250px; margin: 0 auto; }
 
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
-        .showcase-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 800px; margin: 0 auto; }
 
         /* 1. Slider Prima/Dopo Centrato */
-        .comparison-showcase-container {
-            width: 100%;
-            max-width: 380px; 
-            margin: 0 auto;
-        }
-
-        .comparison-glass-frame { 
-            position: relative; width: 100%; aspect-ratio: 1 / 1; 
-            border-radius: 28px; border: 8px solid #000;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-            overflow: hidden; background: #000; 
-            margin-bottom: 12px;
-        }
+        .comparison-showcase-container { width: 100%; max-width: 380px; margin: 0 auto; }
+        .comparison-glass-frame { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 28px; border: 8px solid #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); overflow: hidden; background: #000; margin-bottom: 12px; }
         .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; }
         .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
         .img-comp-img img { display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; }
@@ -249,52 +227,24 @@
 
         /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
         .stage-tabs-nav {
-            display: flex;
-            gap: 4px; /* Piccolo spazio tra le capsule interne */
-            justify-content: center;
-            align-items: center;
-            flex-wrap: nowrap;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 6px; /* MARGINE GRIGIO UNIFORME INTORNO AL BOTTONE BLU */
-            border-radius: 100px; /* Bordo arrotondato massimo per fare la "pillola" */
-            border: 1px solid rgba(255,255,255,0.8);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-            width: max-content; /* Si adatta alla grandezza del contenuto */
-            max-width: 100%;
-            margin: 0 auto;
-            overflow-x: auto;
-            -ms-overflow-style: none; scrollbar-width: none;
+            display: flex; gap: 4px; justify-content: center; align-items: center; flex-wrap: nowrap;
+            background: rgba(255,255,255,0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            padding: 6px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06); width: max-content; max-width: 100%; margin: 0 auto;
+            overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
         }
         .stage-tabs-nav::-webkit-scrollbar { display: none; }
 
         .stage-tab-btn {
-            background: transparent;
-            border: none;
-            padding: 10px 20px; /* Dimensioni interne del bottone */
-            border-radius: 100px; /* Segue l'arrotondamento del contenitore */
-            font-size: 14.5px;
-            font-weight: 700;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap; /* Evita l'a capo del testo */
-            flex-shrink: 0;
-            -webkit-tap-highlight-color: transparent;
-            margin: 0; /* Rimuove margini per rispettare il padding del contenitore */
+            background: transparent; border: none; padding: 10px 20px; border-radius: 100px;
+            font-size: 14.5px; font-weight: 700; color: #555; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 8px;
+            white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; margin: 0;
         }
-        
         .stage-tab-btn svg { width: 18px; height: 18px; stroke-width: 2.2px; color: inherit; transition: color 0.4s ease; }
-        
         .stage-tab-btn:hover { color: #111; }
-        
         .stage-tab-btn.active { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         
-        /* Colori attivi delle capsule */
         .stage-tab-btn.active[data-target="s-display"] { background: #0071E3; color: #fff; }
         .stage-tab-btn.active[data-target="s-battery"] { background: #34C759; color: #fff; }
         .stage-tab-btn.active[data-target="s-data"] { background: #111; color: #fff; }
@@ -304,86 +254,76 @@
 
         /* 3. Pannello Dettaglio Compatto */
         .stage-content-box {
-            position: relative;
-            background: var(--glass-bg);
-            border: var(--glass-border);
-            border-radius: var(--radius-lg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            box-shadow: var(--glass-shadow);
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            min-height: 200px;
+            position: relative; background: var(--glass-bg); border: var(--glass-border); border-radius: var(--radius-lg);
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); box-shadow: var(--glass-shadow);
+            width: 100%; overflow: hidden; display: flex; align-items: center; min-height: 200px;
         }
 
-        .stage-bg-halo {
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 80% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 60%);
-            z-index: 0;
-            transition: background 0.8s ease;
-            pointer-events: none;
-        }
+        .stage-bg-halo { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 80% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 60%); z-index: 0; transition: background 0.8s ease; pointer-events: none; }
 
         .stage-panel {
-            position: absolute;
-            inset: 0;
-            padding: 30px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: translateY(15px);
-            z-index: 1;
+            position: absolute; inset: 0; padding: 30px 40px; display: flex; align-items: center; justify-content: space-between;
+            gap: 30px; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform: translateY(15px); z-index: 1;
         }
-        .stage-panel.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-            position: relative; 
-        }
+        .stage-panel.active { opacity: 1; pointer-events: all; transform: translateY(0); position: relative; }
 
         .stage-text { flex: 1; text-align: left; }
         .stage-text h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; color: #111; }
         .stage-text p { font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 20px; max-width: 450px; }
         
         .stage-cta {
-            background: #111; color: #fff;
-            padding: 12px 24px; border-radius: 100px;
-            font-size: 14px; font-weight: 700; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: #111; color: #fff; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 700;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;
         }
         .stage-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
         .stage-cta svg { width: 16px; height: 16px; fill: white; }
 
-        .stage-visual { 
-            width: 100px; height: 100px; 
-            background: #fff; border-radius: 24px; 
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
-            flex-shrink: 0;
-        }
+        .stage-visual { width: 100px; height: 100px; background: #fff; border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 30px rgba(0,0,0,0.08); flex-shrink: 0; }
         .stage-visual svg { width: 48px; height: 48px; stroke-width: 1.5px; }
+
+        /* --- PREMIUM GOOGLE BANNER --- */
+        .google-premium-banner {
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-lg);
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            box-shadow: var(--glass-shadow);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 20px;
+        }
+        .google-premium-banner:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--glass-shadow-hover);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .g-banner-left { display: flex; align-items: center; gap: 20px; }
+        .g-banner-icon { width: 56px; height: 56px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.08); flex-shrink: 0; }
+        .g-banner-icon svg { width: 28px; height: 28px; }
+        .g-banner-text h4 { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .g-banner-text p { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+        .g-banner-right { display: flex; align-items: center; gap: 16px; }
+        .g-banner-rating { display: flex; flex-direction: column; align-items: flex-end; }
+        .g-banner-stars { display: flex; gap: 4px; color: #FBBC05; }
+        .g-banner-stars svg { width: 20px; height: 20px; fill: currentColor; }
+        .g-banner-score { font-size: 16px; font-weight: 800; color: #111; margin-top: 4px; }
+        .g-banner-score span { color: #888; font-weight: 600; font-size: 14px; }
+        .g-avatars { display: flex; }
+        .g-avatar { width: 36px; height: 36px; border-radius: 50%; border: 3px solid #fff; margin-left: -12px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #555; }
+        .g-avatar:first-child { margin-left: 0; }
 
         /* PC INFINITE SCROLL */
         @media (min-width: 1025px) {
-            .reviews-scroller {
-                display: flex; gap: 30px; scroll-snap-type: none; overflow: hidden; 
-                width: max-content; animation: infiniteScroll 40s linear infinite; padding-left: 0;
-            }
+            .reviews-scroller { display: flex; gap: 30px; scroll-snap-type: none; overflow: hidden; width: max-content; animation: infiniteScroll 40s linear infinite; padding-left: 0; }
             .reviews-scroller:hover { animation-play-state: paused; }
-            .reviews-wrapper {
-                width: 100%; overflow: hidden; 
-                mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-            }
+            .reviews-wrapper { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
             @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         }
 
@@ -411,29 +351,23 @@
         /* --- FOOTER POTENZIATO A 5 COLONNE --- */
         footer { padding: 0; margin-top: var(--section-gap); width: 100%; position: relative; z-index: 10; }
         .glass-footer-box { width: 100%; max-width: 100%; margin: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); border-top: 1px solid rgba(255, 255, 255, 0.8); border-radius: 60px 60px 0 0; padding: 80px 40px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.05); }
-        
         .footer-grid { display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
-        
         .footer-brand { display: flex; align-items: flex-start; justify-content: flex-start; }
         .footer-brand-logo { display: flex; align-items: center; gap: 16px; font-size: 32px; font-weight: 800; color: #111; letter-spacing: -1px; margin-bottom: 0; }
         .footer-brand-logo img { height: 130px; width: auto; border-radius: 16px; transition: transform 0.3s ease; }
         .footer-brand-logo:hover img { transform: scale(1.03); }
         .brand-name-text { display: block; }
-        
         .footer-col h5 { color: var(--accent); margin-bottom: 24px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; }
         .footer-col ul { padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 14px; list-style: none; }
         .footer-col a { color: #444; transition: all 0.3s ease; text-decoration: none; font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .footer-col a svg { width: 16px; height: 16px; flex-shrink: 0; }
-        
         .footer-hours-list li { font-size: 14px; color: #555; line-height: 1.6; }
         .footer-hours-list li strong { color: #111; display: block; margin-top: 4px; font-size: 15px;}
-
         .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; column-gap: 20px;}
         .footer-map-container { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); padding: 8px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
         .footer-map-container iframe { width: 100%; height: 160px; border-radius: 16px; display: block; border: none; }
-        
         .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 13px; font-weight: 500; color: #777; max-width: 1200px; margin: 0 auto; }
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: #777; text-decoration: none; transition: 0.2s; }
@@ -514,40 +448,15 @@
 
             /* NUOVO BLOCCO CORRETTO PER LE CAPSULE APPLE-STYLE SU MOBILE */
             .stage-tabs-nav {
-                justify-content: flex-start; 
-                flex-wrap: nowrap; 
-                overflow-x: auto;
-                scroll-snap-type: x mandatory; 
-                padding: 8px; /* Spaziatura identica alla tua foto (sopra, sotto, sinistra) */
-                border-radius: 100px; /* Forma a pillola esatta */
-                width: 100%; /* FORZA LO SCROLL ALL'INIZIO (Risolve il bug) */
-                margin: 0; /* ANNULLA IL CENTRAGGIO AUTOMATICO */
-                scroll-padding-left: 8px; /* Fa "agganciare" il primo elemento perfettamente al bordo */
-                -ms-overflow-style: none; 
-                scrollbar-width: none;
+                justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; 
+                padding: 8px; border-radius: 100px; width: 100%; margin: 0; scroll-padding-left: 8px; 
+                -ms-overflow-style: none; scrollbar-width: none;
             }
             .stage-tabs-nav::-webkit-scrollbar { display: none; }
-            
-            .stage-tab-btn { 
-                flex: 0 0 auto; 
-                scroll-snap-align: start; 
-                margin: 0 !important; /* Affida lo spazio solo al padding grigio */
-            }
-            
-            /* Questo ::after crea lo stesso spazietto anche dopo l'ultima capsula a destra */
-            .stage-tabs-nav::after {
-                content: '';
-                flex: 0 0 1px;
-                padding-right: 8px;
-            }
-            /* FINE BLOCCO CAPSULE CORRETTO */
+            .stage-tab-btn { flex: 0 0 auto; scroll-snap-align: start; margin: 0 !important; }
+            .stage-tabs-nav::after { content: ''; flex: 0 0 1px; padding-right: 8px; }
 
-            .stage-panel {
-                flex-direction: column-reverse;
-                padding: 24px 20px;
-                text-align: center;
-                gap: 24px;
-            }
+            .stage-panel { flex-direction: column-reverse; padding: 24px 20px; text-align: center; gap: 24px; }
             .stage-text { align-items: center; text-align: center; } 
             .stage-text h3 { font-size: 20px; margin: 0 auto 12px auto; }
             .stage-text p { font-size: 14px; margin: 0 auto 16px auto; }
@@ -555,6 +464,12 @@
             .stage-visual svg { width: 34px; height: 34px; }
 
             .comparison-glass-frame { width: 100%; max-width: 350px; border-width: 6px; } 
+
+            /* Google Banner Mobile Adjustments */
+            .google-premium-banner { flex-direction: column; text-align: center; padding: 24px; gap: 24px; }
+            .g-banner-left { flex-direction: column; text-align: center; gap: 12px; }
+            .g-banner-right { flex-direction: column; align-items: center; gap: 16px; }
+            .g-banner-rating { align-items: center; }
 
             .reviews-scroller { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; animation: none; padding-left: 10px; width: 100%; justify-content: flex-start; }
             .reviews-wrapper { width: 100%; margin: 0; padding: 0; mask-image: linear-gradient(to right, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); }
@@ -603,8 +518,8 @@
                 <div class="nav-links">
                     <a href="#hero" class="nav-link active" onclick="smoothScroll(event, '#hero')">Home</a>
                     <a href="#features" class="nav-link" onclick="smoothScroll(event, '#features')">Perché Noi</a>
-                    <a href="#showcase" class="nav-link" onclick="smoothScroll(event, '#showcase')">Servizi</a>
                     <a href="#process" class="nav-link" onclick="smoothScroll(event, '#process')">Come Funziona</a>
+                    <a href="#services-tabs" class="nav-link" onclick="smoothScroll(event, '#services-tabs')">Servizi</a>
                     <a href="#reviews" class="nav-link" onclick="smoothScroll(event, '#reviews')">Clienti</a>
                 </div>
                 <div style="display:flex; align-items:center;">
@@ -639,8 +554,8 @@
         <div class="fs-menu" id="fsMenu">
             <a href="#hero" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#hero');">Home</a>
             <a href="#features" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#features');">Perché Noi</a>
-            <a href="#showcase" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#showcase');">Servizi</a>
             <a href="#process" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#process');">Come Funziona</a>
+            <a href="#services-tabs" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#services-tabs');">Servizi</a>
             <a href="#reviews" class="fs-link" onclick="toggleMenu(); smoothScroll(event, '#reviews');">Recensioni</a>
             
             <div class="fs-social-actions">
@@ -666,31 +581,13 @@
                         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         Chiama
                     </a>
-                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20informazioni" target="_blank" class="hero-btn btn-animated btn-chat">
-                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20informazioni" target="_blank" class="hero-btn btn-animated btn-whatsapp">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                         Scrivici
                     </a>
                 </div>
-                <a href="#showcase" class="hero-btn btn-outline" onclick="smoothScroll(event, '#showcase')">Scopri i Servizi</a>
+                <a href="#services-tabs" class="hero-btn btn-outline" onclick="smoothScroll(event, '#services-tabs')">Scopri i Servizi</a>
             </div>
-
-            <a href="https://www.google.com/maps" target="_blank" style="text-decoration:none;">
-                <div class="hero-google-card">
-                    <div class="g-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                    </div>
-                    <div class="g-text">
-                        <div class="g-stars">
-                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                        </div>
-                        <div class="g-info">Excellent <span class="g-score">5.0 / 5.0</span></div>
-                    </div>
-                </div>
-            </a>
 
             <div class="glass-dashboard">
                 <div class="stat-item">
@@ -829,8 +726,8 @@
                                 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 Chiama
                             </a>
-                            <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" target="_blank" class="hero-btn btn-animated btn-chat">
-                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" target="_blank" class="hero-btn btn-animated btn-whatsapp">
+                                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                                 Scrivici
                             </a>
                         </div>
@@ -869,129 +766,133 @@
                         <p class="comp-caption" style="margin-top: 12px;">Trascina per visualizzare il restauro</p>
                     </div>
 
-                    <!-- RIGA 2: Tabs Navigazione Servizi (Capsule REDESIGN) -->
-                    <div class="stage-tabs-nav">
-                        <button class="stage-tab-btn active" data-target="s-display" data-color="rgba(0, 113, 227, 0.15)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
-                            Display
-                        </button>
-                        <button class="stage-tab-btn" data-target="s-battery" data-color="rgba(52, 199, 89, 0.15)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
-                            Batteria
-                        </button>
-                        <button class="stage-tab-btn" data-target="s-data" data-color="rgba(0, 0, 0, 0.1)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                            Dati Persi
-                        </button>
-                        <button class="stage-tab-btn" data-target="s-solder" data-color="rgba(88, 86, 214, 0.15)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                            Saldature
-                        </button>
-                        <button class="stage-tab-btn" data-target="s-water" data-color="rgba(50, 173, 230, 0.15)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-                            Lavaggio
-                        </button>
-                        <button class="stage-tab-btn" data-target="s-modules" data-color="rgba(255, 45, 85, 0.15)">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                            Moduli
-                        </button>
-                    </div>
-
-                    <!-- RIGA 3: Pannello Info Compatto -->
-                    <div class="stage-content-box">
-                        <div class="stage-bg-halo" id="stageHalo"></div>
+                    <!-- WRAPPER ANCORAGGIO SERVIZI -->
+                    <div id="services-tabs" style="width: 100%; scroll-margin-top: 130px;">
                         
-                        <!-- PANE: DISPLAY -->
-                        <div class="stage-panel active" id="s-display">
-                            <div class="stage-text">
-                                <h3>Display & OLED</h3>
-                                <p>Sostituzione rapida con riprogrammazione TrueTone e ripristino dell'isolamento originale. Il tuo schermo tornerà ad avere i colori vividi e la reattività del primo giorno.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Display" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #0071E3;">
+                        <!-- RIGA 2: Tabs Navigazione Servizi (Capsule REDESIGN) -->
+                        <div class="stage-tabs-nav" style="margin-bottom: 30px;">
+                            <button class="stage-tab-btn active" data-target="s-display" data-color="rgba(0, 113, 227, 0.15)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
-                            </div>
-                        </div>
-
-                        <!-- PANE: BATTERIA -->
-                        <div class="stage-panel" id="s-battery">
-                            <div class="stage-text">
-                                <h3>Sostituzione Batteria</h3>
-                                <p>Installazione di batterie ad alta capacità. Leggiamo e trasferiamo il chip originale per mantenere il 100% di salute visibile nelle impostazioni. Addio ricariche continue.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Batteria" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #34C759;">
+                                Display
+                            </button>
+                            <button class="stage-tab-btn" data-target="s-battery" data-color="rgba(52, 199, 89, 0.15)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
-                            </div>
-                        </div>
-
-                        <!-- PANE: DATI PERSI -->
-                        <div class="stage-panel" id="s-data">
-                            <div class="stage-text">
-                                <h3>Recupero Dati Persi</h3>
-                                <p>Servizio hardware e software avanzato per telefoni morti o gravemente danneggiati. Non diamo i tuoi ricordi o i tuoi file di lavoro per persi.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Recupero%20Dati" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #111;">
+                                Batteria
+                            </button>
+                            <button class="stage-tab-btn" data-target="s-data" data-color="rgba(0, 0, 0, 0.1)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                            </div>
-                        </div>
-
-                        <!-- PANE: SALDATURE -->
-                        <div class="stage-panel" id="s-solder">
-                            <div class="stage-text">
-                                <h3>Microsaldature</h3>
-                                <p>Interventi a livello di componente microscopico su schede madri. Ripariamo chip IC difettosi, touch disease e cortocircuiti interni complessi.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Saldature" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #5856D6;">
+                                Dati Persi
+                            </button>
+                            <button class="stage-tab-btn" data-target="s-solder" data-color="rgba(88, 86, 214, 0.15)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                            </div>
-                        </div>
-
-                        <!-- PANE: LAVAGGIO -->
-                        <div class="stage-panel" id="s-water">
-                            <div class="stage-text">
-                                <h3>Lavaggio Ultrasuoni</h3>
-                                <p>Smontaggio immediato e deossidazione in speciali vasche a ultrasuoni per salvare la scheda madre dalla corrosione da liquidi.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Lavaggio" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #32ADE6;">
+                                Saldature
+                            </button>
+                            <button class="stage-tab-btn" data-target="s-water" data-color="rgba(50, 173, 230, 0.15)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-                            </div>
-                        </div>
-
-                        <!-- PANE: MODULI E CONNETTORI -->
-                        <div class="stage-panel" id="s-modules">
-                            <div class="stage-text">
-                                <h3>Moduli & Connettori</h3>
-                                <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
-                                <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-                                    Richiedi Info
-                                </a>
-                            </div>
-                            <div class="stage-visual" style="color: #FF2D55;">
+                                Lavaggio
+                            </button>
+                            <button class="stage-tab-btn" data-target="s-modules" data-color="rgba(255, 45, 85, 0.15)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                            </div>
+                                Moduli
+                            </button>
                         </div>
 
-                    </div>
+                        <!-- RIGA 3: Pannello Info Compatto -->
+                        <div class="stage-content-box">
+                            <div class="stage-bg-halo" id="stageHalo"></div>
+                            
+                            <!-- PANE: DISPLAY -->
+                            <div class="stage-panel active" id="s-display">
+                                <div class="stage-text">
+                                    <h3>Display & OLED</h3>
+                                    <p>Sostituzione rapida con riprogrammazione TrueTone e ripristino dell'isolamento originale. Il tuo schermo tornerà ad avere i colori vividi e la reattività del primo giorno.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Display" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #0071E3;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- PANE: BATTERIA -->
+                            <div class="stage-panel" id="s-battery">
+                                <div class="stage-text">
+                                    <h3>Sostituzione Batteria</h3>
+                                    <p>Installazione di batterie ad alta capacità. Leggiamo e trasferiamo il chip originale per mantenere il 100% di salute visibile nelle impostazioni. Addio ricariche continue.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Batteria" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #34C759;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
+                                </div>
+                            </div>
+
+                            <!-- PANE: DATI PERSI -->
+                            <div class="stage-panel" id="s-data">
+                                <div class="stage-text">
+                                    <h3>Recupero Dati Persi</h3>
+                                    <p>Servizio hardware e software avanzato per telefoni morti o gravemente danneggiati. Non diamo i tuoi ricordi o i tuoi file di lavoro per persi.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Recupero%20Dati" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #111;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- PANE: SALDATURE -->
+                            <div class="stage-panel" id="s-solder">
+                                <div class="stage-text">
+                                    <h3>Microsaldature</h3>
+                                    <p>Interventi a livello di componente microscopico su schede madri. Ripariamo chip IC difettosi, touch disease e cortocircuiti interni complessi.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Saldature" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #5856D6;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                                </div>
+                            </div>
+
+                            <!-- PANE: LAVAGGIO -->
+                            <div class="stage-panel" id="s-water">
+                                <div class="stage-text">
+                                    <h3>Lavaggio Ultrasuoni</h3>
+                                    <p>Smontaggio immediato e deossidazione in speciali vasche a ultrasuoni per salvare la scheda madre dalla corrosione da liquidi.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Lavaggio" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #32ADE6;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- PANE: MODULI E CONNETTORI -->
+                            <div class="stage-panel" id="s-modules">
+                                <div class="stage-text">
+                                    <h3>Moduli & Connettori</h3>
+                                    <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
+                                    <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+                                        Richiedi Info
+                                    </a>
+                                </div>
+                                <div class="stage-visual" style="color: #FF2D55;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- END SERVICES TABS -->
                 </div>
             </section>
             
@@ -1019,6 +920,38 @@
                         <h2 class="section-title">Clienti Soddisfatti.</h2>
                     </div>
                 </div>
+
+                <!-- NEW PREMIUM GOOGLE BANNER -->
+                <a href="https://www.google.com/maps" target="_blank" class="google-premium-banner reveal">
+                    <div class="g-banner-left">
+                        <div class="g-banner-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        </div>
+                        <div class="g-banner-text">
+                            <h4>Eccellente su Google</h4>
+                            <p>Basato su oltre 150 recensioni verificate</p>
+                        </div>
+                    </div>
+                    <div class="g-banner-right">
+                        <div class="g-avatars">
+                            <div class="g-avatar" style="background:#e3f2fd; color:#1a73e8;">S</div>
+                            <div class="g-avatar" style="background:#fce8e6; color:#d93025;">M</div>
+                            <div class="g-avatar" style="background:#e6f4ea; color:#188038;">P</div>
+                            <div class="g-avatar" style="background:#fef7e0; color:#f29900;">G</div>
+                            <div class="g-avatar" style="background:#f1f3f4; color:#3c4043;">+</div>
+                        </div>
+                        <div class="g-banner-rating">
+                            <div class="g-banner-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            </div>
+                            <div class="g-banner-score">5.0 <span>/ 5.0</span></div>
+                        </div>
+                    </div>
+                </a>
 
                 <div class="reviews-wrapper">
                     <div class="reviews-scroller reveal" id="reviewsScroll">
@@ -1209,12 +1142,12 @@
                         <div class="footer-col">
                             <h5>I Nostri Servizi</h5>
                             <ul class="footer-services-grid">
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Sostituzione Display</a></li>
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Cambio Batteria</a></li>
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Rip. Fotocamere</a></li>
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Recupero Dati</a></li>
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Microsaldature</a></li>
-                                <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Pulizia e Audio</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Sostituzione Display</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Cambio Batteria</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Rip. Fotocamere</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Recupero Dati</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Microsaldature</a></li>
+                                <li><a href="#services-tabs" onclick="smoothScroll(event, '#services-tabs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Pulizia e Audio</a></li>
                             </ul>
                         </div>
 
@@ -1331,7 +1264,10 @@
             e.preventDefault();
             const target = document.querySelector(targetId);
             if (!target) return;
-            const headerOffset = 130; 
+            
+            // Adjust offset depending if we scroll to the tabs or a section
+            const headerOffset = targetId === '#services-tabs' ? 100 : 130; 
+            
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             const startPosition = window.pageYOffset;
