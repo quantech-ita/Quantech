@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
-    <title>QuanTech | Master Repair Lab</title>
+    <title>QuanTech</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/quantech-ita/Quantech/main/5cf773ee-0710-454c-bdf5-3c139793f3c6.jpeg?v=2">
@@ -172,12 +172,14 @@
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
 
         /* --- MARQUEE --- */
-        .marquee-section { padding: 24px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-top: var(--section-gap); margin-bottom: var(--section-gap); }
+        .marquee-section { padding: 24px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-top: var(--section-gap); margin-bottom: var(--section-gap); display: flex; align-items: center; }
         .marquee-content { display: inline-flex; gap: 80px; animation: scroll 30s linear infinite; align-items: center; padding-left: 80px; }
         .brand-item { font-size: 18px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-        .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); margin-top: 30px; }
+        
+        .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); }
         .marquee-section.dark-mid { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); transform: rotate(1.5deg) scale(1.05); }
         .marquee-section.light-bot { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); }
+        
         .marquee-section.light-top .brand-item, .marquee-section.light-bot .brand-item { color: #111; opacity: 0.8; }
         .marquee-section.dark-mid .brand-item { color: #fff; opacity: 0.9; }
         .marquee-section.dark-mid .brand-item.accent { color: var(--accent); } 
@@ -207,7 +209,6 @@
         .step-single:hover .step-circle { border-color: var(--accent); color: var(--accent); transform: scale(1.1); }
         .step-single h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #111; }
         .step-single p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding: 0 10px; max-width: 250px; margin: 0 auto; }
-
 
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
         .showcase-wrapper {
@@ -246,48 +247,51 @@
         .comp-slider svg { width: 18px; height: 18px; fill: #111; }
         .comp-caption { color: #555; font-size: 13px; font-weight: 600; text-align: center; }
 
-        /* 2. Tabs Navigazione (Capsule) */
+        /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
         .stage-tabs-nav {
             display: flex;
-            gap: 12px; /* Leggermente incrementato per distribuire le capsule */
-            justify-content: flex-end;
+            gap: 12px;
+            justify-content: center;
             flex-wrap: wrap;
-            background: rgba(255,255,255,0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 8px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 10px;
             border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
             width: 100%;
         }
 
         .stage-tab-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 16px; /* Capsule rese leggermente più piccole */
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.04);
+            padding: 12px 24px;
             border-radius: 100px;
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 700;
             color: #555;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
-        .stage-tab-btn svg { width: 16px; height: 16px; stroke-width: 2px; }
         
-        .stage-tab-btn:hover { color: #111; background: rgba(255,255,255,0.5); }
-        .stage-tab-btn.active { background: #fff; color: #111; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transform: scale(1.02); }
+        .stage-tab-btn svg { width: 18px; height: 18px; stroke-width: 2.2px; color: inherit; transition: color 0.4s ease; }
         
-        .stage-tab-btn.active[data-target="s-display"] svg { color: #0071E3; }
-        .stage-tab-btn.active[data-target="s-battery"] svg { color: #34C759; }
-        .stage-tab-btn.active[data-target="s-data"] svg { color: #111; }
-        .stage-tab-btn.active[data-target="s-solder"] svg { color: #5856D6; }
-        .stage-tab-btn.active[data-target="s-water"] svg { color: #32ADE6; }
-        .stage-tab-btn.active[data-target="s-modules"] svg { color: #FF2D55; }
+        .stage-tab-btn:hover { color: #111; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.06); }
+        
+        .stage-tab-btn.active { transform: scale(1.05); border-color: transparent; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        
+        .stage-tab-btn.active[data-target="s-display"] { background: #0071E3; color: #fff; }
+        .stage-tab-btn.active[data-target="s-battery"] { background: #34C759; color: #fff; }
+        .stage-tab-btn.active[data-target="s-data"] { background: #111; color: #fff; }
+        .stage-tab-btn.active[data-target="s-solder"] { background: #5856D6; color: #fff; }
+        .stage-tab-btn.active[data-target="s-water"] { background: #32ADE6; color: #fff; }
+        .stage-tab-btn.active[data-target="s-modules"] { background: #FF2D55; color: #fff; }
 
         /* 3. Pannello Dettaglio Compatto */
         .stage-content-box {
@@ -359,7 +363,6 @@
         }
         .stage-visual svg { width: 48px; height: 48px; stroke-width: 1.5px; }
 
-
         /* PC INFINITE SCROLL */
         @media (min-width: 1025px) {
             .reviews-scroller {
@@ -396,30 +399,33 @@
         .faq-icon { transition: 0.3s; font-size: 22px; color: var(--accent); }
         .faq-item.active .faq-icon { transform: rotate(45deg); }
 
-        /* --- CTA BLOCK --- */
-        .cta-section { background: #111; color: #fff; border-radius: 40px; padding: 80px 40px; text-align: center; margin-top: var(--section-gap); margin-bottom: var(--section-gap); margin-left: auto; margin-right: auto; max-width: var(--max-width); position: relative; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
-        .cta-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(37, 211, 102, 0.25) 0%, transparent 70%); opacity: 0.8; pointer-events: none; }
-        .cta-content { position: relative; z-index: 2; }
-        .cta-title { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -2px; }
-
-        /* --- FOOTER POTENZIATO --- */
+        /* --- FOOTER POTENZIATO A 5 COLONNE --- */
         footer { padding: 0; margin-top: var(--section-gap); width: 100%; position: relative; z-index: 10; }
         .glass-footer-box { width: 100%; max-width: 100%; margin: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); border-top: 1px solid rgba(255, 255, 255, 0.8); border-radius: 60px 60px 0 0; padding: 80px 40px 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.05); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 2fr 1fr 1.5fr; gap: 50px; margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        
+        .footer-grid { display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        
         .footer-brand { display: flex; align-items: flex-start; justify-content: flex-start; }
         .footer-brand-logo { display: flex; align-items: center; gap: 16px; font-size: 32px; font-weight: 800; color: #111; letter-spacing: -1px; margin-bottom: 0; }
         .footer-brand-logo img { height: 130px; width: auto; border-radius: 16px; transition: transform 0.3s ease; }
         .footer-brand-logo:hover img { transform: scale(1.03); }
         .brand-name-text { display: block; }
+        
         .footer-col h5 { color: var(--accent); margin-bottom: 24px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; }
         .footer-col ul { padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 14px; list-style: none; }
         .footer-col a { color: #444; transition: all 0.3s ease; text-decoration: none; font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .footer-col a svg { width: 16px; height: 16px; flex-shrink: 0; }
+        
+        /* Stili specifici per la lista orari */
+        .footer-hours-list li { font-size: 14px; color: #555; line-height: 1.6; }
+        .footer-hours-list li strong { color: #111; display: block; margin-top: 4px; font-size: 15px;}
+
         .footer-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; column-gap: 20px;}
         .footer-map-container { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.9); padding: 8px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
         .footer-map-container iframe { width: 100%; height: 160px; border-radius: 16px; display: block; border: none; }
+        
         .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 13px; font-weight: 500; color: #777; max-width: 1200px; margin: 0 auto; }
         .footer-bottom-links { display: flex; gap: 20px; }
         .footer-bottom-links a { color: #777; text-decoration: none; transition: 0.2s; }
@@ -498,10 +504,10 @@
             .stat-val { font-size: 38px; }
             #featuresDots { display: flex; }
 
-            /* MEDIA QUERIES TABS/STAGE COMPATTI (MANTENENDO STILE ORIGINALE PER GLI ALTRI) */
+            /* MEDIA QUERIES TABS/STAGE COMPATTI */
             .stage-tabs-nav {
                 justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto;
-                scroll-snap-type: x mandatory; padding-bottom: 12px; border-radius: 20px;
+                scroll-snap-type: x mandatory; padding: 10px; border-radius: 24px;
                 -ms-overflow-style: none; scrollbar-width: none;
             }
             .stage-tabs-nav::-webkit-scrollbar { display: none; }
@@ -541,8 +547,6 @@
             .footer-brand-logo img { height: auto; width: 220px; margin-bottom: 15px; }
             .brand-name-text { display: none; }
             
-            .cta-title { font-size: 32px; }
-            .cta-section { padding: 60px 24px; max-width: 90%; }
             .noise-overlay { opacity: 0.03; }
             .whatsapp-fab { display: flex; animation: popIn 0.5s 2s backwards; }
             .review-glass-card { min-width: 85vw; }
@@ -721,7 +725,6 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </div>
                         <div class="feature-icon-circle">
-                            <!-- ICONA BATTERIA ORIGINALE USATA IN FEATURES (INVARIATA MA ALLINEATA) -->
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         </div>
                         <h3>Componenti OEM</h3>
@@ -742,6 +745,7 @@
                 <div class="scroll-dots" id="featuresDots"></div>
             </section>
 
+            <!-- MARQUEE SCURO ARMONIZZATO AL PRIMO -->
             <div class="marquee-section dark-mid reveal">
                 <div class="marquee-content">
                     <span class="brand-item accent">Garanzia 12 Mesi</span>
@@ -759,6 +763,56 @@
                 </div>
             </div>
 
+            <!-- --- INSERIMENTO DELLA SEZIONE COME FUNZIONA --- -->
+            <section class="section-padding" id="process">
+                <div class="process-glass-box reveal">
+                    <div class="center-header" style="margin-bottom: 40px;">
+                        <span class="section-tag">Come Funziona</span>
+                        <h2 class="section-title">Semplice, in 3 step.</h2>
+                    </div>
+                    
+                    <div class="steps-wrapper">
+                        <div class="steps-connector"></div>
+                        <div class="step-single">
+                            <div class="step-circle">1</div>
+                            <div>
+                                <h4>Prenota o Passa</h4>
+                                <p>Prenota online per priorità o passa in negozio per una diagnosi.</p>
+                            </div>
+                        </div>
+                        <div class="step-single">
+                            <div class="step-circle">2</div>
+                            <div>
+                                <h4>Riparazione Live</h4>
+                                <p>I nostri tecnici operano davanti ai tuoi occhi con cura maniacale.</p>
+                            </div>
+                        </div>
+                        <div class="step-single">
+                            <div class="step-circle">3</div>
+                            <div>
+                                <h4>Garanzia e Via</h4>
+                                <p>Ritira il dispositivo perfetto, coperto da 12 mesi di garanzia.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pulsanti sdoppiati in stile Hero -->
+                    <div style="display: flex; justify-content: center; margin-top: 50px; width: 100%;">
+                        <div class="contact-btn-group">
+                            <a href="tel:+393510000000" class="hero-btn btn-animated btn-call">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                Chiama
+                            </a>
+                            <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20vorrei%20prenotare%20una%20riparazione" target="_blank" class="hero-btn btn-animated btn-chat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                Scrivici
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- --- FINE INSERIMENTO --- -->
+
             <!-- SEZIONE SERVIZI PREMIUM COMPACT STAGE (3 RIGHE) -->
             <section class="section-padding" id="showcase">
                 <div class="center-header reveal" style="margin-bottom: 40px;">
@@ -770,7 +824,7 @@
 
                 <div class="showcase-wrapper reveal">
                     
-                    <!-- RIGA 1: Slider Prima/Dopo (Dimensioni Normali) -->
+                    <!-- RIGA 1: Slider Prima/Dopo -->
                     <div class="comparison-showcase-container">
                         <div class="comparison-glass-frame">
                             <div class="img-comp-container">
@@ -790,15 +844,13 @@
                         <p class="comp-caption" style="margin-top: 12px;">Trascina per visualizzare il restauro</p>
                     </div>
 
-                    <!-- RIGA 2: Tabs Navigazione Servizi (Capsule ridotte e Batteria spostata leggermente) -->
+                    <!-- RIGA 2: Tabs Navigazione Servizi (Capsule REDESIGN) -->
                     <div class="stage-tabs-nav">
                         <button class="stage-tab-btn active" data-target="s-display" data-color="rgba(0, 113, 227, 0.15)">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
                             Display
                         </button>
-                        <!-- Aggiunto margine per spostarla a destra come richiesto -->
-                        <button class="stage-tab-btn" data-target="s-battery" data-color="rgba(52, 199, 89, 0.15)" style="margin-left: 4px;">
-                            <!-- NUOVA ICONA BATTERIA: Ingrandita e centrata nel viewBox -->
+                        <button class="stage-tab-btn" data-target="s-battery" data-color="rgba(52, 199, 89, 0.15)">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
                             Batteria
                         </button>
@@ -850,7 +902,6 @@
                                 </a>
                             </div>
                             <div class="stage-visual" style="color: #34C759;">
-                                <!-- NUOVA ICONA BATTERIA: Ingrandita e centrata nel viewBox -->
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="17" height="14" rx="2.5" ry="2.5"></rect><line x1="23" y1="9" x2="23" y2="15"></line><polygon points="12 6 7 13 11 13 10 18 15 11 11 11"></polygon></svg>
                             </div>
                         </div>
@@ -906,7 +957,7 @@
                                 <h3>Moduli & Connettori</h3>
                                 <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
                                 <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
                                     Richiedi Info
                                 </a>
                             </div>
@@ -1118,19 +1169,9 @@
                 </div>
             </section>
 
-            <section class="cta-section" id="contact">
-                <div class="cta-glow"></div>
-                <div class="cta-content">
-                    <h2 class="cta-title">Il tuo dispositivo merita il meglio.</h2>
-                    <p style="font-size: 18px; opacity: 0.9; max-width: 500px; margin: 10px auto 0;">Non aspettare che il danno peggiori. Prenota oggi con un click.</p>
-                    <a href="https://wa.me/393510000000?text=Ciao%20QuanTech,%20ho%20bisogno%20di%20assistenza" class="cta-button" target="_blank" style="margin-top: 25px; padding: 16px 40px; font-size: 16px;">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                        Prenota Subito
-                    </a>
-                </div>
-            </section>
+            <!-- IL BLOCCO WHATSAPP GIGANTE "CTA SECTION" E' STATO RIMOSSO -->
 
-            <!-- FOOTER POTENZIATO -->
+            <!-- FOOTER POTENZIATO A 5 COLONNE -->
             <footer>
                 <div class="glass-footer-box">
                     <div class="footer-grid">
@@ -1151,6 +1192,16 @@
                                 <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Recupero Dati</a></li>
                                 <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Microsaldature</a></li>
                                 <li><a href="#showcase" onclick="smoothScroll(event, '#showcase')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>Pulizia e Audio</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- NUOVA COLONNA ORARI -->
+                        <div class="footer-col">
+                            <h5>Orari d'Apertura</h5>
+                            <ul class="footer-hours-list">
+                                <li>Lun - Ven <strong>09:00 - 13:00<br>15:00 - 19:00</strong></li>
+                                <li style="margin-top:12px;">Sabato <strong>09:00 - 13:00</strong></li>
+                                <li style="margin-top:12px;">Domenica <strong style="color: var(--accent);">Chiuso</strong></li>
                             </ul>
                         </div>
                         
@@ -1182,6 +1233,17 @@
                     </div>
                 </div>
             </footer>
+        </div>
+    </div>
+
+    <!-- Modals and JavaScript untouched exactly as requested -->
+    <div class="f-modal-overlay" id="featureModal" onclick="closeFeatureModal(event)">
+        <div class="f-modal-box" onclick="event.stopPropagation()">
+            <button class="f-modal-close" onclick="closeFeatureModal()">×</button>
+            <div class="f-modal-icon-wrap" id="fModalIcon"></div>
+            <h3 class="f-modal-title" id="fModalTitle">Titolo</h3>
+            <p class="f-modal-desc" id="fModalDesc">Descrizione</p>
+            <ul class="f-modal-list" id="fModalList"></ul>
         </div>
     </div>
 
@@ -1246,7 +1308,6 @@
         window.addEventListener('load', initComparisons);
         window.addEventListener('resize', initComparisons);
 
-
         // --- GENERAL SCRIPTS (Scroll, Menu, Reveal, Counters) ---
         function toggleFaq(el) { el.classList.toggle('active'); }
 
@@ -1283,6 +1344,55 @@
             }
         }
         
+        function openFeatureModal(featureId) {
+            const featureData = {
+                laser: {
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>',
+                    title: 'Diagnostica Laser Avanzata',
+                    desc: 'Utilizziamo strumentazione all\'avanguardia per un\'analisi approfondita del tuo dispositivo.',
+                    bullets: ['Scansione termica per cortocircuiti.', 'Test microscopico dei componenti.', 'Analisi avanzata dei log.']
+                },
+                oem: {
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>',
+                    title: 'Componenti Originali (OEM)',
+                    desc: 'Installiamo solo ricambi originali o certificati di altissima gamma.',
+                    bullets: ['Display OLED con TrueTone.', 'Batterie con chip originale.', 'Garanzia estesa.']
+                },
+                express: {
+                    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+                    title: 'Servizio Express 60 Minuti',
+                    desc: 'Restituiamo il dispositivo riparato in tempi record.',
+                    bullets: ['Riparazioni standard in meno di un\'ora.', 'Priorità con prenotazione.', 'Diagnosi al banco immediata.']
+                }
+            };
+            const checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+            const data = featureData[featureId];
+            if (!data) return;
+
+            document.getElementById('fModalIcon').innerHTML = data.icon;
+            document.getElementById('fModalTitle').innerText = data.title;
+            document.getElementById('fModalDesc').innerText = data.desc;
+            
+            const listEl = document.getElementById('fModalList');
+            listEl.innerHTML = '';
+            data.bullets.forEach(bullet => {
+                const li = document.createElement('li');
+                li.innerHTML = `${checkSvg} <span>${bullet}</span>`;
+                listEl.appendChild(li);
+            });
+
+            document.getElementById('featureModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeFeatureModal(event) {
+            if (!event || event.target.id === 'featureModal') {
+                document.getElementById('featureModal').classList.remove('active');
+                document.body.style.overflow = ''; 
+            }
+        }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
