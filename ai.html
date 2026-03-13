@@ -363,7 +363,7 @@
         // Importante: Ti consiglio di limitare l'uso di questa chiave al tuo dominio specifico 
         // tramite le impostazioni di Google Cloud Console per evitare abusi da terzi.
         // ===================================================================================
-        const apiKey = "AIzaSyBd-x51q959vvAc5AY9o9BEqt2bmVlXyJ8"; 
+        const apiKey = process.env.apiKey;
 
         async function fetchAIResponse(userText) {
             if (!apiKey) {
