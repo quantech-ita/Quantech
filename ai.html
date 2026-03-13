@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QuanTech | Diagnosi IA Intuitiva</title>
+
+    <!-- Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #0071E3; /* Apple Blue */
+            --accent-glow: rgba(0, 113, 227, 0.4);
+            --whatsapp: #25D366;
+            --glass-bg: rgba(28, 28, 30, 0.65);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(40px) saturate(200%);
+            
+            --level-low: #34C759;
+            --level-med: #FF9F0A;
+            --level-high: #FF3B30;
+            
+            /* Siri Intelligence Colors */
+            --siri-1: #4158D0;
+            --siri-2: #C850C0;
+            --siri-3: #FFCC70;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        
+        body { 
+            color: #fff; font-family: 'Inter Tight', sans-serif; 
+            width: 100%; min-height: 100vh; position: relative;
+            background-color: #000; 
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND --- */
+        .global-bg {
+            position: fixed; inset: 0; z-index: -2; 
+            background-image: radial-gradient(circle at 50% -20%, #1c1c22 0%, #000 80%);
+        }
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998; 
+            opacity: 0.05; mix-blend-mode: overlay; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        .ai-section-container { position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; }
+
+        .center-header { text-align: center; margin-bottom: 24px; }
+        .section-tag { 
+            background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px;
+            color: #fff; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; 
+            display: inline-block; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #fff; margin-bottom: 8px; }
+        .section-subtitle { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 500;}
+
+        /* Main Container */
+        .ai-glass-box { 
+            background: var(--glass-bg); 
+            border: var(--glass-border); 
+            backdrop-filter: var(--glass-blur); 
+            -webkit-backdrop-filter: var(--glass-blur); 
+            border-radius: 40px; 
+            padding: 32px; 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15); 
+            position: relative; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* --- STEP 1: INPUT --- */
+        .input-wrapper { margin-bottom: 24px; text-align: left; }
+        .ai-textarea {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; padding: 24px; border-radius: 24px; font-size: 16px; line-height: 1.6;
+            font-family: inherit; font-weight: 400; outline: none; resize: none;
+            transition: all 0.3s ease; box-shadow: inset 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .ai-textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .ai-textarea:focus { 
+            border-color: rgba(255,255,255,0.3); background: rgba(0,0,0,0.5); 
+            box-shadow: inset 0 4px 15px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.05); 
+        }
+
+        .btn-analyze {
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+            color: #111; width: 100%; padding: 18px; border-radius: 100px;
+            font-size: 16px; font-weight: 800; border: none; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 10px; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+        }
+        .btn-analyze:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
+        .btn-analyze svg { width: 22px; height: 22px; stroke-width: 2; }
+        .btn-analyze:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* --- STEP 2: LOADER SIRI STYLE --- */
+        .loader-container { display: none; padding: 60px 0; text-align: center; }
+        .siri-orb {
+            width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 30px;
+            background: linear-gradient(45deg, var(--siri-1), var(--siri-2), var(--siri-3));
+            filter: blur(10px);
+            animation: orbSpin 3s linear infinite, orbBreathe 2s ease-in-out infinite alternate;
+        }
+        .loader-text { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.5px; margin-bottom: 8px;}
+        .loader-subtext { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); }
+        .loader-error { color: var(--level-high) !important; }
+
+        /* --- STEP 3: RESULTS (iOS 26 WIDGET STYLE) --- */
+        .result-container { display: none; text-align: left; }
+        
+        /* Staggered Animation Classes */
+        .stagger-1 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        .stagger-2 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; transform: translateY(20px); }
+        .stagger-3 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; transform: translateY(20px); }
+        .stagger-4 { animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; transform: translateY(20px); }
+
+        /* Top Badges */
+        .result-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .device-pill { 
+            background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 100px;
+            font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .device-pill svg { width: 14px; height: 14px; opacity: 0.7;}
+        
+        .urgency-badge {
+            padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid transparent;
+        }
+
+        /* --- HERO CAUSE (LA PIU' PLAUSIBILE) --- */
+        .hero-cause-card {
+            position: relative;
+            background: rgba(0,0,0,0.3);
+            border-radius: 28px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hero-glow {
+            position: absolute; width: 150%; height: 150%; top: -25%; left: -25%;
+            background: radial-gradient(circle at 50% 50%, var(--card-glow, rgba(255,255,255,0.05)), transparent 70%);
+            z-index: -1; opacity: 0.4; animation: breatheGlow 4s ease-in-out infinite alternate;
+        }
+
+        .hero-cause-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        
+        .hero-cause-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: flex; align-items: center; gap: 6px;}
+        .hero-cause-label svg { width: 14px; height: 14px; color: var(--card-glow); }
+        
+        .hero-prob-pill {
+            background: var(--card-glow); color: #fff; padding: 4px 10px; border-radius: 100px;
+            font-size: 13px; font-weight: 800; font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-cause-title { font-size: 22px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; color: #fff;}
+        .hero-cause-desc { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.8); font-weight: 400;}
+
+        /* --- SECONDARY CAUSES (DIFFERENZIALE) --- */
+        .differential-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); margin: 24px 0 12px 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+        
+        .secondary-causes-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        
+        .sec-cause-item {
+            padding: 16px 20px; display: flex; flex-direction: column; gap: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .sec-cause-item:last-child { border-bottom: none; }
+        
+        .sec-cause-header { display: flex; justify-content: space-between; align-items: center; }
+        .sec-info h5 { font-size: 15px; font-weight: 700; color: #fff; }
+        .sec-prob { 
+            background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
+            padding: 4px 8px; border-radius: 8px; 
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; 
+        }
+        .sec-cause-item p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+        /* Protocol Box */
+        .protocol-box {
+            background: rgba(0, 113, 227, 0.1); border: 1px solid rgba(0, 113, 227, 0.2);
+            border-radius: 24px; padding: 20px; margin-bottom: 32px; display: flex; gap: 16px;
+        }
+        .protocol-icon {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .protocol-icon svg { width: 20px; height: 20px; }
+        .protocol-content h5 { font-size: 13px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;}
+        .protocol-text { font-size: 14.5px; font-weight: 500; color: #fff; line-height: 1.5; }
+
+        /* Buttons */
+        .btn-whatsapp {
+            background: var(--whatsapp); color: #fff; width: 100%; padding: 20px; border-radius: 100px;
+            font-size: 16px; font-weight: 800; border: none; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.02); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3); background: #20b958; }
+        .btn-whatsapp svg { width: 22px; height: 22px; fill: currentColor; }
+
+        .restart-btn { 
+            background: transparent; border: none; color: rgba(255,255,255,0.4); 
+            font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 20px; 
+            width: 100%; transition: color 0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;
+        }
+        .restart-btn:hover { color: #fff; }
+        .restart-btn svg { width: 16px; height: 16px; }
+
+        /* Animations */
+        @keyframes orbSpin { 100% { transform: rotate(360deg); } }
+        @keyframes orbBreathe { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
+        @keyframes blink { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+        @keyframes springUp { 
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); } 
+            100% { opacity: 1; transform: translateY(0) scale(1); } 
+        }
+        @keyframes breatheGlow { 0% { opacity: 0.3; } 100% { opacity: 0.6; } }
+
+        @media (max-width: 768px) {
+            .ai-glass-box { padding: 24px; border-radius: 32px;}
+            .hero-cause-card { padding: 20px; }
+            .hero-cause-title { font-size: 20px; }
+            .protocol-box { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="global-bg"></div>
+
+    <div class="ai-section-container">
+        
+        <div class="center-header">
+            <span class="section-tag">QuanTech AI Diagnostics</span>
+            <h2 class="section-title">Scopri il Problema.</h2>
+            <p class="section-subtitle">Risposte semplici per problemi complessi. Spiegaci cosa è successo, l'IA farà il resto.</p>
+        </div>
+
+        <div class="ai-glass-box" id="mainPanel">
+            
+            <!-- STEP 1: INPUT -->
+            <div id="step1">
+                <div class="input-wrapper">
+                    <textarea id="userIssue" class="ai-textarea" rows="4" placeholder="Cosa è successo al tuo telefono? Scrivilo con parole tue... (es: È caduto dal tavolo e ora lo schermo fa delle righe strane)" oninput="checkInput()"></textarea>
+                </div>
+                
+                <button class="btn-analyze" id="analyzeBtn" onclick="startDynamicAnalysis()" disabled>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Analizza il Danno
+                </button>
+            </div>
+
+            <!-- STEP 2: LOADER (SIRI STYLE) -->
+            <div class="loader-container" id="step2">
+                <div class="siri-orb"></div>
+                <div class="loader-text" id="loaderText">L'IA sta elaborando...</div>
+                <div class="loader-subtext" id="loaderSubtext">Traduzione dei sintomi in corso</div>
+            </div>
+
+            <!-- STEP 3: RESULTS (iOS 26 WIDGET STYLE) -->
+            <div class="result-container" id="step3">
+                
+                <!-- ROW 1: Meta -->
+                <div class="result-meta-row stagger-1">
+                    <div class="device-pill">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        <span id="resDevice">Smartphone</span>
+                    </div>
+                    <div class="urgency-badge" id="resUrgency">Valutazione Completata</div>
+                </div>
+
+                <!-- ROW 2: HERO CAUSE (LA PIU' PROBABILE) -->
+                <div class="hero-cause-card stagger-2">
+                    <div class="hero-glow" id="heroGlow"></div>
+                    
+                    <div class="hero-cause-header">
+                        <div class="hero-cause-label">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Causa Più Probabile
+                        </div>
+                        <div class="hero-prob-pill" id="primaryProb">0%</div>
+                    </div>
+                    
+                    <h3 class="hero-cause-title" id="primaryTitle">Titolo Danno</h3>
+                    <p class="hero-cause-desc" id="primaryDesc">Descrizione semplice e comprensibile del danno primario.</p>
+                </div>
+
+                <!-- ROW 3: DIFFERENTIAL CAUSES -->
+                <div id="secondaryCausesWrapper" class="stagger-3">
+                    <div class="differential-title">Altre possibili cause</div>
+                    <div class="secondary-causes-box" id="resCausesList">
+                        <!-- Le cause secondarie verranno inserite qui dal JS -->
+                    </div>
+                </div>
+
+                <!-- ROW 4: PROTOCOL & CTA -->
+                <div class="stagger-4">
+                    <div class="protocol-box">
+                        <div class="protocol-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2-2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="protocol-content">
+                            <h5>Cosa Faremo in Laboratorio</h5>
+                            <div class="protocol-text" id="resProtocol">Spiegazione di come interverremo per risolvere.</div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-whatsapp" id="waLink" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Parla con un nostro Tecnico
+                    </a>
+                    
+                    <button class="restart-btn" onclick="resetForm()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Analizza un altro problema
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkInput() {
+            const val = document.getElementById('userIssue').value.trim();
+            document.getElementById('analyzeBtn').disabled = val.length < 10;
+        }
+
+        const loaderMessages = [
+            "Analisi dei sintomi in corso...",
+            "Controllo delle possibili cause...",
+            "Valutazione della gravità...",
+            "Creazione del referto finale..."
+        ];
+        
+        const subtextMessages = [
+            "Identificazione modello",
+            "Ricerca incrociata con casi simili",
+            "Verifica componenti a rischio",
+            "Fase completata."
+        ];
+
+        // Chiave API generata automaticamente dall'ambiente. Non modificare.
+        const apiKey = ""; 
+
+        async function fetchAIResponse(userText) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = `Sei l'Assistente Diagnostico del "QuanTech Master Repair Lab", un laboratorio di riparazioni per smartphone di altissimo livello.
+            Il tuo compito è leggere il problema descritto dall'utente e fornire 2 o 3 possibili cause (ordinate dalla più probabile alla meno probabile).
+            
+            REGOLA FONDAMENTALE: L'utente non è un tecnico. Usa un linguaggio SEMPLICE, CHIARO E COMPRENSIBILE. 
+            - Evita termini super complessi. Invece di "Cortocircuito VDD_MAIN", usa "Danno al circuito di alimentazione principale".
+            - Invece di "Rottura Layer OLED", usa "Danno al pannello luminoso interno".
+            - Spiega sempre brevemente *perché* succede quel problema basandoti sui sintomi scritti dall'utente.
+            
+            Sii rassicurante, professionale e mostra competenza spiegando le cose in modo semplice.`;
+
+            const schema = {
+                type: "OBJECT",
+                properties: {
+                    device: { type: "STRING", description: "Nome del telefono dedotto dal testo (es. 'iPhone 13 Pro'). Se non fornito, scrivi 'Dispositivo non specificato'" },
+                    severity_color: { type: "STRING", description: "Scegli un colore in base alla gravità del danno peggiore: 'var(--level-low)' (verde, problemi lievi/schermo), 'var(--level-med)' (arancione, problemi batteria/ricarica), 'var(--level-high)' (rosso, acqua o non si accende)" },
+                    urgency: { type: "STRING", description: "Messaggio da mostrare in alto a destra. Es. 'Riparazione Standard', 'Consigliato Controllo', 'Intervento Urgente'." },
+                    causes: {
+                        type: "ARRAY",
+                        description: "Le 2 o 3 possibili cause. La prima è quella che ritieni più probabile.",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                name: { type: "STRING", description: "Nome del guasto, semplice e chiaro. (Es. 'Danno allo Schermo Interno', 'Batteria Esaurita')" },
+                                prob: { type: "STRING", description: "Probabilità (es. '80%')" },
+                                desc: { type: "STRING", description: "Spiegazione semplice per l'utente di cosa si è rotto e perché fa quel difetto." }
+                            },
+                            required: ["name", "prob", "desc"]
+                        }
+                    },
+                    protocol: { type: "STRING", description: "Cosa faranno i tecnici in modo rassicurante. Es: 'In laboratorio testeremo il componente e lo sostituiremo mantenendo i tuoi dati al sicuro.'" }
+                },
+                required: ["device", "severity_color", "urgency", "causes", "protocol"]
+            };
+
+            const payload = {
+                contents: [{ parts: [{ text: userText }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.4 }
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if(!response.ok) throw new Error("API Error");
+                    const data = await response.json();
+                    if(data.candidates && data.candidates[0].content.parts[0].text) {
+                        return JSON.parse(data.candidates[0].content.parts[0].text);
+                    }
+                } catch (e) {
+                    if (i === 4) {
+                        throw e;
+                    }
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+            throw new Error("API timeout");
+        }
+
+        // Funzione di fallback locale nel caso di fallimento o assenza chiave
+        function generateFallbackResponse(text) {
+            let textLower = text.toLowerCase();
+            let color = "var(--level-med)"; let urgency = "Analisi Consigliata";
+            let causes = [
+                { name: "Problema a un componente", prob: "60%", desc: "Il difetto che descrivi di solito è legato a un singolo pezzo difettoso (come il connettore o un sensore) che va semplicemente sostituito." },
+                { name: "Anomalia alla Scheda Madre", prob: "30%", desc: "A volte, un piccolo urto o sbalzo di corrente danneggia i circuiti principali del telefono, causando malfunzionamenti generali." }
+            ];
+
+            if(textLower.match(/acqu|mare|piscina|liquid/)) {
+                color = "var(--level-high)"; urgency = "Intervento Urgente";
+                causes = [
+                    { name: "Ossidazione dei Circuiti", prob: "85%", desc: "L'acqua (specialmente se salata) crea rapidamente ruggine e cortocircuiti all'interno. Anche se ora funziona, la corrosione peggiorerà." },
+                    { name: "Danno allo Schermo", prob: "15%", desc: "Il liquido potrebbe essere penetrato sotto il vetro, rovinando l'illuminazione del display." }
+                ];
+            } else if (textLower.match(/vetro|crep|schermo|cadut|righe/)) {
+                color = "var(--level-low)"; urgency = "Riparazione Standard";
+                causes = [
+                    { name: "Rottura del Display Interno", prob: "80%", desc: "L'urto ha rotto non solo il vetro esterno, ma anche il pannello luminoso sotto di esso (ecco perché vedi righe o macchie nere)." },
+                    { name: "Danno da Impatto Interno", prob: "20%", desc: "La botta è stata forte e potrebbe aver allentato alcuni collegamenti vitali all'interno del dispositivo." }
+                ];
+            }
+
+            return {
+                device: "Dispositivo Mobile", severity_color: color, urgency: urgency, causes: causes,
+                protocol: "I nostri tecnici apriranno il dispositivo in sicurezza, verificheranno esattamente quale pezzo è stato compromesso e ti forniranno la soluzione migliore senza toccare i tuoi dati."
+            };
+        }
+
+        async function startDynamicAnalysis() {
+            const rawText = document.getElementById('userIssue').value.trim();
+
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+
+            let msgIndex = 0;
+            const loaderText = document.getElementById('loaderText');
+            const loaderSub = document.getElementById('loaderSubtext');
+            
+            const interval = setInterval(() => {
+                msgIndex++;
+                if(msgIndex < loaderMessages.length) {
+                    loaderText.innerText = loaderMessages[msgIndex];
+                    loaderSub.innerText = subtextMessages[msgIndex];
+                }
+            }, 1000);
+
+            try {
+                let aiResult = await fetchAIResponse(rawText);
+                clearInterval(interval);
+                showResults(aiResult, rawText);
+            } catch(error) {
+                console.error("API error:", error);
+                clearInterval(interval);
+                
+                // UX Feedback of failure before falling back
+                loaderText.innerText = "Impossibile connettersi all'Intelligenza Artificiale al momento.";
+                loaderText.classList.add("loader-error");
+                loaderSub.innerText = "Utilizzando il protocollo di diagnosi base.";
+                
+                setTimeout(() => {
+                    showResults(generateFallbackResponse(rawText), rawText);
+                }, 2000);
+            }
+        }
+
+        function showResults(aiResult, rawText) {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+            
+            if(aiResult.causes && aiResult.causes.length > 0) {
+                aiResult.causes.sort((a,b) => parseInt(b.prob) - parseInt(a.prob));
+            }
+            
+            const primaryCause = aiResult.causes[0];
+
+            // Setup Meta
+            document.getElementById('resDevice').innerText = aiResult.device;
+            const urgBadge = document.getElementById('resUrgency');
+            urgBadge.innerText = aiResult.urgency;
+            
+            // Colore del badge di urgenza basato sulla gravità
+            if(aiResult.severity_color.includes("high") || aiResult.severity_color.includes("extreme")) {
+                urgBadge.style.backgroundColor = "rgba(255, 59, 48, 0.15)";
+                urgBadge.style.color = "var(--level-high)";
+                urgBadge.style.borderColor = "rgba(255, 59, 48, 0.3)";
+            } else if(aiResult.severity_color.includes("med")) {
+                urgBadge.style.backgroundColor = "rgba(255, 159, 10, 0.15)";
+                urgBadge.style.color = "var(--level-med)";
+                urgBadge.style.borderColor = "rgba(255, 159, 10, 0.3)";
+            } else {
+                urgBadge.style.backgroundColor = "rgba(52, 199, 89, 0.15)";
+                urgBadge.style.color = "var(--level-low)";
+                urgBadge.style.borderColor = "rgba(52, 199, 89, 0.3)";
+            }
+
+            // Setup HERO CAUSE (Causa Principale)
+            document.getElementById('heroGlow').style.setProperty('--card-glow', aiResult.severity_color);
+            document.getElementById('primaryTitle').innerText = primaryCause.name;
+            document.getElementById('primaryDesc').innerText = primaryCause.desc;
+            document.getElementById('primaryProb').innerText = primaryCause.prob;
+            document.getElementById('primaryProb').style.backgroundColor = aiResult.severity_color;
+
+            // Setup SECONDARY CAUSES (Celle in stile Impostazioni iOS)
+            const secContainer = document.getElementById('resCausesList');
+            const secWrapper = document.getElementById('secondaryCausesWrapper');
+            secContainer.innerHTML = '';
+            
+            if(aiResult.causes.length > 1) {
+                secWrapper.style.display = 'block';
+                for(let i = 1; i < aiResult.causes.length; i++) {
+                    const cause = aiResult.causes[i];
+                    secContainer.innerHTML += `
+                        <div class="sec-cause-item">
+                            <div class="sec-cause-header">
+                                <div class="sec-info">
+                                    <h5>${cause.name}</h5>
+                                </div>
+                                <div class="sec-prob">${cause.prob}</div>
+                            </div>
+                            <p>${cause.desc}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                secWrapper.style.display = 'none';
+            }
+            
+            // Setup Protocollo
+            document.getElementById('resProtocol').innerText = aiResult.protocol;
+
+            // Setup WhatsApp
+            let shortQuote = rawText.length > 60 ? rawText.substring(0, 60) + "..." : rawText;
+            const waNumber = "393510000000"; // IL TUO NUMERO QUI
+            const message = `*TICKET DIAGNOSI SITO*%0A%0A📱 *Modello:* ${aiResult.device}%0A💬 *Problema:* "${shortQuote}"%0A🔍 *Diagnosi IA:* ${primaryCause.name} (${primaryCause.prob})%0A%0ACiao QuanTech! Ho fatto l'analisi sul sito e vorrei parlare con voi per risolvere.`;
+            document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${message}`;
+        }
+
+        function resetForm() {
+            document.getElementById('userIssue').value = "";
+            document.getElementById('analyzeBtn').disabled = true;
+            
+            const step3 = document.getElementById('step3');
+            step3.style.display = 'none';
+            step3.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4');
+            
+            document.getElementById('step1').style.display = 'block';
+            
+            const loaderText = document.getElementById('loaderText');
+            loaderText.innerText = loaderMessages[0];
+            loaderText.classList.remove("loader-error");
+            document.getElementById('loaderSubtext').innerText = subtextMessages[0];
+        }
+    </script>
+</body>
+</html>
