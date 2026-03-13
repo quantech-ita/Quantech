@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
-    <title>QuanTech</title>
+    <title>QuanTech | Master Repair Lab</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/quantech-ita/Quantech/main/5cf773ee-0710-454c-bdf5-3c139793f3c6.jpeg?v=2">
@@ -247,45 +247,54 @@
         .comp-slider svg { width: 18px; height: 18px; fill: #111; }
         .comp-caption { color: #555; font-size: 13px; font-weight: 600; text-align: center; }
 
-        /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
+        /* 2. Tabs Navigazione (CSS PERFETTO STILE APPLE PILL) */
         .stage-tabs-nav {
             display: flex;
-            gap: 12px;
+            gap: 4px; /* Piccolo spazio tra le capsule interne */
             justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
+            flex-wrap: nowrap;
             background: rgba(255,255,255,0.6);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            padding: 10px;
-            border-radius: 100px;
+            padding: 6px; /* QUESTO CREA IL MARGINE GRIGIO UNIFORME INTORNO AL BOTTONE BLU */
+            border-radius: 100px; /* Bordo arrotondato massimo per fare la "pillola" */
             border: 1px solid rgba(255,255,255,0.8);
             box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-            width: 100%;
+            width: max-content; /* Si adatta alla grandezza del contenuto */
+            max-width: 100%;
+            margin: 0 auto;
+            overflow-x: auto;
+            -ms-overflow-style: none; scrollbar-width: none;
         }
+        .stage-tabs-nav::-webkit-scrollbar { display: none; }
 
         .stage-tab-btn {
-            background: #ffffff;
-            border: 1px solid rgba(0,0,0,0.04);
-            padding: 12px 24px;
-            border-radius: 100px;
-            font-size: 14px;
+            background: transparent;
+            border: none;
+            padding: 10px 20px; /* Dimensioni interne del bottone */
+            border-radius: 100px; /* Segue l'arrotondamento del contenitore */
+            font-size: 14.5px;
             font-weight: 700;
             color: #555;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap; /* Evita l'a capo del testo */
+            flex-shrink: 0;
             -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            margin: 0; /* Rimuove margini per rispettare il padding del contenitore */
         }
         
         .stage-tab-btn svg { width: 18px; height: 18px; stroke-width: 2.2px; color: inherit; transition: color 0.4s ease; }
         
-        .stage-tab-btn:hover { color: #111; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.06); }
+        .stage-tab-btn:hover { color: #111; }
         
-        .stage-tab-btn.active { transform: scale(1.05); border-color: transparent; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .stage-tab-btn.active { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         
+        /* Colori attivi delle capsule */
         .stage-tab-btn.active[data-target="s-display"] { background: #0071E3; color: #fff; }
         .stage-tab-btn.active[data-target="s-battery"] { background: #34C759; color: #fff; }
         .stage-tab-btn.active[data-target="s-data"] { background: #111; color: #fff; }
@@ -418,7 +427,6 @@
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .footer-col a svg { width: 16px; height: 16px; flex-shrink: 0; }
         
-        /* Stili specifici per la lista orari */
         .footer-hours-list li { font-size: 14px; color: #555; line-height: 1.6; }
         .footer-hours-list li strong { color: #111; display: block; margin-top: 4px; font-size: 15px;}
 
@@ -503,22 +511,6 @@
             .stat-item:last-child { grid-column: span 2; }
             .stat-val { font-size: 38px; }
             #featuresDots { display: flex; }
-
-            /* MEDIA QUERIES TABS/STAGE COMPATTI */
-            .stage-tabs-nav {
-                justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto;
-                scroll-snap-type: x mandatory; 
-                padding: 10px; /* Manteniamo il padding base per il vetro */
-                border-radius: 24px;
-                -ms-overflow-style: none; scrollbar-width: none;
-            }
-
-            /* AGGIUNGI QUESTE DUE RIGHE: Creano uno spazio simmetrico e perfetto per il primo e l'ultimo bottone */
-            .stage-tab-btn:first-child { margin-left: 100px; }
-            .stage-tab-btn:last-child { margin-right: 14px; }
-            
-            .stage-tabs-nav::-webkit-scrollbar { display: none; }
-            .stage-tab-btn { flex: 0 0 auto; scroll-snap-align: start; }
 
             .stage-panel {
                 flex-direction: column-reverse;
@@ -752,7 +744,6 @@
                 <div class="scroll-dots" id="featuresDots"></div>
             </section>
 
-            <!-- MARQUEE SCURO ARMONIZZATO AL PRIMO -->
             <div class="marquee-section dark-mid reveal">
                 <div class="marquee-content">
                     <span class="brand-item accent">Garanzia 12 Mesi</span>
@@ -770,7 +761,6 @@
                 </div>
             </div>
 
-            <!-- --- INSERIMENTO DELLA SEZIONE COME FUNZIONA --- -->
             <section class="section-padding" id="process">
                 <div class="process-glass-box reveal">
                     <div class="center-header" style="margin-bottom: 40px;">
@@ -803,7 +793,6 @@
                         </div>
                     </div>
                     
-                    <!-- Pulsanti sdoppiati in stile Hero -->
                     <div style="display: flex; justify-content: center; margin-top: 50px; width: 100%;">
                         <div class="contact-btn-group">
                             <a href="tel:+393510000000" class="hero-btn btn-animated btn-call">
@@ -818,7 +807,6 @@
                     </div>
                 </div>
             </section>
-            <!-- --- FINE INSERIMENTO --- -->
 
             <!-- SEZIONE SERVIZI PREMIUM COMPACT STAGE (3 RIGHE) -->
             <section class="section-padding" id="showcase">
@@ -851,7 +839,7 @@
                         <p class="comp-caption" style="margin-top: 12px;">Trascina per visualizzare il restauro</p>
                     </div>
 
-                    <!-- RIGA 2: Tabs Navigazione Servizi (Capsule REDESIGN) -->
+                    <!-- RIGA 2: Tabs Navigazione Servizi (CAPSULE CON STILE APPLE ESATTO DALLA FOTO) -->
                     <div class="stage-tabs-nav">
                         <button class="stage-tab-btn active" data-target="s-display" data-color="rgba(0, 113, 227, 0.15)">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M5 8l14 4"></path></svg>
@@ -964,7 +952,7 @@
                                 <h3>Moduli & Connettori</h3>
                                 <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
                                 <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
-                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                                     Richiedi Info
                                 </a>
                             </div>
@@ -1176,8 +1164,6 @@
                 </div>
             </section>
 
-            <!-- IL BLOCCO WHATSAPP GIGANTE "CTA SECTION" E' STATO RIMOSSO -->
-
             <!-- FOOTER POTENZIATO A 5 COLONNE -->
             <footer>
                 <div class="glass-footer-box">
@@ -1202,7 +1188,6 @@
                             </ul>
                         </div>
 
-                        <!-- NUOVA COLONNA ORARI -->
                         <div class="footer-col">
                             <h5>Orari d'Apertura</h5>
                             <ul class="footer-hours-list">
@@ -1243,7 +1228,7 @@
         </div>
     </div>
 
-    <!-- Modals and JavaScript untouched exactly as requested -->
+    <!-- Modals and JavaScript untouched -->
     <div class="f-modal-overlay" id="featureModal" onclick="closeFeatureModal(event)">
         <div class="f-modal-box" onclick="event.stopPropagation()">
             <button class="f-modal-close" onclick="closeFeatureModal()">×</button>
@@ -1260,16 +1245,13 @@
         const stagePanels = document.querySelectorAll('.stage-panel');
         const stageHalo = document.getElementById('stageHalo');
 
-        // Set default halo color on load (Display)
         if(stageHalo) stageHalo.style.background = `radial-gradient(circle at 80% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 60%)`;
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 1. Remove active state from all
                 tabBtns.forEach(b => b.classList.remove('active'));
                 stagePanels.forEach(p => p.classList.remove('active'));
 
-                // 2. Add active state to clicked
                 btn.classList.add('active');
                 const targetId = btn.getAttribute('data-target');
                 const targetPanel = document.getElementById(targetId);
@@ -1277,7 +1259,6 @@
                     targetPanel.classList.add('active');
                 }
 
-                // 3. Update Glow Color
                 const glowColor = btn.getAttribute('data-color');
                 if(stageHalo && glowColor) {
                     stageHalo.style.background = `radial-gradient(circle at 80% 50%, ${glowColor} 0%, transparent 60%)`;
@@ -1300,7 +1281,6 @@
             function getCursorPos(e) { let a = container.getBoundingClientRect(); let x = 0; e = e.changedTouches ? e.changedTouches[0] : e; x = e.pageX - a.left; x = x - window.pageXOffset; return x; }
             function slide(x) { overlay.style.width = x + "px"; slider.style.left = x + "px"; }
 
-            // Initialize position correctly
             setTimeout(() => {
                 w = container.offsetWidth;
                 if(w > 0) slide(w / 2);
@@ -1315,7 +1295,7 @@
         window.addEventListener('load', initComparisons);
         window.addEventListener('resize', initComparisons);
 
-        // --- GENERAL SCRIPTS (Scroll, Menu, Reveal, Counters) ---
+        // --- GENERAL SCRIPTS ---
         function toggleFaq(el) { el.classList.toggle('active'); }
 
         function smoothScroll(e, targetId) {
