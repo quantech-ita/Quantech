@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"] # Cambia in "master" se il tuo branch principale si chiama master
+
+# Permessi necessari per GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Inserisci la API Key di Gemini nel file HTML
+        # Questo comando cerca il segnaposto e lo sostituisce con il tuo Secret
+        run: |
+          sed -i 's/__MIA_CHIAVE_SEGRETA__/${{ secrets.API_KEY }}/g' index.html
+
+      - name: Setup delle GitHub Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Prepara i file per il caricamento
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Pubblica il sito
+        id: deployment
+        uses: actions/deploy-pages@v4
