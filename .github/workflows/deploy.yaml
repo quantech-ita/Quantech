@@ -27,7 +27,7 @@ jobs:
       - name: Inserisci la API Key di Gemini nel file HTML
         # Questo comando cerca il segnaposto e lo sostituisce con il tuo Secret
         run: |
-          sed -i 's/__MIA_CHIAVE_SEGRETA__/${{ secrets.API_KEY }}/g' ia.html
+          sed -i 's/__MIA_CHIAVE_SEGRETA__/${{ secrets.API_KEY }}/g' ai.html
 
       - name: Setup delle GitHub Pages
         uses: actions/configure-pages@v4
