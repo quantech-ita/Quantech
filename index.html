@@ -186,15 +186,19 @@
         
         /* DESKTOP GRID & FEATURE CARDS */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 28px; padding-bottom: 60px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 250px; position: relative; cursor: pointer; transition: background 0.3s ease; box-shadow: var(--glass-shadow); }
+        .feature-card { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); padding: 32px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-height: 280px; position: relative; cursor: pointer; transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: var(--glass-shadow); }
         .feature-card:hover { background: var(--glass-bg-hover); box-shadow: var(--glass-shadow-hover); transform: translateY(-3px); }
-        .feature-icon-circle { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .feature-card h3 { font-size: 17px; font-weight: 700; color: #111; padding-right: 30px; margin: 0; }
-        .feature-card p { font-size: 14px; line-height: 1.5; color: var(--text-secondary); font-weight: 500; margin: 0; }
+        .feature-icon-circle { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 4px; }
+        .feature-card h3 { font-size: 18px; font-weight: 800; color: #111; margin: 0; letter-spacing: -0.3px; }
+        .feature-card p { font-size: 14.5px; line-height: 1.5; color: var(--text-secondary); font-weight: 500; margin: 0; flex-grow: 1; }
         
-        .feature-expand-indicator { position: absolute; top: 28px; right: 28px; width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 113, 227, 0.08); color: var(--accent); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; }
-        .feature-expand-indicator svg { width: 16px; height: 16px; stroke-width: 2.5px; transition: transform 0.3s ease; }
-        .feature-card:hover .feature-expand-indicator { background: var(--accent); color: #fff; transform: scale(1.1) rotate(90deg); }
+        .feature-card-footer { width: 100%; margin-top: auto; padding-top: 12px; }
+        .feature-divider { width: 100%; height: 1px; background: rgba(0,0,0,0.08); margin-bottom: 16px; transition: background 0.3s ease; }
+        .feature-link { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease; }
+        .feature-link svg { width: 16px; height: 16px; stroke-width: 2.5px; transition: transform 0.3s ease; }
+        
+        .feature-card:hover .feature-divider { background: rgba(0,0,0,0.15); }
+        .feature-card:hover .feature-link { gap: 10px; }
 
         /* --- PROCESS BOX --- */
         .process-glass-box { background: var(--glass-bg); border: var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: 40px; padding: 60px 50px; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; width: 100%; max-width: 900px; margin: 0 auto; } 
@@ -209,23 +213,24 @@
         .step-single p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding: 0 10px; max-width: 250px; margin: 0 auto; }
 
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
-        .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 800px; margin: 0 auto; }
+        .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
 
         /* 1. Slider Prima/Dopo Centrato */
-        .comparison-showcase-container { width: 100%; max-width: 380px; margin: 0 auto; }
-        .comparison-glass-frame { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 28px; border: 8px solid #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); overflow: hidden; background: #000; margin-bottom: 12px; }
-        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; }
+        .comparison-showcase-container { width: 100%; max-width: 400px; margin: 0 auto; }
+        .comparison-glass-frame { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 36px; padding: 14px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); margin-bottom: 20px; }
+        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; border-radius: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
         .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
         .img-comp-img img { display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; }
         .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .label-badge.after { right: 16px; background: rgba(255, 255, 255, 0.9); color: #000; }
-        .label-badge.before { left: 16px; background: rgba(20, 20, 20, 0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .label-badge.after { right: 16px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+        .label-badge.before { left: 16px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
-        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-        .comp-slider:hover { background: rgba(255, 255, 255, 0.6); }
-        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent); z-index: -1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .comp-slider svg { width: 18px; height: 18px; fill: #111; }
-        .comp-caption { color: #555; font-size: 13px; font-weight: 600; text-align: center; }
+        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: #fff; border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .comp-slider:hover { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,255,255,0.3); }
+        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 3px; background: #fff; z-index: -1; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        .comp-slider svg { width: 22px; height: 22px; fill: var(--accent); }
+        .comp-caption { color: rgba(255, 255, 255, 0.95); font-size: 13px; font-weight: 700; text-align: center; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); padding: 10px 24px; border-radius: 100px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-top: 16px; }
+        .comp-caption svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
         .stage-tabs-nav {
@@ -331,6 +336,13 @@
             .reviews-scroller:hover { animation-play-state: paused; }
             .reviews-wrapper { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
             @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+            /* LAYOUT SERVIZI DESKTOP (SLIDER SINISTRA, PANNELLO DESTRA) */
+            .showcase-wrapper { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 50px; }
+            .comparison-showcase-container { flex: 0 0 420px; max-width: 420px; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+            #services-tabs { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+            .stage-tabs-nav { justify-content: flex-start; margin: 0 0 30px 0; width: 100%; }
+            .stage-content-box { flex: 1; display: flex; min-height: 320px; }
         }
 
         /* REVIEWS CARD COMMON */
@@ -446,8 +458,7 @@
 
             .features-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 10px; padding-right: 0; -ms-overflow-style: none; scrollbar-width: none; }
             .features-grid::-webkit-scrollbar { display: none; }
-            .feature-card { min-width: 100%; scroll-snap-align: start; padding: 20px; padding-bottom: 55px; border-radius: 24px; }
-            .feature-expand-indicator { top: 20px; right: 20px; }
+            .feature-card { min-width: 100%; scroll-snap-align: start; padding: 24px; border-radius: 24px; min-height: 250px; }
 
             .glass-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px; margin-top: 10px; margin-bottom: 10px; }
             .stat-item:last-child { grid-column: span 2; }
@@ -470,7 +481,8 @@
             .stage-visual { width: 70px; height: 70px; border-radius: 16px; margin: 0 auto; }
             .stage-visual svg { width: 34px; height: 34px; }
 
-            .comparison-glass-frame { width: 100%; max-width: 350px; border-width: 6px; } 
+            .comparison-glass-frame { width: 100%; max-width: 360px; padding: 10px; border-radius: 28px; } 
+            .img-comp-container { border-radius: 18px; }
 
             /* Google Capsule Banner Mobile Adjustments */
             .google-premium-capsule {
@@ -649,36 +661,48 @@
                 
                 <div class="features-grid">
                     <div class="feature-card reveal" onclick="openFeatureModal('laser')">
-                        <div class="feature-expand-indicator">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
-                        </div>
                         <div class="feature-icon-circle">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"></path></svg>
                         </div>
                         <h3>Diagnostica Laser</h3>
                         <p>Strumenti di precisione per identificare micro-danni invisibili a occhio nudo. La cura è nei dettagli.</p>
+                        <div class="feature-card-footer">
+                            <div class="feature-divider"></div>
+                            <div class="feature-link">
+                                Scopri di più
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="feature-card reveal" onclick="openFeatureModal('oem')" style="transition-delay: 0.1s">
-                        <div class="feature-expand-indicator">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
-                        </div>
                         <div class="feature-icon-circle">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         </div>
                         <h3>Componenti OEM</h3>
                         <p>Solo parti originali o certificate. Il tuo schermo avrà gli stessi colori vividi, la tua batteria la stessa durata.</p>
+                        <div class="feature-card-footer">
+                            <div class="feature-divider"></div>
+                            <div class="feature-link">
+                                Scopri di più
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="feature-card reveal" onclick="openFeatureModal('express')" style="transition-delay: 0.2s">
-                        <div class="feature-expand-indicator">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
-                        </div>
                         <div class="feature-icon-circle">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
                         <h3>Riparazione Express</h3>
                         <p>Il 90% delle riparazioni avviene in meno di un'ora. Goditi un caffè nella nostra area relax mentre aspetti.</p>
+                        <div class="feature-card-footer">
+                            <div class="feature-divider"></div>
+                            <div class="feature-link">
+                                Scopri di più
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="scroll-dots" id="featuresDots"></div>
@@ -771,12 +795,18 @@
                                     <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
                                     <span class="label-badge before">Prima</span>
                                 </div>
-                            </div>
-                            <div class="comp-slider">
-                                <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#111"/><path d="M16 12L10 18V6L16 12Z" fill="#111"/></svg>
+                                <!-- SPOSTATO: Lo slider ora si trova DENTRO img-comp-container -->
+                                <div class="comp-slider">
+                                    <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#111"/><path d="M16 12L10 18V6L16 12Z" fill="#111"/></svg>
+                                </div>
                             </div>
                         </div>
-                        <p class="comp-caption" style="margin-top: 12px;">Trascina per visualizzare il restauro</p>
+                        <div style="width: 100%; display: flex; justify-content: center;">
+                            <div class="comp-caption">
+                                <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="currentColor"/><path d="M16 12L10 18V6L16 12Z" fill="currentColor"/></svg>
+                                Trascina per visualizzare il restauro
+                            </div>
+                        </div>
                     </div>
 
                     <!-- WRAPPER ANCORAGGIO SERVIZI -->
@@ -895,7 +925,7 @@
                                     <h3>Moduli & Connettori</h3>
                                     <p>Risolviamo problemi di ricarica sostituendo la porta. Sistemiamo fotocamere, speaker bassi o Face ID disabilitati.</p>
                                     <a href="https://wa.me/393510000000?text=Info%20Moduli" target="_blank" class="stage-cta">
-                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+                                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                                         Richiedi Info
                                     </a>
                                 </div>
@@ -942,7 +972,7 @@
                         </div>
                         <div class="g-cap-text">
                             <h4>Eccellente su Google</h4>
-                            <p>150+ recensioni verificate</p>
+                            <p><span id="dynamic-review-count">150+</span> recensioni verificate</p>
                         </div>
                     </div>
                     
@@ -964,7 +994,7 @@
                                 <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                                 <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                             </div>
-                            <div class="g-cap-score">5.0</div>
+                            <div class="g-cap-score" id="dynamic-rating-score">5.0</div>
                         </div>
                     </div>
                 </a>
@@ -1248,7 +1278,8 @@
         function initComparisons() {
             const overlay = document.querySelector(".img-comp-overlay");
             const slider = document.querySelector(".comp-slider");
-            const container = document.querySelector(".comparison-glass-frame");
+            // CORREZIONE JS: Puntiamo direttamente al contenitore dell'immagine, non alla cornice
+            const container = document.querySelector(".img-comp-container");
             let clicked = 0; let w;
             
             if(!overlay || !slider || !container) return;
@@ -1466,6 +1497,36 @@
             });
             card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)'; });
         });
+
+        // --- FETCH GOOGLE REVIEWS (STRUTTURA PRONTA PER IL BACKEND) ---
+        async function fetchRealGoogleReviews() {
+            // INFORMAZIONI: Sostituisci questo URL con l'endpoint del tuo server proxy o del servizio esterno
+            // Es: const url = 'https://tuo-dominio.com/api/get-google-reviews?place_id=TUO_PLACE_ID';
+            const url = null; // Inserire URL qui
+            
+            if (!url) return; // Disattivato di default finché non configuri l'URL
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // Supponendo che il tuo server restituisca { rating: 4.8, total_reviews: 215 }
+                if(data && data.rating && data.total_reviews) {
+                    const countEl = document.getElementById('dynamic-review-count');
+                    const scoreEl = document.getElementById('dynamic-rating-score');
+                    
+                    // Anima i numeri (opzionale ma carino)
+                    if(countEl) countEl.innerText = data.total_reviews;
+                    if(scoreEl) scoreEl.innerText = data.rating.toFixed(1);
+                }
+            } catch (error) {
+                console.error("Errore durante il recupero delle recensioni Google:", error);
+            }
+        }
+        
+        // Chiama la funzione quando la pagina si carica
+        window.addEventListener('DOMContentLoaded', fetchRealGoogleReviews);
+
     </script>
 </body>
 </html>
