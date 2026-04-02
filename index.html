@@ -1344,7 +1344,7 @@
             e.preventDefault();
             const target = document.querySelector(targetId);
             if (!target) return;
-            const headerOffset = targetId === '#services-tabs' ? 140 : 130; 
+            const headerOffset = targetId === '#services-tabs' ? 140 : 140; 
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             const startPosition = window.pageYOffset;
