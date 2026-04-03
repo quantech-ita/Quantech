@@ -165,7 +165,20 @@
         .content-layer { position: relative; z-index: 10; width: 100%; }
         .section-padding { margin-top: var(--section-gap); margin-bottom: var(--section-gap); max-width: var(--max-width); margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
         .center-header { text-align: center; width: 100%; margin-bottom: 40px; }
+        
+        /* UPDATE: Combined Glass Header */
         .section-glass-header { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); padding: 14px 32px; border-radius: 100px; display: inline-block; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 15px 30px rgba(0,0,0,0.05); text-align: center; }
+        
+        /* Unified Social Proof & Google Capsule Group */
+        .section-glass-header.combined-header {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 32px;
+            border-radius: 40px;
+        }
+
         .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; display: block; margin-bottom: 4px; }
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
 
@@ -215,22 +228,57 @@
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
         .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
 
-        /* 1. Slider Prima/Dopo Centrato */
+        /* 1. MAGIC ANIMATION BOX (Sostituisce il vecchio Slider Prima/Dopo) */
         .comparison-showcase-container { width: 100%; max-width: 400px; margin: 0 auto; }
-        .comparison-glass-frame { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 36px; padding: 14px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); margin-bottom: 20px; }
-        .img-comp-container { position: relative; height: 100%; width: 100%; overflow: hidden; border-radius: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
-        .img-comp-img { position: absolute; width: 100%; height: 100%; overflow: hidden; }
-        .img-comp-img img { display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; }
+        .comparison-glass-frame { 
+            position: relative; width: 100%; 
+            border-radius: 36px; padding: 14px; padding-bottom: 24px; /* Più lungo sul basso */
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); 
+            border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); 
+            margin-bottom: 20px; 
+        }
+        .magic-img-container { 
+            position: relative; height: auto; aspect-ratio: 1/1; width: 100%; overflow: hidden; 
+            border-radius: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); 
+            transform: translateZ(0); -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+        .magic-layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; }
+        .magic-layer img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; object-position: center; }
+        
+        .layer-after { z-index: 1; }
+        /* La clip-path ritaglia l'immagine per l'effetto scanner senza deformarla */
+        .layer-before { 
+            z-index: 2; 
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
+        }
+        .is-repaired .layer-before { clip-path: inset(0 0 0 100%); }
+
+        /* Laser Line */
+        .laser-scan {
+            position: absolute; top: 0; bottom: 0; left: 0%; width: 4px;
+            background: #fff; box-shadow: 0 0 15px 4px var(--accent), 0 0 30px 10px rgba(0, 113, 227, 0.8);
+            z-index: 3; transform: translateX(-50%); opacity: 0;
+            transition: left 1.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease;
+        }
+        .is-animating .laser-scan { opacity: 1; }
+        .is-repaired .laser-scan { left: 100%; }
+
         .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .label-badge.after { right: 16px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
         .label-badge.before { left: 16px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
-        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: #fff; border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
-        .comp-slider:hover { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,255,255,0.3); }
-        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 3px; background: #fff; z-index: -1; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-        .comp-slider svg { width: 22px; height: 22px; fill: var(--accent); }
-        .comp-caption { color: rgba(255, 255, 255, 0.95); font-size: 13px; font-weight: 700; text-align: center; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); padding: 10px 24px; border-radius: 100px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-top: 16px; }
-        .comp-caption svg { width: 18px; height: 18px; fill: currentColor; }
+        /* Area Pulsante nel fondo del box */
+        .magic-action-area { display: flex; justify-content: center; margin-top: 24px; position: relative; z-index: 10;}
+        .magic-btn {
+            background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 100px;
+            font-size: 15px; font-weight: 800; display: inline-flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3); font-family: 'Inter Tight', sans-serif; letter-spacing: -0.3px;
+        }
+        .magic-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0, 113, 227, 0.4); }
+        .magic-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .magic-btn.repaired { background: #111; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .magic-btn.repaired:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
 
         /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
         .stage-tabs-nav {
@@ -296,22 +344,35 @@
             -webkit-backdrop-filter: blur(25px);
             border-radius: 100px;
             padding: 8px 24px 8px 8px;
-            display: flex; /* CAMBIATO da inline-flex per centratura naturale */
+            display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.06);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            margin: 0 auto 50px auto; /* ALLINEAMENTO CENTRALE NATURALE */
+            margin: 0 auto 50px auto;
             width: fit-content;
             max-width: 100%;
         }
         .google-premium-capsule:hover {
-            transform: translateY(-3px) scale(1.02); /* RIMOSSO il translateX(-50%) */
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.12);
             background: rgba(255, 255, 255, 0.95);
         }
+
+        /* Capsula Inline per Header Combinato */
+        .google-premium-capsule.inline-capsule {
+            margin: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .google-premium-capsule.inline-capsule:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
         .g-cap-left { display: flex; align-items: center; gap: 12px; }
         .g-cap-icon { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(0,0,0,0.06); flex-shrink: 0; }
         .g-cap-icon svg { width: 22px; height: 22px; }
@@ -338,7 +399,6 @@
             @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
             /* LAYOUT SERVIZI DESKTOP (SLIDER SINISTRA, PANNELLO DESTRA) */
-            /* Cambiato align-items in center e aggiunto margine per bilanciarlo con la foto */
             .showcase-wrapper { flex-direction: row; align-items: center; justify-content: space-between; gap: 50px; }
             .comparison-showcase-container { flex: 0 0 420px; max-width: 420px; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
             #services-tabs { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; margin-bottom: 45px; }
@@ -351,9 +411,6 @@
             .stage-text p { font-size: 15.5px; margin-bottom: 24px; max-width: 480px; line-height: 1.6; }
             .stage-visual { width: 110px; height: 110px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
             .stage-visual svg { width: 50px; height: 50px; }
-
-            /* Tolto il limite di 360px: ora la foto occupa i 420px del contenitore, bilanciando il testo */
-            .comparison-glass-frame { width: 100%; max-width: 100%; padding: 14px; border-radius: 36px; margin-bottom: 0; } 
         }
 
         /* REVIEWS CARD COMMON */
@@ -463,7 +520,6 @@
             .hero-actions { flex-direction: column; width: 100%; gap: 12px; }
             .contact-btn-group { width: 100%; display: flex; gap: 12px; }
             
-            /* Su mobile concediamo flessibilità per far entrare i pulsanti affiancati */
             .contact-btn-group .hero-btn { min-width: 0; flex: 1; padding: 0 10px; font-size: 14px; }
             .hero-actions .btn-outline { width: 100%; }
 
@@ -492,18 +548,23 @@
             .stage-visual { width: 80px; height: 80px; border-radius: 20px; margin: 0 auto; }
             .stage-visual svg { width: 38px; height: 38px; }
 
-            .comparison-glass-frame { width: 100%; max-width: 360px; padding: 10px; border-radius: 28px; } 
-            .img-comp-container { border-radius: 18px; }
-
-            /* Google Capsule Banner Mobile Adjustments */
-            .google-premium-capsule {
-                flex-direction: column;
-                border-radius: 32px; /* Diventa tondo come un rettangolo smussato su mobile per far entrare il testo */
-                padding: 16px 24px;
-                gap: 12px;
+            /* Google Capsule Banner Mobile Adjustments per l'header unificato */
+            .section-glass-header.combined-header {
+                padding: 24px 20px;
+                border-radius: 36px;
+                gap: 24px;
                 width: 100%;
-                max-width: 320px;
+                max-width: 360px;
+                margin: 0 auto;
             }
+            .google-premium-capsule.inline-capsule {
+                padding: 16px;
+                gap: 16px;
+                border-radius: 28px;
+                flex-direction: column;
+                width: 100%;
+            }
+            
             .g-cap-divider { width: 100%; height: 1px; margin: 4px 0; }
             .g-cap-right { flex-direction: column; gap: 12px; }
 
@@ -796,28 +857,26 @@
 
                 <div class="showcase-wrapper reveal">
                     
-                    <!-- Slider Prima/Dopo -->
+                    <!-- Nuovo Box Animazione Magica -->
                     <div class="comparison-showcase-container">
                         <div class="comparison-glass-frame">
-                            <div class="img-comp-container">
-                                <div class="img-comp-img">
-                                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop" alt="Dopo - Schermo Perfetto">
+                            <div class="magic-img-container" id="magicContainer">
+                                <div class="magic-layer layer-after">
+                                    <img id="imgAfter" src="" alt="Dopo - Schermo Perfetto">
                                     <span class="label-badge after">Dopo</span>
                                 </div>
-                                <div class="img-comp-img img-comp-overlay">
-                                    <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
+                                <div class="magic-layer layer-before">
+                                    <img id="imgBefore" src="" alt="Prima - Schermo Rotto" style="filter: brightness(0.7) contrast(1.2);">
                                     <span class="label-badge before">Prima</span>
                                 </div>
-                                <!-- SPOSTATO: Lo slider ora si trova DENTRO img-comp-container -->
-                                <div class="comp-slider">
-                                    <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#111"/><path d="M16 12L10 18V6L16 12Z" fill="#111"/></svg>
-                                </div>
+                                <div class="laser-scan"></div>
                             </div>
-                        </div>
-                        <div style="width: 100%; display: flex; justify-content: center;">
-                            <div class="comp-caption">
-                                <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="currentColor"/><path d="M16 12L10 18V6L16 12Z" fill="currentColor"/></svg>
-                                Trascina per visualizzare il restauro
+                            
+                            <div class="magic-action-area">
+                                <button class="magic-btn" id="magicBtn" onclick="triggerMagic()">
+                                    <svg viewBox="0 0 24 24" id="magicIcon"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
+                                    <span id="magicBtnText">Avvia Riparazione</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -971,46 +1030,48 @@
 
             <section class="section-padding" id="reviews">
                 <div class="center-header reveal">
-                    <div class="section-glass-header">
-                        <span class="section-tag">Social Proof</span>
-                        <h2 class="section-title">Clienti Soddisfatti.</h2>
+                    <!-- HEADER UNIFICATO SOCIAL PROOF + CAPSULA GOOGLE -->
+                    <div class="section-glass-header combined-header">
+                        <div>
+                            <span class="section-tag">Social Proof</span>
+                            <h2 class="section-title" style="margin-bottom: 0;">Clienti Soddisfatti.</h2>
+                        </div>
+                        
+                        <a href="https://www.google.com/maps" target="_blank" class="google-premium-capsule inline-capsule">
+                            <div class="g-cap-left">
+                                <div class="g-cap-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                </div>
+                                <div class="g-cap-text">
+                                    <h4>Eccellente su Google</h4>
+                                    <p><span id="dynamic-review-count">150+</span> recensioni verificate</p>
+                                </div>
+                            </div>
+                            
+                            <div class="g-cap-divider"></div>
+                            
+                            <div class="g-cap-right">
+                                <div class="g-cap-avatars">
+                                    <div class="g-cap-avatar" style="background:#e3f2fd; color:#1a73e8; z-index: 5;">S</div>
+                                    <div class="g-cap-avatar" style="background:#fce8e6; color:#d93025; z-index: 4;">M</div>
+                                    <div class="g-cap-avatar" style="background:#e6f4ea; color:#188038; z-index: 3;">P</div>
+                                    <div class="g-cap-avatar" style="background:#fef7e0; color:#f29900; z-index: 2;">G</div>
+                                    <div class="g-cap-avatar" style="background:#f1f3f4; color:#3c4043; z-index: 1;">+</div>
+                                </div>
+                                <div class="g-cap-rating">
+                                    <div class="g-cap-stars">
+                                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                    </div>
+                                    <div class="g-cap-score" id="dynamic-rating-score">5.0</div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-
-                <!-- NUOVA CAPSULA GOOGLE PREMIUM -->
-                <a href="https://www.google.com/maps" target="_blank" class="google-premium-capsule reveal">
-                    <div class="g-cap-left">
-                        <div class="g-cap-icon">
-                            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                        </div>
-                        <div class="g-cap-text">
-                            <h4>Eccellente su Google</h4>
-                            <p><span id="dynamic-review-count">150+</span> recensioni verificate</p>
-                        </div>
-                    </div>
-                    
-                    <div class="g-cap-divider"></div>
-                    
-                    <div class="g-cap-right">
-                        <div class="g-cap-avatars">
-                            <div class="g-cap-avatar" style="background:#e3f2fd; color:#1a73e8; z-index: 5;">S</div>
-                            <div class="g-cap-avatar" style="background:#fce8e6; color:#d93025; z-index: 4;">M</div>
-                            <div class="g-cap-avatar" style="background:#e6f4ea; color:#188038; z-index: 3;">P</div>
-                            <div class="g-cap-avatar" style="background:#fef7e0; color:#f29900; z-index: 2;">G</div>
-                            <div class="g-cap-avatar" style="background:#f1f3f4; color:#3c4043; z-index: 1;">+</div>
-                        </div>
-                        <div class="g-cap-rating">
-                            <div class="g-cap-stars">
-                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            </div>
-                            <div class="g-cap-score" id="dynamic-rating-score">5.0</div>
-                        </div>
-                    </div>
-                </a>
 
                 <div class="reviews-wrapper">
                     <div class="reviews-scroller reveal" id="reviewsScroll">
@@ -1251,15 +1312,19 @@
     </div>
 
     <script>
-        // --- CONFIGURAZIONE CONTATTI (VARIABILI) ---
+        // --- CONFIGURAZIONE CONTATTI E IMMAGINI (VARIABILI) ---
         const numeroVisualizzato = "+39 393 179 6417"; // Formato estetico
         const numeroSoloCifre = "393931796417";       // Formato per link (senza + o spazi)
         const linkFacebook = "https://facebook.com/quantech-ita";
         const linkInstagram = "https://instagram.com/quantech_riparazioni";
         const messaggioWhatsapp = "";
+        
+        // Link Foto per Animazione Magica
+        const urlFotoPrima = "https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop";
+        const urlFotoDopo = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop";
 
-        // --- FUNZIONE INIZIALIZZAZIONE CONTATTI ---
-        function initContactVariables() {
+        // --- FUNZIONE INIZIALIZZAZIONE VARIABILI ---
+        function initConfigVariables() {
             const waLink = `https://wa.me/${numeroSoloCifre}?text=${encodeURIComponent(messaggioWhatsapp)}`;
             const callLink = `tel:+${numeroSoloCifre}`;
 
@@ -1277,10 +1342,16 @@
             // Aggiorna i Social
             document.querySelectorAll('.fb-link-ref').forEach(el => el.href = linkFacebook);
             document.querySelectorAll('.ig-link-ref').forEach(el => el.href = linkInstagram);
+
+            // Aggiorna Immagini Magic Box
+            const imgBeforeEl = document.getElementById('imgBefore');
+            const imgAfterEl = document.getElementById('imgAfter');
+            if(imgBeforeEl) imgBeforeEl.src = urlFotoPrima;
+            if(imgAfterEl) imgAfterEl.src = urlFotoDopo;
         }
 
         // --- Esegui immediatamente ---
-        initContactVariables();
+        initConfigVariables();
 
         // --- PREMIUM STAGE TABS LOGIC ---
         const tabBtns = document.querySelectorAll('.stage-tab-btn');
@@ -1308,34 +1379,45 @@
             });
         });
 
-        // --- COMPARISON SLIDER ---
-        function initComparisons() {
-            const overlay = document.querySelector(".img-comp-overlay");
-            const slider = document.querySelector(".comp-slider");
-            const container = document.querySelector(".img-comp-container");
-            let clicked = 0; let w;
+        // --- MAGIC ANIMATION LOGIC ---
+        function triggerMagic() {
+            const container = document.getElementById('magicContainer');
+            const btn = document.getElementById('magicBtn');
+            const btnText = document.getElementById('magicBtnText');
+            const icon = document.getElementById('magicIcon');
             
-            if(!overlay || !slider || !container) return;
-
-            function slideReady(e) { e.preventDefault(); clicked = 1; w = container.offsetWidth; window.addEventListener("mousemove", slideMove); window.addEventListener("touchmove", slideMove, {passive: false}); }
-            function slideFinish() { clicked = 0; }
-            function slideMove(e) { if (clicked == 0) return false; let pos = getCursorPos(e); if (pos < 0) pos = 0; if (pos > w) pos = w; slide(pos); }
-            function getCursorPos(e) { let a = container.getBoundingClientRect(); let x = 0; e = e.changedTouches ? e.changedTouches[0] : e; x = e.pageX - a.left; x = x - window.pageXOffset; return x; }
-            function slide(x) { overlay.style.width = x + "px"; slider.style.left = x + "px"; }
-
-            setTimeout(() => {
-                w = container.offsetWidth;
-                if(w > 0) slide(w / 2);
-            }, 100); 
+            // Definisco le due icone SVG
+            const repairIcon = '<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>';
+            const undoIcon = '<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>';
             
-            slider.addEventListener("mousedown", slideReady);
-            window.addEventListener("mouseup", slideFinish);
-            slider.addEventListener("touchstart", slideReady, {passive: false});
-            window.addEventListener("touchend", slideFinish);
+            // Rimuovo animazione in corso (se presente)
+            container.classList.remove('is-animating');
+            
+            // Forza il reflow del DOM per riavviare la transizione in modo pulito
+            void container.offsetWidth;
+            
+            // Aggiungo la classe per accendere il laser
+            container.classList.add('is-animating');
+            
+            if(container.classList.contains('is-repaired')) {
+                // Torna al Prima
+                container.classList.remove('is-repaired');
+                btn.classList.remove('repaired');
+                btnText.innerText = 'Avvia Riparazione';
+                icon.innerHTML = repairIcon;
+            } else {
+                // Mostra il Dopo
+                container.classList.add('is-repaired');
+                btn.classList.add('repaired');
+                btnText.innerText = 'Mostra Danno Originale';
+                icon.innerHTML = undoIcon;
+            }
+            
+            // Spegni il laser quando la transizione (che dura 1.5s) è finita
+            setTimeout(() => { 
+                container.classList.remove('is-animating'); 
+            }, 1500); 
         }
-
-        window.addEventListener('load', initComparisons);
-        window.addEventListener('resize', initComparisons);
 
         // --- GENERAL SCRIPTS ---
         function toggleFaq(el) { el.classList.toggle('active'); }
