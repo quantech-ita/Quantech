@@ -228,10 +228,10 @@
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
         .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
 
-        /* 1. SLIDER PRIMA/DOPO CENTRATO E FIXATO */
+        /* 1. SLIDER PRIMA/DOPO CENTRATO E FIXATO (4:4 = 1:1) */
         .comparison-showcase-container { width: 100%; max-width: 400px; margin: 0 auto; }
         .comparison-glass-frame { 
-            position: relative; width: 100%; aspect-ratio: 4 / 5; /* Formato più alto per i telefoni */
+            position: relative; width: 100%; aspect-ratio: 1 / 1; /* Formato 4:4 quadrato */
             border-radius: 36px; padding: 14px; 
             background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); 
             border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); margin-bottom: 20px; 
@@ -241,31 +241,34 @@
             position: relative; height: 100%; width: 100%; overflow: hidden; border-radius: 24px; 
             box-shadow: inset 0 0 20px rgba(0,0,0,0.2); transform: translateZ(0); 
             -webkit-mask-image: -webkit-radial-gradient(white, black); 
-            background-color: #0a0a0a; /* Sfondo scuro elegante */
+            background-color: #0a0a0a; /* Sfondo scuro elegante per riempire gli spazi laterali */
         }
         
-        /* Modifica chiave: background-color scuro per riempire gli spazi creati da object-fit: contain */
+        /* Struttura base per le immagini sovrapposte */
         .img-comp-img { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; 
-            background-color: #0a0a0a;
+            background-color: transparent;
         }
         
-        /* L'overlay è sempre largo 100% per non schiacciare le foto, e viene tagliato da JavaScript tramite clip-path */
+        /* FIX CHIAVE PER LE FOTO CHE SI MUOVEVANO: 
+           Manteniamo l'overlay sempre al 100% della grandezza per non schiacciare le foto, e tagliamo con clip-path da JS */
         .img-comp-overlay {
-            width: 100% !important; 
+            width: 100% !important; /* Non toccare da CSS! È gestito con clip-path in JavaScript */
             z-index: 5;
         }
 
         /* object-fit: contain rimpicciolisce la foto in modo che entri completamente nel box senza essere tagliata */
         .img-comp-img img { 
             display: block; vertical-align: middle; width: 100%; height: 100%; 
-            object-fit: contain; 
+            object-fit: contain; /* Impedisce il ritaglio */
+            padding: 10px; /* Rimpicciolisce ulteriormente la foto per tenerla lontana dai bordi curvi (sincronizzazione perfetta) */
+            box-sizing: border-box;
             border-radius: inherit; object-position: center; 
         }
         
         .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .label-badge.after { right: 16px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
-        .label-badge.before { left: 16px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .label-badge.after { right: 26px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); } /* Spostato leggermente per compensare il padding */
+        .label-badge.before { left: 26px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
         .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: #fff; border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
         .comp-slider:hover { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,255,255,0.3); }
@@ -407,7 +410,7 @@
             .stage-visual { width: 110px; height: 110px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
             .stage-visual svg { width: 50px; height: 50px; }
 
-            .comparison-glass-frame { width: 100%; max-width: 100%; padding: 14px; border-radius: 36px; margin-bottom: 0; aspect-ratio: 4 / 5;} 
+            .comparison-glass-frame { width: 100%; max-width: 100%; padding: 14px; border-radius: 36px; margin-bottom: 0; aspect-ratio: 1 / 1; } 
         }
 
         /* REVIEWS CARD COMMON */
@@ -589,6 +592,9 @@
             .whatsapp-fab { display: flex; animation: popIn 0.5s 2s backwards; }
             .review-glass-card { min-width: 85vw; }
             .f-modal-box { padding: 30px 24px; }
+            
+            /* Aggiornamento Aspect Ratio su Mobile a 1/1 per il Prima/Dopo */
+            .comparison-glass-frame { aspect-ratio: 1 / 1 !important; }
         }
     </style>
 </head>
