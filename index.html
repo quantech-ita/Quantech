@@ -228,57 +228,47 @@
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
         .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
 
-        /* 1. MAGIC ANIMATION BOX (Sostituisce il vecchio Slider Prima/Dopo) */
+        /* 1. SLIDER PRIMA/DOPO CENTRATO */
         .comparison-showcase-container { width: 100%; max-width: 400px; margin: 0 auto; }
         .comparison-glass-frame { 
-            position: relative; width: 100%; 
-            border-radius: 36px; padding: 14px; padding-bottom: 24px; /* Più lungo sul basso */
+            position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 36px; padding: 14px; 
             background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); 
-            border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); 
-            margin-bottom: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); margin-bottom: 20px; 
         }
-        .magic-img-container { 
-            position: relative; height: auto; aspect-ratio: 1/1; width: 100%; overflow: hidden; 
-            border-radius: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); 
-            transform: translateZ(0); -webkit-mask-image: -webkit-radial-gradient(white, black);
-        }
-        .magic-layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; }
-        .magic-layer img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; object-position: center; }
         
-        .layer-after { z-index: 1; }
-        /* La clip-path ritaglia l'immagine per l'effetto scanner senza deformarla */
-        .layer-before { 
-            z-index: 2; 
-            clip-path: inset(0 0 0 0);
-            transition: clip-path 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
+        .img-comp-container { 
+            position: relative; height: 100%; width: 100%; overflow: hidden; border-radius: 24px; 
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2); transform: translateZ(0); 
+            -webkit-mask-image: -webkit-radial-gradient(white, black); 
         }
-        .is-repaired .layer-before { clip-path: inset(0 0 0 100%); }
-
-        /* Laser Line */
-        .laser-scan {
-            position: absolute; top: 0; bottom: 0; left: 0%; width: 4px;
-            background: #fff; box-shadow: 0 0 15px 4px var(--accent), 0 0 30px 10px rgba(0, 113, 227, 0.8);
-            z-index: 3; transform: translateX(-50%); opacity: 0;
-            transition: left 1.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease;
+        
+        /* Struttura base per le immagini sovrapposte */
+        .img-comp-img { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; 
         }
-        .is-animating .laser-scan { opacity: 1; }
-        .is-repaired .laser-scan { left: 100%; }
+        
+        /* FIX CHIAVE PER LE FOTO CHE SI MUOVEVANO: 
+           Manteniamo l'overlay sempre al 100% della grandezza per non schiacciare le foto, e tagliamo con clip-path da JS */
+        .img-comp-overlay {
+            width: 100% !important; /* Non toccare da CSS! È gestito con clip-path in JavaScript */
+            z-index: 5;
+        }
 
+        .img-comp-img img { 
+            display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; object-position: center; 
+        }
+        
         .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .label-badge.after { right: 16px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
         .label-badge.before { left: 16px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
-        /* Area Pulsante nel fondo del box */
-        .magic-action-area { display: flex; justify-content: center; margin-top: 24px; position: relative; z-index: 10;}
-        .magic-btn {
-            background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 100px;
-            font-size: 15px; font-weight: 800; display: inline-flex; align-items: center; gap: 10px;
-            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3); font-family: 'Inter Tight', sans-serif; letter-spacing: -0.3px;
-        }
-        .magic-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0, 113, 227, 0.4); }
-        .magic-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-        .magic-btn.repaired { background: #111; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .magic-btn.repaired:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .comp-slider { position: absolute; z-index: 9; cursor: ew-resize; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: #fff; border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .comp-slider:hover { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,255,255,0.3); }
+        .comp-slider::before { content: ''; position: absolute; top: -1000px; bottom: -1000px; width: 3px; background: #fff; z-index: -1; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        .comp-slider svg { width: 22px; height: 22px; fill: var(--accent); }
+        
+        .comp-caption { color: rgba(255, 255, 255, 0.95); font-size: 13px; font-weight: 700; text-align: center; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); padding: 10px 24px; border-radius: 100px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); margin-top: 16px; }
+        .comp-caption svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* 2. Tabs Navigazione (Capsule REDESIGN PREMIUM) */
         .stage-tabs-nav {
@@ -857,26 +847,30 @@
 
                 <div class="showcase-wrapper reveal">
                     
-                    <!-- Nuovo Box Animazione Magica -->
+                    <!-- Slider Prima/Dopo Centrato -->
                     <div class="comparison-showcase-container">
                         <div class="comparison-glass-frame">
-                            <div class="magic-img-container" id="magicContainer">
-                                <div class="magic-layer layer-after">
-                                    <img id="imgAfter" src="https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2797.png" alt="Dopo - Schermo Perfetto">
+                            <div class="img-comp-container">
+                                <!-- Sfondo: Immagine del DOPO -->
+                                <div class="img-comp-img">
+                                    <img id="imgAfter" src="" alt="Dopo - Schermo Perfetto">
                                     <span class="label-badge after">Dopo</span>
                                 </div>
-                                <div class="magic-layer layer-before">
-                                    <img id="imgBefore" src="https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2796.png" alt="Prima - Schermo Rotto">
+                                <!-- Overlay: Immagine del PRIMA -->
+                                <!-- L'overlay viene tagliato (clippato) dallo slider, non ridimensionato -->
+                                <div class="img-comp-img img-comp-overlay">
+                                    <img id="imgBefore" src="" alt="Prima - Schermo Rotto">
                                     <span class="label-badge before">Prima</span>
                                 </div>
-                                <div class="laser-scan"></div>
+                                <div class="comp-slider">
+                                    <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="#111"/><path d="M16 12L10 18V6L16 12Z" fill="#111"/></svg>
+                                </div>
                             </div>
-                            
-                            <div class="magic-action-area">
-                                <button class="magic-btn" id="magicBtn" onclick="triggerMagic()">
-                                    <svg viewBox="0 0 24 24" id="magicIcon"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
-                                    <span id="magicBtnText">Avvia Riparazione</span>
-                                </button>
+                        </div>
+                        <div style="width: 100%; display: flex; justify-content: center;">
+                            <div class="comp-caption">
+                                <svg viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z" fill="currentColor"/><path d="M16 12L10 18V6L16 12Z" fill="currentColor"/></svg>
+                                Trascina per visualizzare il restauro
                             </div>
                         </div>
                     </div>
@@ -1319,7 +1313,7 @@
         const linkInstagram = "https://instagram.com/quantech_riparazioni";
         const messaggioWhatsapp = "";
         
-        // Link Foto per Animazione Magica
+        // Link Foto per Slider Prima/Dopo
         const urlFotoPrima = "https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2796.png";
         const urlFotoDopo = "https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2797.png";
 
@@ -1343,7 +1337,7 @@
             document.querySelectorAll('.fb-link-ref').forEach(el => el.href = linkFacebook);
             document.querySelectorAll('.ig-link-ref').forEach(el => el.href = linkInstagram);
 
-            // Aggiorna Immagini Magic Box
+            // Aggiorna Immagini Slider Prima/Dopo
             const imgBeforeEl = document.getElementById('imgBefore');
             const imgAfterEl = document.getElementById('imgAfter');
             if(imgBeforeEl) imgBeforeEl.src = urlFotoPrima;
@@ -1379,45 +1373,74 @@
             });
         });
 
-        // --- MAGIC ANIMATION LOGIC ---
-        function triggerMagic() {
-            const container = document.getElementById('magicContainer');
-            const btn = document.getElementById('magicBtn');
-            const btnText = document.getElementById('magicBtnText');
-            const icon = document.getElementById('magicIcon');
+        // --- COMPARISON SLIDER FIXATO CON CLIP-PATH ---
+        function initComparisons() {
+            const overlay = document.querySelector(".img-comp-overlay");
+            const slider = document.querySelector(".comp-slider");
+            const container = document.querySelector(".img-comp-container");
+            let clicked = 0; let w;
             
-            // Definisco le due icone SVG
-            const repairIcon = '<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>';
-            const undoIcon = '<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>';
+            if(!overlay || !slider || !container) return;
+
+            // Forza l'overlay ad essere sempre grande il 100% del container
+            // In questo modo le foto interne non vengono mai ridimensionate/schiacciate
+            overlay.style.width = "100%";
+            overlay.style.height = "100%";
+
+            function slideReady(e) { 
+                e.preventDefault(); 
+                clicked = 1; 
+                w = container.offsetWidth; 
+                window.addEventListener("mousemove", slideMove); 
+                window.addEventListener("touchmove", slideMove, {passive: false}); 
+            }
+            function slideFinish() { clicked = 0; }
             
-            // Rimuovo animazione in corso (se presente)
-            container.classList.remove('is-animating');
-            
-            // Forza il reflow del DOM per riavviare la transizione in modo pulito
-            void container.offsetWidth;
-            
-            // Aggiungo la classe per accendere il laser
-            container.classList.add('is-animating');
-            
-            if(container.classList.contains('is-repaired')) {
-                // Torna al Prima
-                container.classList.remove('is-repaired');
-                btn.classList.remove('repaired');
-                btnText.innerText = 'Avvia Riparazione';
-                icon.innerHTML = repairIcon;
-            } else {
-                // Mostra il Dopo
-                container.classList.add('is-repaired');
-                btn.classList.add('repaired');
-                btnText.innerText = 'Mostra Danno Originale';
-                icon.innerHTML = undoIcon;
+            function slideMove(e) { 
+                if (clicked == 0) return false; 
+                let pos = getCursorPos(e); 
+                if (pos < 0) pos = 0; 
+                if (pos > w) pos = w; 
+                slide(pos); 
             }
             
-            // Spegni il laser quando la transizione (che dura 1.5s) è finita
-            setTimeout(() => { 
-                container.classList.remove('is-animating'); 
-            }, 1500); 
+            function getCursorPos(e) { 
+                let a = container.getBoundingClientRect(); 
+                let x = 0; 
+                e = e.changedTouches ? e.changedTouches[0] : e; 
+                x = e.pageX - a.left; 
+                x = x - window.pageXOffset; 
+                return x; 
+            }
+            
+            function slide(x) { 
+                w = container.offsetWidth; 
+                let rightClip = w - x;
+                
+                // Usiamo clip-path per mascherare l'overlay, così le immagini restano ferme e combaciano perfettamente
+                overlay.style.clipPath = `inset(0px ${rightClip}px 0px 0px)`;
+                overlay.style.webkitClipPath = `inset(0px ${rightClip}px 0px 0px)`; // Supporto per Safari
+                
+                slider.style.left = x + "px"; 
+            }
+
+            setTimeout(() => {
+                w = container.offsetWidth;
+                if(w > 0) slide(w / 2);
+            }, 100); 
+            
+            slider.addEventListener("mousedown", slideReady);
+            window.addEventListener("mouseup", slideFinish);
+            slider.addEventListener("touchstart", slideReady, {passive: false});
+            window.addEventListener("touchend", slideFinish);
+            
+            window.addEventListener("resize", () => {
+                w = container.offsetWidth;
+                slide(w / 2);
+            });
         }
+
+        window.addEventListener('load', initComparisons);
 
         // --- GENERAL SCRIPTS ---
         function toggleFaq(el) { el.classList.toggle('active'); }
