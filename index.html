@@ -228,10 +228,11 @@
         /* --- NUOVO LAYOUT SERVIZI COMPATTO --- */
         .showcase-wrapper { display: flex; flex-direction: column; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
 
-        /* 1. SLIDER PRIMA/DOPO CENTRATO */
+        /* 1. SLIDER PRIMA/DOPO CENTRATO E FIXATO */
         .comparison-showcase-container { width: 100%; max-width: 400px; margin: 0 auto; }
         .comparison-glass-frame { 
-            position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 36px; padding: 14px; 
+            position: relative; width: 100%; aspect-ratio: 4 / 5; /* Formato più alto per i telefoni */
+            border-radius: 36px; padding: 14px; 
             background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); 
             border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3); margin-bottom: 20px; 
         }
@@ -240,22 +241,26 @@
             position: relative; height: 100%; width: 100%; overflow: hidden; border-radius: 24px; 
             box-shadow: inset 0 0 20px rgba(0,0,0,0.2); transform: translateZ(0); 
             -webkit-mask-image: -webkit-radial-gradient(white, black); 
+            background-color: #0a0a0a; /* Sfondo scuro elegante */
         }
         
-        /* Struttura base per le immagini sovrapposte */
+        /* Modifica chiave: background-color scuro per riempire gli spazi creati da object-fit: contain */
         .img-comp-img { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; 
+            background-color: #0a0a0a;
         }
         
-        /* FIX CHIAVE PER LE FOTO CHE SI MUOVEVANO: 
-           Manteniamo l'overlay sempre al 100% della grandezza per non schiacciare le foto, e tagliamo con clip-path da JS */
+        /* L'overlay è sempre largo 100% per non schiacciare le foto, e viene tagliato da JavaScript tramite clip-path */
         .img-comp-overlay {
-            width: 100% !important; /* Non toccare da CSS! È gestito con clip-path in JavaScript */
+            width: 100% !important; 
             z-index: 5;
         }
 
+        /* object-fit: contain rimpicciolisce la foto in modo che entri completamente nel box senza essere tagliata */
         .img-comp-img img { 
-            display: block; vertical-align: middle; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; object-position: center; 
+            display: block; vertical-align: middle; width: 100%; height: 100%; 
+            object-fit: contain; 
+            border-radius: inherit; object-position: center; 
         }
         
         .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -401,6 +406,8 @@
             .stage-text p { font-size: 15.5px; margin-bottom: 24px; max-width: 480px; line-height: 1.6; }
             .stage-visual { width: 110px; height: 110px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
             .stage-visual svg { width: 50px; height: 50px; }
+
+            .comparison-glass-frame { width: 100%; max-width: 100%; padding: 14px; border-radius: 36px; margin-bottom: 0; aspect-ratio: 4 / 5;} 
         }
 
         /* REVIEWS CARD COMMON */
@@ -1313,9 +1320,9 @@
         const linkInstagram = "https://instagram.com/quantech_riparazioni";
         const messaggioWhatsapp = "";
         
-        // Link Foto per Slider Prima/Dopo
-        const urlFotoPrima = "https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2796.png";
-        const urlFotoDopo = "https://raw.githubusercontent.com/quantech-ita/Quantech/refs/heads/main/IMG_2797.png";
+        // Link Foto per Slider Prima/Dopo (ORA IN FORMATO RAW)
+        const urlFotoPrima = "https://raw.githubusercontent.com/quantech-ita/Quantech/main/IMG_3260.png";
+        const urlFotoDopo = "https://raw.githubusercontent.com/quantech-ita/Quantech/main/IMG_3261.png";
 
         // --- FUNZIONE INIZIALIZZAZIONE VARIABILI ---
         function initConfigVariables() {
