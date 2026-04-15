@@ -40,16 +40,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         html {
-            width: 100%; height: 100%;
             background-color: #050505;
-            overscroll-behavior: none; scroll-behavior: smooth;
+            scroll-behavior: smooth;
             scroll-padding-top: 160px; /* Offset globale per l'header fisso aumentato */
-            overflow-x: hidden;
         }
 
         body { 
             color: #0a0a0a; font-family: 'Inter Tight', sans-serif; 
-            width: 100%; min-height: 100%; position: relative;
+            position: relative;
             background-color: transparent; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
@@ -61,18 +59,23 @@
             background-size: cover; background-position: center;
             filter: brightness(0.55);
             transform: translateZ(0);
+            will-change: transform;
         }
         
         .noise-overlay {
             position: fixed; inset: 0; pointer-events: none; z-index: 9998; 
             opacity: 0.04; mix-blend-mode: overlay; 
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .hero-vignette { 
             position: fixed; inset: 0;
             background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
             z-index: -1; pointer-events: none; mix-blend-mode: multiply;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .main-wrapper { position: relative; z-index: 2; width: 100%; overflow-x: hidden; display: flex; flex-direction: column; }
@@ -183,8 +186,8 @@
         .section-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #111; margin: 0; }
 
         /* --- MARQUEE --- */
-        .marquee-section { padding: 24px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-top: var(--section-gap); margin-bottom: var(--section-gap); display: flex; align-items: center; }
-        .marquee-content { display: inline-flex; gap: 80px; animation: scroll 30s linear infinite; align-items: center; padding-left: 80px; }
+        .marquee-section { padding: 24px 0; width: 100vw; position: relative; margin-left: calc(50% - 50vw); overflow: hidden; white-space: nowrap; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-top: var(--section-gap); margin-bottom: var(--section-gap); display: flex; align-items: center; }
+        .marquee-content { display: inline-flex; gap: 80px; animation: scroll 30s linear infinite; align-items: center; padding-left: 80px; will-change: transform; }
         .brand-item { font-size: 18px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         
         .marquee-section.light-top { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); transform: rotate(-1.5deg) scale(1.05); }
@@ -247,6 +250,7 @@
         .img-comp-img { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; 
             background-color: transparent;
+            z-index: 1; /* FIX: Crea il contesto di stacking per non far sbordare le etichette */
         }
         
         .img-comp-overlay {
@@ -262,7 +266,7 @@
             border-radius: inherit; object-position: center; 
         }
         
-        .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: opacity 0.1s ease-out; }
         .label-badge.after { right: 26px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); } 
         .label-badge.before { left: 26px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
@@ -437,6 +441,9 @@
 
         /* PC INFINITE SCROLL */
         @media (min-width: 1025px) {
+            /* Avvicina il primo marquee alla Hero section su Desktop */
+            .content-layer > .marquee-section:first-child { margin-top: 20px; }
+            
             .reviews-scroller { display: flex; gap: 30px; scroll-snap-type: none; overflow: hidden; width: max-content; animation: infiniteScroll 40s linear infinite; padding-left: 0; }
             .reviews-scroller:hover { animation-play-state: paused; }
             .reviews-wrapper { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
@@ -754,7 +761,7 @@
             <div class="glass-dashboard">
                 <div class="stat-item">
                     <span class="stat-val">30-60</span>
-                    <span class="stat-label">Minuti Attesa Media</span>
+                    <span class="stat-label">Minuti Riparazione Media</span>
                 </div>
                 
                 <div class="stat-item">
@@ -848,11 +855,11 @@
                     <span class="brand-item">Ricambi Originali</span>
                     <span class="brand-item accent">Tecnici Certificati</span>
                     <span class="brand-item">Velocità</span>
-                    <span class="brand-item accent">Garanzia 12 Mesi</span>
+                    <span class="brand-item accent">Garanzia fino a 12 Mesi</span>
                     <span class="brand-item">Ricambi Originali</span>
                     <span class="brand-item accent">Tecnici Certificati</span>
                     <span class="brand-item">Velocità</span>
-                    <span class="brand-item accent">Garanzia 12 Mesi</span>
+                    <span class="brand-item accent">Garanzia fino a 12 Mesi</span>
                     <span class="brand-item">Ricambi Originali</span>
                     <span class="brand-item accent">Tecnici Certificati</span>
                     <span class="brand-item">Velocità</span>
@@ -1117,7 +1124,7 @@
                                 </div>
                                 <div class="g-cap-text">
                                     <h4>Eccellente su Google</h4>
-                                    <p><span id="dynamic-review-count">150+</span> recensioni verificate</p>
+                                    <p><span id="dynamic-review-count">140+</span> recensioni verificate</p>
                                 </div>
                             </div>
                             
@@ -1519,7 +1526,11 @@
                 window.addEventListener("mousemove", slideMove); 
                 window.addEventListener("touchmove", slideMove, {passive: false}); 
             }
-            function slideFinish() { clicked = 0; }
+            function slideFinish() { 
+                clicked = 0; 
+                window.removeEventListener("mousemove", slideMove);
+                window.removeEventListener("touchmove", slideMove);
+            }
             
             function slideMove(e) { 
                 if (clicked == 0) return false; 
@@ -1547,6 +1558,14 @@
                 overlay.style.webkitClipPath = `inset(0px ${rightClip}px 0px 0px)`; // Supporto per Safari
                 
                 slider.style.left = x + "px"; 
+                
+                // Effetto Premium: Fade out delle etichette quando lo slider si avvicina
+                const lblBefore = container.querySelector('.label-badge.before');
+                const lblAfter = container.querySelector('.label-badge.after');
+                if(lblBefore && lblAfter) {
+                    lblBefore.style.opacity = x < 100 ? Math.max(0, (x - 50) / 50) : 1;
+                    lblAfter.style.opacity = (w - x) < 100 ? Math.max(0, ((w - x) - 50) / 50) : 1;
+                }
             }
 
             setTimeout(() => {
@@ -1576,7 +1595,13 @@
             if (!target) return;
             
             // Calcola la posizione esatta garantendo uno spaziatura costante e maggiorata (160px) sotto l'header fisso
-            const headerOffset = 160;
+            let headerOffset = 160;
+            
+            // Riduciamo l'offset specificamente per la sezione servizi per farla atterrare più in basso
+            if (targetId === '#showcase') {
+                headerOffset = 80;
+            }
+            
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             
