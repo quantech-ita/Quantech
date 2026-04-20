@@ -665,6 +665,30 @@
             
             /* Aggiornamento Aspect Ratio su Mobile a 1/1 per il Prima/Dopo */
             .comparison-glass-frame { aspect-ratio: 1 / 1 !important; }
+
+            /* --- FIX GLITCH SOVRAPPOSIZIONE IPAD/TABLET --- */
+            .smart-nav-container {
+                z-index: 99999 !important;
+                -webkit-transform: translate3d(0, 0, 999px) !important;
+                transform: translate3d(0, 0, 999px) !important;
+            }
+            .process-glass-box.reveal,
+            .step-single {
+                will-change: auto !important;
+                -webkit-backface-visibility: visible !important;
+                backface-visibility: visible !important;
+            }
+            .step-single {
+                -webkit-transform: translateY(10px) !important;
+                transform: translateY(10px) !important;
+            }
+            .step-single.step-active {
+                -webkit-transform: translateY(0) !important;
+                transform: translateY(0) !important;
+            }
+            .reveal {
+                will-change: auto !important;
+            }
         }
     </style>
 </head>
