@@ -157,9 +157,9 @@
         @keyframes floatMsg { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
 
         .glass-dashboard { background: var(--glass-bg); border: var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-radius: var(--radius-lg); padding: 30px 60px; display: flex; justify-content: center; gap: 80px; max-width: 800px; width: 100%; margin-bottom: 10px; opacity: 0; animation: fadeUp 1s 0.7s forwards; }
-        .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .stat-val { font-size: 42px; font-weight: 800; color: #111; font-family: 'Space Grotesk', sans-serif; display: block; line-height: 1; margin-bottom: 8px; letter-spacing: -2px; text-align: center; }
-        .stat-label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+        .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; width: 100%; }
+        .stat-val { font-size: 42px; font-weight: 800; color: #111; font-family: 'Space Grotesk', sans-serif; display: block; line-height: 1; margin-bottom: 8px; letter-spacing: -2px; text-align: center; width: 100%; }
+        .stat-label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; width: 100%; }
 
         /* --- CONTENT LAYER & PADDING --- */
         .content-layer { position: relative; z-index: 10; width: 100%; }
@@ -262,7 +262,7 @@
             border-radius: inherit; object-position: center; 
         }
         
-        .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .label-badge { position: absolute; top: 16px; padding: 6px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 10; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: opacity 0.2s ease; }
         .label-badge.after { right: 26px; background: var(--accent); color: #fff; border: 1px solid rgba(255,255,255,0.3); } 
         .label-badge.before { left: 26px; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         
@@ -1539,27 +1539,33 @@
             }
             
             function getCursorPos(e) { 
-                let a = container.getBoundingClientRect(); 
-                let x = 0; 
-                e = e.changedTouches ? e.changedTouches[0] : e; 
-                x = e.pageX - a.left; 
-                x = x - window.pageXOffset; 
-                return x; 
-            }
+            let a = container.getBoundingClientRect(); 
+            let x = 0; 
+            e = e.changedTouches ? e.changedTouches[0] : e; 
+            x = e.pageX - a.left; 
+            x = x - window.pageXOffset; 
+            return x; 
+        }
+        
+        function slide(x) { 
+            w = container.offsetWidth; 
+            let rightClip = w - x;
             
-            function slide(x) { 
-                w = container.offsetWidth; 
-                let rightClip = w - x;
-                
-                // Usiamo clip-path per mascherare l'overlay, così le immagini restano ferme
-                overlay.style.clipPath = `inset(0px ${rightClip}px 0px 0px)`;
-                overlay.style.webkitClipPath = `inset(0px ${rightClip}px 0px 0px)`; // Supporto per Safari
-                
-                slider.style.left = x + "px"; 
-            }
+            // Usiamo clip-path per mascherare l'overlay, così le immagini restano ferme
+            overlay.style.clipPath = `inset(0px ${rightClip}px 0px 0px)`;
+            overlay.style.webkitClipPath = `inset(0px ${rightClip}px 0px 0px)`; // Supporto per Safari
+            
+            slider.style.left = x + "px"; 
+            
+            // Effetto dissolvenza sulle etichette quando lo slider si avvicina
+            const badgeBefore = container.querySelector('.label-badge.before');
+            const badgeAfter = container.querySelector('.label-badge.after');
+            if (badgeBefore) badgeBefore.style.opacity = x < 110 ? '0' : '1';
+            if (badgeAfter) badgeAfter.style.opacity = (w - x) < 110 ? '0' : '1';
+        }
 
-            setTimeout(() => {
-                w = container.offsetWidth;
+        setTimeout(() => {
+            w = container.offsetWidth;
                 if(w > 0) slide(w / 2);
             }, 100); 
             
@@ -1585,7 +1591,13 @@
             if (!target) return;
             
             // Calcola la posizione esatta garantendo uno spaziatura costante e maggiorata (160px) sotto l'header fisso
-            const headerOffset = 160;
+            let headerOffset = 160;
+            
+            // Regolazione specifica per i servizi: scende leggermente di più
+            if (targetId === '#showcase') {
+                headerOffset = 100; 
+            }
+
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             
