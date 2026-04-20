@@ -435,6 +435,15 @@
         .g-cap-stars svg { width: 14px; height: 14px; fill: currentColor; }
         .g-cap-score { font-size: 15px; font-weight: 800; color: #111; }
 
+        /* --- HARDWARE ACCELERATION (FLUIDITA' IPAD/TABLET/MOBILE) --- */
+        .reveal, .step-single, .stage-panel, .marquee-content, .reviews-scroller, .tilt-card, .hero h1, .hero p, .hero-actions, .glass-dashboard {
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
         /* PC INFINITE SCROLL */
         @media (min-width: 1025px) {
             .reviews-scroller { display: flex; gap: 30px; scroll-snap-type: none; overflow: hidden; width: max-content; animation: infiniteScroll 40s linear infinite; padding-left: 0; }
@@ -1667,37 +1676,8 @@
                     processObserver.unobserve(entry.target); 
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.15 });
         if(stepsContainer) processObserver.observe(stepsContainer);
-
-        const animateCounters = () => {
-            document.querySelectorAll('.stat-val').forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                if(!target) return;
-                const duration = 2000; 
-                const increment = target / (duration / 16); 
-                let current = 0;
-                const update = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.innerText = target + (target > 100 ? "+" : "");
-                    }
-                };
-                update();
-            });
-        };
-        let counterTriggered = false;
-        const statsSection = document.querySelector('.glass-dashboard');
-        const statsObserver = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting && !counterTriggered) {
-                animateCounters();
-                counterTriggered = true;
-            }
-        });
-        if(statsSection) statsObserver.observe(statsSection);
 
         function createDots(containerId, dotsId, itemSelector) {
             const container = document.querySelector(containerId);
